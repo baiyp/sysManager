@@ -19,10 +19,20 @@
 		<constructor-arg>
 			<value>
       		/assets/** = anon
-      		/rounder/index.html=anon
 			</value>
 		</constructor-arg>
 	</bean>
+	<!-- 
+	anon 		org.apache.shiro.web.filter.authc.AnonymousFilter
+	authc 		org.apache.shiro.web.filter.authc.FormAuthenticationFilter
+	authcBasic 	org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter
+	perms 		org.apache.shiro.web.filter.authz.PermissionsAuthorizationFilter
+	port 		org.apache.shiro.web.filter.authz.PortFilter
+	rest 		org.apache.shiro.web.filter.authz.HttpMethodPermissionFilter
+	roles 		org.apache.shiro.web.filter.authz.RolesAuthorizationFilter
+	ssl 		org.apache.shiro.web.filter.authz.SslFilter
+	user 		org.apache.shiro.web.filter.authc.UserFilter
+	 -->
 	
 	<!--定义授权缓存管理器 -->
 	<bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
@@ -33,6 +43,14 @@
 		<property name="activeSessionsCacheName" value="activeSessionsCache" />
 		<property name="cacheManager" ref="shiroCacheManager"/>
 	</bean>
+	<!--
+	<bean id="sessionIdGenerator"   
+	class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator"/>  
+	<bean id="sessionDAO" class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">  
+	    <property name="activeSessionsCacheName" value="shiro-activeSessionCache"/>  
+	    <property name="sessionIdGenerator" ref="sessionIdGenerator"/>  
+	</bean> 
+	-->
 	
 	<!-- CAS认证过滤器 -->  
 	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter">  
@@ -53,7 +71,10 @@
 	
 	<bean id="systemAuthorizingRealm" class="com.manager.common.security.SystemAuthorizingRealm"></bean>
 	
-	<bean id="authenticationFilter" class="com.manager.common.security.AuthenticationFilter"></bean>
+	<bean id="authenticationFilter" class="com.manager.common.security.AuthenticationFilter">
+	
+	
+	</bean>
 	
 	<!--定义Shiro安全管理配置-->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
@@ -77,9 +98,6 @@
 			<ref bean="shiroFilterChainDefinitions"/>
 		</property>
 	</bean>
-	
-	 
-	
 
 	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
