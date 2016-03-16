@@ -205,7 +205,6 @@ var Layout = function () {
         $('.page-sidebar').on('click', ' li > a.ajaxify', function (e) {
             e.preventDefault();
             App.scrollTop();
-
             var url = $(this).attr("href");
             var menuContainer = $('.page-sidebar ul');
             var pageContent = $('.page-content');
@@ -237,7 +236,6 @@ var Layout = function () {
                     if (the.parents('li.open').size() === 0) {
                         $('.page-sidebar-menu > li.open > a').click();
                     }
-
                     App.stopPageLoading();
                     pageContentBody.html(res);
                     Layout.fixContentHeight(); // fix content height

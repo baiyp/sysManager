@@ -186,7 +186,10 @@ var Demo = function() {
                 $('.page-logo img').attr('src', Layout.getLayoutImgPath() + 'logo.png');
             }
         };
-
+        
+        var pageContent = function(html,javascript){
+        		alert("");
+        };
         $('.toggler', panel).click(function() {
             $('.toggler').hide();
             $('.toggler-close').show();
