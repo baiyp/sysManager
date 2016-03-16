@@ -1,8 +1,7 @@
 package com.manager.sys.model;
 
-public class User {
-	
-	private String id;
+public class User extends BaseEntity{
+	 
 	
 	private String login_name;
 	
@@ -27,24 +26,16 @@ public class User {
 	private String login_flag;
 	
 	private String create_by;
-	
-	private String create_date;
+	 
 	
 	private String update_by;
-	
-	private String update_date;
+	 
 	
 	private String remarks;
 	
-	private String del_flag;
+ 
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
+	 
 
 	public String getLogin_name() {
 		return login_name;
@@ -142,13 +133,7 @@ public class User {
 		this.create_by = create_by;
 	}
 
-	public String getCreate_date() {
-		return create_date;
-	}
-
-	public void setCreate_date(String create_date) {
-		this.create_date = create_date;
-	}
+ 
 
 	public String getUpdate_by() {
 		return update_by;
@@ -158,13 +143,7 @@ public class User {
 		this.update_by = update_by;
 	}
 
-	public String getUpdate_date() {
-		return update_date;
-	}
-
-	public void setUpdate_date(String update_date) {
-		this.update_date = update_date;
-	}
+ 
 
 	public String getRemarks() {
 		return remarks;
@@ -173,14 +152,5 @@ public class User {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-
-	public String getDel_flag() {
-		return del_flag;
-	}
-
-	public void setDel_flag(String del_flag) {
-		this.del_flag = del_flag;
-	}
-	 
-
+ 
 }

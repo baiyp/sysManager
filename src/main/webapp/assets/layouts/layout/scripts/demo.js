@@ -3,7 +3,6 @@ Demo script to handle the theme demo
 **/
 var Demo = function() {
 
-    // Handle Theme Settings
     var handleTheme = function() {
 
         var panel = $('.theme-panel');
@@ -14,10 +13,6 @@ var Demo = function() {
 
         $('.sidebar-option', panel).val("default");
         $('.page-header-option', panel).val("fixed");
-        $('.page-footer-option', panel).val("default");
-        if ($('.sidebar-pos-option').attr("disabled") === false) {
-            $('.sidebar-pos-option', panel).val(App.isRTL() ? 'right' : 'left');
-        }
 
         //handle theme layout
         var resetLayout = function() {
@@ -67,7 +62,7 @@ var Demo = function() {
                 headerOption = 'fixed';
             }
 
-            resetLayout(); // reset layout to default state
+            resetLayout(); 
 
             if (layoutOption === "boxed") {
                 $("body").addClass("page-boxed");
@@ -243,12 +238,8 @@ var Demo = function() {
 
         var sidebarOption = $('.sidebar-option', panel).val();
         var headerOption = $('.page-header-option', panel).val();
-        var footerOption = $('.page-footer-option', panel).val();
-        var sidebarPosOption = $('.sidebar-pos-option', panel).val();
-        var sidebarStyleOption = $('.sidebar-style-option', panel).val();
-        var sidebarMenuOption = $('.sidebar-menu-option', panel).val();
 
-        $('.layout-option, .page-header-option, .page-header-top-dropdown-style-option, .sidebar-option, .page-footer-option, .sidebar-pos-option, .sidebar-style-option, .sidebar-menu-option', panel).change(setLayout);
+        $('.page-header-option, .sidebar-option',panel).change(setLayout);
     };
 
     // handle theme style
@@ -287,6 +278,6 @@ var Demo = function() {
 
 if (App.isAngularJsApp() === false) {
     jQuery(document).ready(function() {    
-       Demo.init(); // init metronic core componets
+       Demo.init();
     });
 }
