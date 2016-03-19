@@ -206,6 +206,7 @@ var Layout = function () {
             e.preventDefault();
             App.scrollTop();
             var url = $(this).attr("href");
+            var ajaxScript = $(this).attr("ajaxScript");
             var menuContainer = $('.page-sidebar ul');
             var pageContent = $('.page-content');
             var pageContentBody = $('.page-content .page-content-body');
@@ -224,10 +225,22 @@ var Layout = function () {
             }
 
             App.startPageLoading();
-
-            var the = $(this);
             
-            $.ajax({
+            pageContentBody.load(url,function(){
+            	$.getScript("../assets/global/scripts/app.min.js",function(){
+	            	if(ajaxScript == undefined || ajaxScript == ""){
+	            		App.stopPageLoading();
+	            	}else{
+	            		$.getScript(ajaxScript,function(){
+	                		App.stopPageLoading();
+	                	});
+	            	}
+            	});
+            });
+  
+            //var the = $(this);
+            
+           /* $.ajax({
                 type: "GET",
                 cache: false,
                 url: url,
@@ -245,7 +258,7 @@ var Layout = function () {
                     App.stopPageLoading();
                     pageContentBody.html('<h4>Could not load the requested content.</h4>');
                 }
-            });
+            });*/
         });
 
         // handle ajax link within main content
