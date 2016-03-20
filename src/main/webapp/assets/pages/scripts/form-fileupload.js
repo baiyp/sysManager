@@ -5,6 +5,7 @@ var FormFileUpload = function () {
 
              // Initialize the jQuery File Upload widget:
             $('#fileupload').fileupload({
+            	"url":"../multipartFileUpload",
                 disableImageResize: false,
                 autoUpload: false,
                 disableImageResize: /Android(?!.*Chrome)|Opera/.test(window.navigator.userAgent),

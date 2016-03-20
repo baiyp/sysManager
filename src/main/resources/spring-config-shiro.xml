@@ -19,6 +19,7 @@
 		<constructor-arg>
 			<value>
       		/assets/** = anon
+      		/multipartFileUpload/** = anon
 			</value>
 		</constructor-arg>
 	</bean>
