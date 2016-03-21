@@ -8,17 +8,21 @@ import java.util.Iterator;
 import java.util.Properties;
 import java.util.Map.Entry;
 /**
- * ¶ÔÊôĞÔÎÄ¼ş²Ù×÷µÄ¹¤¾ßÀà
- * »ñÈ¡£¬ĞÂÔö£¬ĞŞ¸Ä
- * ×¢Òâ£º	ÒÔÏÂ·½·¨¶ÁÈ¡ÊôĞÔÎÄ¼ş»á»º´æÎÊÌâ,ÔÚĞŞ¸ÄÊôĞÔÎÄ¼şÊ±£¬²»Æğ×÷ÓÃ£¬
- *¡¡InputStream in = PropertiesUtils.class.getResourceAsStream("/config.properties");
- *¡¡½â¾ö°ì·¨£º
- *¡¡String savePath = PropertiesUtils.class.getResource("/config.properties").getPath();
+ * å¯¹å±æ€§æ–‡ä»¶æ“ä½œçš„å·¥å…·ç±»
+ * è·å–ï¼Œæ–°å¢ï¼Œä¿®æ”¹
+ * æ³¨æ„ï¼š	ä»¥ä¸‹æ–¹æ³•è¯»å–å±æ€§æ–‡ä»¶ä¼šç¼“å­˜é—®é¢˜,åœ¨ä¿®æ”¹å±æ€§æ–‡ä»¶æ—¶ï¼Œä¸èµ·ä½œç”¨ï¼Œ
+ *ã€€InputStream in = PropertiesUtils.class.getResourceAsStream("/config.properties");
+ *ã€€è§£å†³åŠæ³•ï¼š
+ *ã€€String savePath = PropertiesUtils.class.getResource("/config.properties").getPath();
+ * @author lanyuan
+ * 2013-11-19
+ * @Email: mmm333zzz520@163.com
+ * @version 1.0v
  */
 public class PropertiesUtils {
 	/**
-	 * »ñÈ¡ÊôĞÔÎÄ¼şµÄÊı¾İ ¸ù¾İkey»ñÈ¡Öµ
-	 * @param fileName ÎÄ¼şÃû¡¡(×¢Òâ£º¼ÓÔØµÄÊÇsrcÏÂµÄÎÄ¼ş,Èç¹ûÔÚÄ³¸ö°üÏÂ£®Çë°Ñ°üÃû¼ÓÉÏ)
+	 * è·å–å±æ€§æ–‡ä»¶çš„æ•°æ® æ ¹æ®keyè·å–å€¼
+	 * @param fileName æ–‡ä»¶åã€€(æ³¨æ„ï¼šåŠ è½½çš„æ˜¯srcä¸‹çš„æ–‡ä»¶,å¦‚æœåœ¨æŸä¸ªåŒ…ä¸‹ï¼è¯·æŠŠåŒ…ååŠ ä¸Š)
 	 * @param key
 	 * @return
 	 */
@@ -51,15 +55,15 @@ public class PropertiesUtils {
 	}
 
 	/**
-	 * ·µ»Ø¡¡Properties
-	 * @param fileName ÎÄ¼şÃû¡¡(×¢Òâ£º¼ÓÔØµÄÊÇsrcÏÂµÄÎÄ¼ş,Èç¹ûÔÚÄ³¸ö°üÏÂ£®Çë°Ñ°üÃû¼ÓÉÏ)
+	 * è¿”å›ã€€Properties
+	 * @param fileName æ–‡ä»¶åã€€(æ³¨æ„ï¼šåŠ è½½çš„æ˜¯srcä¸‹çš„æ–‡ä»¶,å¦‚æœåœ¨æŸä¸ªåŒ…ä¸‹ï¼è¯·æŠŠåŒ…ååŠ ä¸Š)
 	 * @param 
 	 * @return
 	 */
 	public static Properties getProperties(){
 		Properties prop = new Properties();
 		String savePath = PropertiesUtils.class.getResource("/config.properties").getPath();
-		//ÒÔÏÂ·½·¨¶ÁÈ¡ÊôĞÔÎÄ¼ş»á»º´æÎÊÌâ
+		//ä»¥ä¸‹æ–¹æ³•è¯»å–å±æ€§æ–‡ä»¶ä¼šç¼“å­˜é—®é¢˜
 //		InputStream in = PropertiesUtils.class
 //				.getResourceAsStream("/config.properties");
 		try {
@@ -71,16 +75,16 @@ public class PropertiesUtils {
 		return prop;
 	}
 	/**
-	 * Ğ´ÈëpropertiesĞÅÏ¢
+	 * å†™å…¥propertiesä¿¡æ¯
 	 * 
 	 * @param key
-	 *            Ãû³Æ
+	 *            åç§°
 	 * @param value
-	 *            Öµ
+	 *            å€¼
 	 */
 	public static void modifyProperties(String key, String value) {
 		try {
-			// ´ÓÊäÈëÁ÷ÖĞ¶ÁÈ¡ÊôĞÔÁĞ±í£¨¼üºÍÔªËØ¶Ô£©
+			// ä»è¾“å…¥æµä¸­è¯»å–å±æ€§åˆ—è¡¨ï¼ˆé”®å’Œå…ƒç´ å¯¹ï¼‰
 			Properties prop = getProperties();
 			prop.setProperty(key, value);
 			String path = PropertiesUtils.class.getResource("/config.properties").getPath();
@@ -92,4 +96,3 @@ public class PropertiesUtils {
 		}
 	}
 }
-

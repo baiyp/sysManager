@@ -1,15 +1,14 @@
-package com.manager.common; 
+package com.manager.common;
 
 import java.lang.reflect.Field;
 
 /**
- * 
- * @author baiyp
- *
+ * @author Administrator
+ *	åå°„å·¥å…·
  */
 public class ReflectHelper {
 	/**
-	 * »ñÈ¡obj¶ÔÏófieldNameµÄField
+	 * è·å–objå¯¹è±¡fieldNameçš„Field
 	 * @param obj
 	 * @param fieldName
 	 * @return
@@ -18,7 +17,8 @@ public class ReflectHelper {
 		if (obj == null || fieldName == null) {
 			return null;
 		}
-		for (Class<?> superClass = obj.getClass(); superClass != Object.class; superClass = superClass.getSuperclass()) {
+		for (Class<?> superClass = obj.getClass(); superClass != Object.class; superClass = superClass
+				.getSuperclass()) {
 			try {
 				return superClass.getDeclaredField(fieldName);
 			} catch (Exception e) {
@@ -28,7 +28,7 @@ public class ReflectHelper {
 	}
 
 	/**
-	 * »ñÈ¡obj¶ÔÏófieldNameµÄÊôĞÔÖµ
+	 * è·å–objå¯¹è±¡fieldNameçš„å±æ€§å€¼
 	 * @param obj
 	 * @param fieldName
 	 * @return
@@ -52,7 +52,7 @@ public class ReflectHelper {
 	}
 
 	/**
-	 * »ñÈ¡obj¶ÔÏófieldNameµÄÊôĞÔÖµ
+	 * è·å–objå¯¹è±¡fieldNameçš„å±æ€§å€¼
 	 * @param obj
 	 * @param fieldName
 	 * @return
@@ -87,7 +87,7 @@ public class ReflectHelper {
 	}
 
 	/**
-	 * ÉèÖÃobj¶ÔÏófieldNameµÄÊôĞÔÖµ
+	 * è®¾ç½®objå¯¹è±¡fieldNameçš„å±æ€§å€¼
 	 * @param obj
 	 * @param fieldName
 	 * @param value
@@ -99,22 +99,22 @@ public class ReflectHelper {
 	public static boolean setValueByFieldName(Object obj, String fieldName,
 			Object value) {
 		try {
-			//java.lang.Class.getDeclaredField()·½·¨ÓÃ·¨ÊµÀı½Ì³Ì - ·½·¨·µ»ØÒ»¸öField¶ÔÏó£¬Ëü·´Ó³´ËClass¶ÔÏóËù±íÊ¾µÄÀà»ò½Ó¿ÚµÄÖ¸¶¨ÒÑÉùÃ÷×Ö¶Î¡£
-			//´Ë·½·¨·µ»ØÕâ¸öÀàÖĞµÄÖ¸¶¨×Ö¶ÎµÄField¶ÔÏó
+			//java.lang.Class.getDeclaredField()æ–¹æ³•ç”¨æ³•å®ä¾‹æ•™ç¨‹ - æ–¹æ³•è¿”å›ä¸€ä¸ªFieldå¯¹è±¡ï¼Œå®ƒåæ˜ æ­¤Classå¯¹è±¡æ‰€è¡¨ç¤ºçš„ç±»æˆ–æ¥å£çš„æŒ‡å®šå·²å£°æ˜å­—æ®µã€‚
+			//æ­¤æ–¹æ³•è¿”å›è¿™ä¸ªç±»ä¸­çš„æŒ‡å®šå­—æ®µçš„Fieldå¯¹è±¡
 			Field field = obj.getClass().getDeclaredField(fieldName);
 		  /**
 			* public void setAccessible(boolean flag)
-            *       throws SecurityException½«´Ë¶ÔÏóµÄ accessible ±êÖ¾ÉèÖÃÎªÖ¸Ê¾µÄ²¼¶ûÖµ¡£ÖµÎª true ÔòÖ¸Ê¾·´ÉäµÄ¶ÔÏóÔÚÊ¹ÓÃÊ±Ó¦¸ÃÈ¡Ïû Java ÓïÑÔ·ÃÎÊ¼ì²é¡£ÖµÎª false ÔòÖ¸Ê¾·´ÉäµÄ¶ÔÏóÓ¦¸ÃÊµÊ© Java ÓïÑÔ·ÃÎÊ¼ì²é¡£ 
-			* 	Ê×ÏÈ£¬Èç¹û´æÔÚ°²È«¹ÜÀíÆ÷£¬ÔòÔÚ ReflectPermission("suppressAccessChecks") È¨ÏŞÏÂµ÷ÓÃ checkPermission ·½·¨¡£ 
-			* 	Èç¹û flag Îª true£¬²¢ÇÒ²»ÄÜ¸ü¸Ä´Ë¶ÔÏóµÄ¿É·ÃÎÊĞÔ£¨ÀıÈç£¬Èç¹û´ËÔªËØ¶ÔÏóÊÇ Class ÀàµÄ Constructor ¶ÔÏó£©£¬Ôò»áÒı·¢ SecurityException¡£ 
-			* 	Èç¹û´Ë¶ÔÏóÊÇ java.lang.Class ÀàµÄ Constructor ¶ÔÏó£¬²¢ÇÒ flag Îª true£¬Ôò»áÒı·¢ SecurityException¡£ 
-			* 	²ÎÊı£º
-			* 	flag - accessible ±êÖ¾µÄĞÂÖµ 
- 			* 	Å×³ö£º 
-			* 	SecurityException - Èç¹ûÇëÇó±»¾Ü¾ø¡£
+            *       throws SecurityExceptionå°†æ­¤å¯¹è±¡çš„ accessible æ ‡å¿—è®¾ç½®ä¸ºæŒ‡ç¤ºçš„å¸ƒå°”å€¼ã€‚å€¼ä¸º true åˆ™æŒ‡ç¤ºåå°„çš„å¯¹è±¡åœ¨ä½¿ç”¨æ—¶åº”è¯¥å–æ¶ˆ Java è¯­è¨€è®¿é—®æ£€æŸ¥ã€‚å€¼ä¸º false åˆ™æŒ‡ç¤ºåå°„çš„å¯¹è±¡åº”è¯¥å®æ–½ Java è¯­è¨€è®¿é—®æ£€æŸ¥ã€‚ 
+			* 	é¦–å…ˆï¼Œå¦‚æœå­˜åœ¨å®‰å…¨ç®¡ç†å™¨ï¼Œåˆ™åœ¨ ReflectPermission("suppressAccessChecks") æƒé™ä¸‹è°ƒç”¨ checkPermission æ–¹æ³•ã€‚ 
+			* 	å¦‚æœ flag ä¸º trueï¼Œå¹¶ä¸”ä¸èƒ½æ›´æ”¹æ­¤å¯¹è±¡çš„å¯è®¿é—®æ€§ï¼ˆä¾‹å¦‚ï¼Œå¦‚æœæ­¤å…ƒç´ å¯¹è±¡æ˜¯ Class ç±»çš„ Constructor å¯¹è±¡ï¼‰ï¼Œåˆ™ä¼šå¼•å‘ SecurityExceptionã€‚ 
+			* 	å¦‚æœæ­¤å¯¹è±¡æ˜¯ java.lang.Class ç±»çš„ Constructor å¯¹è±¡ï¼Œå¹¶ä¸” flag ä¸º trueï¼Œåˆ™ä¼šå¼•å‘ SecurityExceptionã€‚ 
+			* 	å‚æ•°ï¼š
+			* 	flag - accessible æ ‡å¿—çš„æ–°å€¼ 
+ 			* 	æŠ›å‡ºï¼š 
+			* 	SecurityException - å¦‚æœè¯·æ±‚è¢«æ‹’ç»ã€‚
 			*/
-			if (field.isAccessible()) {//»ñÈ¡´Ë¶ÔÏóµÄ accessible ±êÖ¾µÄÖµ¡£ 
-				field.set(obj, value);//½«Ö¸¶¨¶ÔÏó±äÁ¿ÉÏ´Ë Field ¶ÔÏó±íÊ¾µÄ×Ö¶ÎÉèÖÃÎªÖ¸¶¨µÄĞÂÖµ
+			if (field.isAccessible()) {//è·å–æ­¤å¯¹è±¡çš„ accessible æ ‡å¿—çš„å€¼ã€‚ 
+				field.set(obj, value);//å°†æŒ‡å®šå¯¹è±¡å˜é‡ä¸Šæ­¤ Field å¯¹è±¡è¡¨ç¤ºçš„å­—æ®µè®¾ç½®ä¸ºæŒ‡å®šçš„æ–°å€¼
 			} else {
 				field.setAccessible(true);
 				field.set(obj, value);

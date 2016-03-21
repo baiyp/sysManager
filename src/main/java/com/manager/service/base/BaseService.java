@@ -5,13 +5,10 @@ import com.manager.dao.base.Base;
 
 
 
-/**
- * ËùÓĞ·şÎñ½Ó¿Ú¶¼Òª¼Ì³ĞÕâ¸ö
- * @param <T>
- */
+
 public interface BaseService<T> extends Base<T> {
 	/**
-	 * ·µ»Ø·ÖÒ³ºóµÄÊı¾İ
+	 * ï¿½ï¿½ï¿½Ø·ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param pageView
 	 * @param t
 	 * @return

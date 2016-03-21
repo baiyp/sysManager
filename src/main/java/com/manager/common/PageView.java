@@ -3,44 +3,44 @@ package com.manager.common;
 import java.util.List;
 
 /**
- * //·ÖÒ³·â×°º¯Êı
+ * //åˆ†é¡µå°è£…å‡½æ•°
  * 
  * @param <T>
  */
-public class PageView<T> {
+public class PageView {
 	/**
-	 * ·ÖÒ³Êı¾İ
+	 * åˆ†é¡µæ•°æ®
 	 */
-	private List<T> records;
+	private List records;
 
 	/**
-	 * ×ÜÒ³Êı Õâ¸öÊıÊÇ¼ÆËã³öÀ´µÄ
+	 * æ€»é¡µæ•° è¿™ä¸ªæ•°æ˜¯è®¡ç®—å‡ºæ¥çš„
 	 * 
 	 */
 	private long pageCount;
 
 	/**
-	 * Ã¿Ò³ÏÔÊ¾¼¸Ìõ¼ÇÂ¼
+	 * æ¯é¡µæ˜¾ç¤ºå‡ æ¡è®°å½•
 	 */
 	private int pageSize = 10;
 
 	/**
-	 * Ä¬ÈÏ µ±Ç°Ò³ ÎªµÚÒ»Ò³ Õâ¸öÊıÊÇ¼ÆËã³öÀ´µÄ
+	 * é»˜è®¤ å½“å‰é¡µ ä¸ºç¬¬ä¸€é¡µ è¿™ä¸ªæ•°æ˜¯è®¡ç®—å‡ºæ¥çš„
 	 */
 	private int pageNow = 1;
 
 	/**
-	 * ×Ü¼ÇÂ¼Êı
+	 * æ€»è®°å½•æ•°
 	 */
 	private long rowCount;
 
 	/**
-	 * ´ÓµÚ¼¸Ìõ¼ÇÂ¼¿ªÊ¼
+	 * ä»ç¬¬å‡ æ¡è®°å½•å¼€å§‹
 	 */
 	private int startPage;
 
 	/**
-	 * ¹æ¶¨ÏÔÊ¾5¸öÒ³Âë
+	 * è§„å®šæ˜¾ç¤º5ä¸ªé¡µç 
 	 */
 	private int pagecode = 10;
 
@@ -48,7 +48,7 @@ public class PageView<T> {
 	}
 
 	/**
-	 * Òª»ñµÃ¼ÇÂ¼µÄ¿ªÊ¼Ë÷Òı¡¡¼´¡¡¿ªÊ¼Ò³Âë
+	 * è¦è·å¾—è®°å½•çš„å¼€å§‹ç´¢å¼•ã€€å³ã€€å¼€å§‹é¡µç 
 	 * 
 	 * @return
 	 */
@@ -65,12 +65,12 @@ public class PageView<T> {
 	}
 
 	/**
-	 * Ê¹ÓÃ¹¹Ôìº¯Êı£¬£¬Ç¿ÖÆ±ØĞèÊäÈë Ã¿Ò³ÏÔÊ¾ÊıÁ¿¡¡ºÍ¡¡µ±Ç°Ò³
+	 * ä½¿ç”¨æ„é€ å‡½æ•°ï¼Œï¼Œå¼ºåˆ¶å¿…éœ€è¾“å…¥ æ¯é¡µæ˜¾ç¤ºæ•°é‡ã€€å’Œã€€å½“å‰é¡µ
 	 * 
 	 * @param pageSize
-	 *            ¡¡¡¡Ã¿Ò³ÏÔÊ¾ÊıÁ¿
+	 *            ã€€ã€€æ¯é¡µæ˜¾ç¤ºæ•°é‡
 	 * @param pageNow
-	 *            ¡¡µ±Ç°Ò³
+	 *            ã€€å½“å‰é¡µ
 	 */
 	public PageView(int pageSize, int pageNow) {
 		this.pageSize = pageSize;
@@ -78,10 +78,10 @@ public class PageView<T> {
 	}
 
 	/**
-	 * Ê¹ÓÃ¹¹Ôìº¯Êı£¬£¬Ç¿ÖÆ±ØĞèÊäÈë µ±Ç°Ò³
+	 * ä½¿ç”¨æ„é€ å‡½æ•°ï¼Œï¼Œå¼ºåˆ¶å¿…éœ€è¾“å…¥ å½“å‰é¡µ
 	 * 
 	 * @param pageNow
-	 *            ¡¡µ±Ç°Ò³
+	 *            ã€€å½“å‰é¡µ
 	 */
 	public PageView(int pageNow) {
 		this.pageNow = pageNow;
@@ -89,12 +89,12 @@ public class PageView<T> {
 	}
 
 	/**
-	 * ²éÑ¯½á¹û·½·¨ °Ñ¡¡¼ÇÂ¼Êı¡¡½á¹û¼¯ºÏ¡¡·ÅÈëµ½¡¡PageView¶ÔÏó
+	 * æŸ¥è¯¢ç»“æœæ–¹æ³• æŠŠã€€è®°å½•æ•°ã€€ç»“æœé›†åˆã€€æ”¾å…¥åˆ°ã€€PageViewå¯¹è±¡
 	 * 
 	 * @param rowCount
-	 *            ×Ü¼ÇÂ¼Êı
+	 *            æ€»è®°å½•æ•°
 	 * @param records
-	 *            ½á¹û¼¯ºÏ
+	 *            ç»“æœé›†åˆ
 	 */
 
 	public void setQueryResult(long rowCount, List records) {
@@ -107,11 +107,11 @@ public class PageView<T> {
 		setPageCount(this.rowCount % this.pageSize == 0 ? this.rowCount / this.pageSize : this.rowCount / this.pageSize + 1);
 	}
 
-	public List<T> getRecords() {
+	public List getRecords() {
 		return records;
 	}
 
-	public void setRecords(List<T> records) {
+	public void setRecords(List records) {
 		this.records = records;
 	}
 

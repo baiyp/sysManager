@@ -11,12 +11,24 @@
        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache-4.1.xsd
        http://www.springframework.org/schema/mvc  http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
 	  
+	   <!--加载配置属性文件-->
+	<context:property-placeholder ignore-unresolvable="true" location="classpath:dbcpconfig.properties" />
+	  
 	  <!-- 配置访问信息 -->
 	  <mvc:resources location="/rounder/" mapping="/rounder/**"></mvc:resources>
 	  <mvc:resources location="/assets/" mapping="/assets/**"></mvc:resources>
 	  <mvc:resources location="/login.html" mapping="/**"></mvc:resources>
 	  <!-- 开启MVC注解 -->
 	  <mvc:annotation-driven />
+	  
+	  <!-- 拦截器配置，拦截顺序：先执行后定义的，排在第一位的最后执行。-->
+	  <mvc:interceptors>
+	  	<mvc:interceptor>
+	  		<mvc:mapping path="/**"/>
+	  		<bean class="com.manager.common.interceptor.LogInterceptor"></bean>
+	  	</mvc:interceptor>
+ 
+	  </mvc:interceptors>
 	  
 	  <!--context:annotation-config/-->
 	  <!-- 设置使用注解的包 -->

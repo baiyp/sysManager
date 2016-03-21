@@ -44,8 +44,6 @@ public class FileUploadController extends BaseController{
 	@RequestMapping(value="/multipartFileUpload",method=RequestMethod.GET)
 	//@RequestBody
 	public String fileUploadForm() {
-		
-		System.out.println("multipartFileUpload : " +  this.getClass().getSimpleName());
 		return "";
 	}
 	

@@ -25,37 +25,44 @@ import org.apache.ibatis.scripting.defaults.DefaultParameterHandler;
 
 
 /**
- * MybatisµÄ·ÖÒ³²éÑ¯²å¼ş£¬Í¨¹ıÀ¹½ØStatementHandlerµÄprepare·½·¨À´ÊµÏÖ¡£ 
- * Ö»ÓĞÔÚ²ÎÊıÁĞ±íÖĞ°üÀ¨PageÀàĞÍµÄ²ÎÊıÊ±²Å½øĞĞ·ÖÒ³²éÑ¯¡£ 
- * ÔÚ¶à²ÎÊıµÄÇé¿öÏÂ£¬Ö»¶ÔµÚÒ»¸öPageÀàĞÍµÄ²ÎÊıÉúĞ§¡£ 
- * ÁíÍâ£¬ÔÚ²ÎÊıÁĞ±íÖĞ£¬PageÀàĞÍµÄ²ÎÊıÎŞĞèÓÃ@ParamÀ´±ê×¢ 
+ * Mybatisçš„åˆ†é¡µæŸ¥è¯¢æ’ä»¶ï¼Œé€šè¿‡æ‹¦æˆªStatementHandlerçš„prepareæ–¹æ³•æ¥å®ç°ã€‚ 
+ * åªæœ‰åœ¨å‚æ•°åˆ—è¡¨ä¸­åŒ…æ‹¬Pageç±»å‹çš„å‚æ•°æ—¶æ‰è¿›è¡Œåˆ†é¡µæŸ¥è¯¢ã€‚ 
+ * åœ¨å¤šå‚æ•°çš„æƒ…å†µä¸‹ï¼Œåªå¯¹ç¬¬ä¸€ä¸ªPageç±»å‹çš„å‚æ•°ç”Ÿæ•ˆã€‚ 
+ * å¦å¤–ï¼Œåœ¨å‚æ•°åˆ—è¡¨ä¸­ï¼ŒPageç±»å‹çš„å‚æ•°æ— éœ€ç”¨@Paramæ¥æ ‡æ³¨ 
+ * @author lanyuan
+ * 2013-11-19
+ * @Email: mmm333zzz520@163.com
+ * @version 1.0v
  */
 @SuppressWarnings("unchecked")
 @Intercepts( { @Signature(type = StatementHandler.class, method = "prepare", args = { Connection.class }) })
 public class PagePlugin implements Interceptor {
 
-	private static String dialect = null;//Êı¾İ¿âÀàĞÍ
-	private static String pageSqlId = ""; // mybaitsµÄÊı¾İ¿âxmlÓ³ÉäÎÄ¼şÖĞĞèÒªÀ¹½ØµÄID(ÕıÔòÆ¥Åä)
+	private static String dialect = null;//æ•°æ®åº“ç±»å‹
+	private static String pageSqlId = ""; // mybaitsçš„æ•°æ®åº“xmlæ˜ å°„æ–‡ä»¶ä¸­éœ€è¦æ‹¦æˆªçš„ID(æ­£åˆ™åŒ¹é…)
 
 	public Object intercept(Invocation ivk) throws Throwable {
 		if (ivk.getTarget() instanceof RoutingStatementHandler) {
 			RoutingStatementHandler statementHandler = (RoutingStatementHandler) ivk
 					.getTarget();
-			BaseStatementHandler delegate = (BaseStatementHandler) ReflectHelper.getValueByFieldName(statementHandler, "delegate");
-			MappedStatement mappedStatement = (MappedStatement) ReflectHelper.getValueByFieldName(delegate, "mappedStatement");
+			BaseStatementHandler delegate = (BaseStatementHandler) ReflectHelper
+					.getValueByFieldName(statementHandler, "delegate");
+			MappedStatement mappedStatement = (MappedStatement) ReflectHelper
+					.getValueByFieldName(delegate, "mappedStatement");
 			/**
-			 * ·½·¨1£ºÍ¨¹ı£É£ÄÀ´Çø·ÖÊÇ·ñĞèÒª·ÖÒ³£®.*query.*
-			 * ·½·¨2£º´«ÈëµÄ²ÎÊıÊÇ·ñÓĞpage²ÎÊı£¬Èç¹ûÓĞ£¬Ôò·ÖÒ³£¬
+			 * æ–¹æ³•1ï¼šé€šè¿‡ï¼©ï¼¤æ¥åŒºåˆ†æ˜¯å¦éœ€è¦åˆ†é¡µï¼.*query.*
+			 * æ–¹æ³•2ï¼šä¼ å…¥çš„å‚æ•°æ˜¯å¦æœ‰pageå‚æ•°ï¼Œå¦‚æœæœ‰ï¼Œåˆ™åˆ†é¡µï¼Œ
 			 */
-		//	if (mappedStatement.getId().matches(pageSqlId)) { // À¹½ØĞèÒª·ÖÒ³µÄSQL
+		//	if (mappedStatement.getId().matches(pageSqlId)) { // æ‹¦æˆªéœ€è¦åˆ†é¡µçš„SQL
 				BoundSql boundSql = delegate.getBoundSql();
-				Object parameterObject = boundSql.getParameterObject();// ·ÖÒ³SQL<select>ÖĞparameterTypeÊôĞÔ¶ÔÓ¦µÄÊµÌå²ÎÊı£¬¼´Mapper½Ó¿ÚÖĞÖ´ĞĞ·ÖÒ³·½·¨µÄ²ÎÊı,¸Ã²ÎÊı²»µÃÎª¿Õ
+				Object parameterObject = boundSql.getParameterObject();// åˆ†é¡µSQL<select>ä¸­parameterTypeå±æ€§å¯¹åº”çš„å®ä½“å‚æ•°ï¼Œå³Mapperæ¥å£ä¸­æ‰§è¡Œåˆ†é¡µæ–¹æ³•çš„å‚æ•°,è¯¥å‚æ•°ä¸å¾—ä¸ºç©º
 				if (parameterObject == null) {
 					//throw new NullPointerException("boundSql.getParameterObject() is null!");
 					return ivk.proceed();
 				} else {
+
 					PageView pageView = null;
-					if (parameterObject instanceof PageView) { // ²ÎÊı¾ÍÊÇPagesÊµÌå
+					if (parameterObject instanceof PageView) { // å‚æ•°å°±æ˜¯Pageså®ä½“
 						pageView = (PageView) parameterObject;
 					} else if (parameterObject instanceof Map) {
 						for (Entry entry : (Set<Entry>) ((Map) parameterObject)
@@ -65,7 +72,7 @@ public class PagePlugin implements Interceptor {
 								break;
 							}
 						}
-					} else { // ²ÎÊıÎªÄ³¸öÊµÌå£¬¸ÃÊµÌåÓµÓĞPagesÊôĞÔ
+					} else { // å‚æ•°ä¸ºæŸä¸ªå®ä½“ï¼Œè¯¥å®ä½“æ‹¥æœ‰Pageså±æ€§
 						pageView = ReflectHelper.getValueByFieldType(
 								parameterObject, PageView.class);
 						if (pageView == null) {
@@ -79,15 +86,15 @@ public class PagePlugin implements Interceptor {
 					Connection connection = (Connection) ivk.getArgs()[0];
 					setPageParameter(sql, connection, mappedStatement, boundSql, parameterObject, pageView);
 					String pageSql = generatePagesSql(sql, pageView);
-					ReflectHelper.setValueByFieldName(boundSql, "sql", pageSql); // ½«·ÖÒ³sqlÓï¾ä·´Éä»ØBoundSql.
+					ReflectHelper.setValueByFieldName(boundSql, "sql", pageSql); // å°†åˆ†é¡µsqlè¯­å¥åå°„å›BoundSql.
 				}
 			//}
 		}
 		return ivk.proceed();
 	}
 	/**
-     * ´ÓÊı¾İ¿âÀï²éÑ¯×ÜµÄ¼ÇÂ¼Êı²¢¼ÆËã×ÜÒ³Êı£¬»ØĞ´½ø·ÖÒ³²ÎÊı<code>PageParameter</code>,ÕâÑùµ÷ÓÃÕß¾Í¿ÉÓÃÍ¨¹ı ·ÖÒ³²ÎÊı
-     * <code>PageParameter</code>»ñµÃÏà¹ØĞÅÏ¢¡£
+     * ä»æ•°æ®åº“é‡ŒæŸ¥è¯¢æ€»çš„è®°å½•æ•°å¹¶è®¡ç®—æ€»é¡µæ•°ï¼Œå›å†™è¿›åˆ†é¡µå‚æ•°<code>PageParameter</code>,è¿™æ ·è°ƒç”¨è€…å°±å¯ç”¨é€šè¿‡ åˆ†é¡µå‚æ•°
+     * <code>PageParameter</code>è·å¾—ç›¸å…³ä¿¡æ¯ã€‚
      * 
      * @param sql
      * @param connection
@@ -98,12 +105,12 @@ public class PagePlugin implements Interceptor {
      */
     private void setPageParameter(String sql, Connection connection, MappedStatement mappedStatement,
             BoundSql boundSql,Object parameterObject, PageView pageView) throws SQLException {
-        // ¼ÇÂ¼×Ü¼ÇÂ¼Êı
+        // è®°å½•æ€»è®°å½•æ•°
     	PreparedStatement countStmt = null;
 		ResultSet rs = null;
 		try {
 			String countSql = "select count(1) from (" + sql
-					+ ") tmp_count"; // ¼ÇÂ¼Í³¼Æ
+					+ ") tmp_count"; // è®°å½•ç»Ÿè®¡
 			countStmt = connection.prepareStatement(countSql);
 			ReflectHelper.setValueByFieldName(boundSql, "sql",
 					countSql);
@@ -129,7 +136,7 @@ public class PagePlugin implements Interceptor {
 
     }
 	/**
-	 * ¸ù¾İÊı¾İ¿â·½ÑÔ£¬Éú³ÉÌØ¶¨µÄ·ÖÒ³sql
+	 * æ ¹æ®æ•°æ®åº“æ–¹è¨€ï¼Œç”Ÿæˆç‰¹å®šçš„åˆ†é¡µsql
 	 * 
 	 * @param sql
 	 * @param page
@@ -146,7 +153,7 @@ public class PagePlugin implements Interceptor {
 		return sql;
 	}
 	  /**
-     * mysqlµÄ·ÖÒ³Óï¾ä
+     * mysqlçš„åˆ†é¡µè¯­å¥
      * 
      * @param sql
      * @param page
@@ -161,7 +168,7 @@ public class PagePlugin implements Interceptor {
     }
 
     /**
-     * ²Î¿¼hibernateµÄÊµÏÖÍê³ÉoracleµÄ·ÖÒ³
+     * å‚è€ƒhibernateçš„å®ç°å®Œæˆoracleçš„åˆ†é¡µ
      * 
      * @param sql
      * @param page
@@ -184,15 +191,15 @@ public class PagePlugin implements Interceptor {
 
 	public void setProperties(Properties p) {
 		dialect = p.getProperty("dialect");
-		if (Common.isEmpty(dialect)) {
+		if (isEmpty(dialect)) {
 			try {
 				throw new PropertyException("dialectName or dialect property is not found!");
 			} catch (PropertyException e) {
 				e.printStackTrace();
 			}
 		} 
-		pageSqlId = p.getProperty("pageSqlId");//¸ù¾İidÀ´Çø·ÖÊÇ·ñĞèÒª·ÖÒ³
-		if (Common.isEmpty(pageSqlId)) {
+		pageSqlId = p.getProperty("pageSqlId");//æ ¹æ®idæ¥åŒºåˆ†æ˜¯å¦éœ€è¦åˆ†é¡µ
+		if (isEmpty(pageSqlId)) {
 			try {
 				throw new PropertyException("pageSqlId property is not found!");
 			} catch (PropertyException e) {
@@ -200,5 +207,17 @@ public class PagePlugin implements Interceptor {
 			}
 		}
 	}
-
+	/**
+	 * åˆ¤æ–­å˜é‡æ˜¯å¦ä¸ºç©º
+	 * 
+	 * @param s
+	 * @return
+	 */
+	public boolean isEmpty(String s) {
+		if (null == s || "".equals(s) || "".equals(s.trim()) || "null".equalsIgnoreCase(s)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
