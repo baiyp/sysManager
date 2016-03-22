@@ -9,6 +9,9 @@ public interface UserService extends BaseService<User>{
 	
 	public User countUser(User user);
 	
+	
+	public User userLogin(String userName,String password);
+	 
 	/**
 	 * @param account
 	 * @param pageView

@@ -6,5 +6,7 @@ import com.manager.sys.model.User;
 public interface UserDao extends BaseDao<User>{
 	
 	public User countAccount(User user);
+	
+	public User userLogin(String username,String password);
 
 }

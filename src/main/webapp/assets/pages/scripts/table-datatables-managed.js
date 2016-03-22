@@ -8,25 +8,24 @@ var TableDatatablesManaged = function () {
         table.dataTable({
 
             // Internationalisation. For more info refer to http://datatables.net/manual/i18n
-            "language": {
-                "aria": {
-                    "sortAscending": ": activate to sort column ascending",
-                    "sortDescending": ": activate to sort column descending"
-                },
-                "emptyTable": "No data available in table",
-                "info": "Showing _START_ to _END_ of _TOTAL_ records",
-                "infoEmpty": "No records found",
-                "infoFiltered": "(filtered1 from _MAX_ total records)",
-                "lengthMenu": "Show _MENU_",
-                "search": "Search:",
-                "zeroRecords": "No matching records found",
-                "paginate": {
-                    "previous":"Prev",
-                    "next": "Next",
-                    "last": "Last",
-                    "first": "First"
-                }
-            },
+
+            
+            "oLanguage" : {
+				  "sProcessing" : "正在获取数据，请稍后...",  
+		         "sLengthMenu": "_MENU_ 记录/页",
+		         "sZeroRecords": "抱歉， 没有找到",
+		         "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+		         "sInfoEmpty": "显示第 0 至 0 项记录，共 0 项",
+		         "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+		         "sZeroRecords": "没有检索到数据",
+		         "sSearch": "搜索:",
+		         "oPaginate": {
+		             "sFirst": "首页",
+		             "sPrevious": "前一页",
+		             "sNext": "后一页",
+		             "sLast": "尾页"     
+		         }, 
+		 },
 
             // Or you can use remote translation file
             //"language": {

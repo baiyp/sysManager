@@ -6,12 +6,14 @@ import java.util.Map;
 
 import org.apache.shiro.authc.Account;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.manager.common.PageView;
 import com.manager.sys.dao.UserDao;
 import com.manager.sys.model.User;
 import com.manager.sys.service.UserService;
 
+@Service("accountService")
 public class UserServiceImpl  implements UserService{
 
 	
@@ -67,14 +69,17 @@ public class UserServiceImpl  implements UserService{
 
 	@Override
 	public User countUser(User user) {
-		// TODO Auto-generated method stub
-		return null;
+		return userDao.countAccount(user);
 	}
 
 	@Override
 	public PageView queryNoMatch(User user, PageView pageView) {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public User userLogin(String userName, String password) {
+		return userDao.userLogin(userName, password);
 	}
 
 }

@@ -224,7 +224,7 @@ var Layout = function () {
                 $('.page-header .responsive-toggler').click();
             }
 
-            App.startPageLoading();
+            App.startPageLoading(); 
             
             pageContentBody.load(url,function(){
             	$.getScript("../assets/global/scripts/app.min.js",function(){

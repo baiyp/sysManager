@@ -273,14 +273,24 @@ var Demo = function() {
             if (typeof Cookies !== "undefined" && Cookies.get('layout-style-option') === 'rounded') {
                 setThemeStyle(Cookies.get('layout-style-option'));
                 $('.theme-panel .layout-style-option').val(Cookies.get('layout-style-option'));
-            }            
+            }
+            
+            App.startPageLoading(); 
+            var pageContentBody = $('.page-content .page-content-body');
+            pageContentBody.load("home.html",function(){
+            	$.getScript("../assets/global/scripts/app.min.js",function(){
+            		$.getScript("../assets/pages/scripts/dashboard.min.js",function(){
+                		App.stopPageLoading();
+                	}); 
+            	});
+            });
+            
         }
     };
 
 }();
 
-if (App.isAngularJsApp() === false) {
-    jQuery(document).ready(function() {    
-       Demo.init();
-    });
-}
+
+jQuery(document).ready(function() {
+   Demo.init();
+});

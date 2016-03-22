@@ -46,7 +46,7 @@ var Login = function() {
             },
 
             submitHandler: function(form) {
-                form.submit(); // form validation success, call ajax form submit
+                form.submit(); 
             }
         });
 

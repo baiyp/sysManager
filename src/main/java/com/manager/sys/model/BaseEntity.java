@@ -1,7 +1,8 @@
 package com.manager.sys.model;
 
+import java.io.Serializable;
 
-public class BaseEntity {
+public class BaseEntity implements Serializable{
 
     protected Integer id;
     
