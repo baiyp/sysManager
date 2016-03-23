@@ -13,7 +13,7 @@ import com.manager.sys.dao.UserDao;
 import com.manager.sys.model.User;
 import com.manager.sys.service.UserService;
 
-@Service("accountService")
+@Service("userService")
 public class UserServiceImpl  implements UserService{
 
 	

@@ -46,7 +46,16 @@ var Login = function() {
             },
 
             submitHandler: function(form) {
-                form.submit(); 
+                //form.submit();
+            	 $.post("/sysManager/userLogin",{username:$("#username").val(),password:$("#password").val()},function(data1){	
+            		 var r = data1.success;
+            		 //var data = eval( "("+data1+")" );
+            		 if(r== "true"){
+	    					window.location.href="/sysManager/rounder/index.html";
+	    			 }else{
+	    				 $('.alert-danger', $('.login-form')).show().html(data1.message); 
+	    			 }
+            	 },"json"); 
             }
         });
 

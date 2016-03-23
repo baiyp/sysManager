@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.manager.common.view.JsonView;
 import com.manager.control.base.BaseController;
 import com.manager.sys.service.AccountService;
 
@@ -18,7 +19,7 @@ public class AccountController extends BaseController {
 	private AccountService accountService = null;
 	
 	@RequestMapping(value="/queryAccount",method=RequestMethod.POST)
-	public String queryAccount(HttpServletRequest request,HttpServletResponse response){
+	public JsonView queryAccount(HttpServletRequest request,HttpServletResponse response){
 		
 		String sEcho = request.getParameter("sEcho");
 		int pageNo = Integer.parseInt(request.getParameter("iDisplayStart"));
@@ -26,7 +27,7 @@ public class AccountController extends BaseController {
 		int accountType = Integer.parseInt(request.getParameter("accountType")); 
 		accountService.queryAccount(pageNo,pageSize,accountType);
   
-		return "";
+		return new JsonView();
 	}
 
 }

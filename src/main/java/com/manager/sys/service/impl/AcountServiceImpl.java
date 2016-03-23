@@ -3,12 +3,15 @@
  */
 package com.manager.sys.service.impl;
 
+import org.springframework.stereotype.Service;
+
 import com.manager.sys.service.AccountService;
 
 /**
  * @author baiyp
  *
  */
+@Service("accountService")
 public class AcountServiceImpl implements AccountService {
 
 
@@ -20,8 +23,7 @@ public class AcountServiceImpl implements AccountService {
 
 
 	@Override
-	public String queryAccountDetailed(int accountId) {
-		// TODO Auto-generated method stub
+	public String queryAccountDetailed(int accountId){
 		return null;
 	}
 
