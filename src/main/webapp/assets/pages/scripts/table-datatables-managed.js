@@ -8,24 +8,27 @@ var TableDatatablesManaged = function () {
         table.dataTable({
 
             // Internationalisation. For more info refer to http://datatables.net/manual/i18n
-
-            
-            "oLanguage" : {
-				  "sProcessing" : "正在获取数据，请稍后...",  
-		         "sLengthMenu": "_MENU_ 记录/页",
-		         "sZeroRecords": "抱歉， 没有找到",
-		         "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
-		         "sInfoEmpty": "显示第 0 至 0 项记录，共 0 项",
-		         "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
-		         "sZeroRecords": "没有检索到数据",
-		         "sSearch": "搜索:",
-		         "oPaginate": {
-		             "sFirst": "首页",
-		             "sPrevious": "前一页",
-		             "sNext": "后一页",
-		             "sLast": "尾页"     
-		         }, 
-		 },
+        	"language": {
+                "processing": "处理中...",
+                "lengthMenu": "显示 _MENU_ 项结果",
+                "zeroRecords": "没有匹配结果",
+                "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "infoFiltered": "(由 _MAX_ 项结果过滤)",
+                "search": "搜索:",
+                "emptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "paginate": {
+                    "first": "首页",
+                    "previous": "上页",
+                    "next": "下页",
+                    "last": "末页"
+                },
+                "aria": {
+                    "sortAscending": ": 以升序排列此列",
+                    "sortDescending": ": 以降序排列此列"
+                }
+            },
 
             // Or you can use remote translation file
             //"language": {
@@ -93,23 +96,25 @@ var TableDatatablesManaged = function () {
         table.dataTable({
 
             // Internationalisation. For more info refer to http://datatables.net/manual/i18n
-            "language": {
-                "aria": {
-                    "sortAscending": ": activate to sort column ascending",
-                    "sortDescending": ": activate to sort column descending"
-                },
-                "emptyTable": "No data available in table",
-                "info": "Showing _START_ to _END_ of _TOTAL_ records",
-                "infoEmpty": "No records found",
-                "infoFiltered": "(filtered1 from _MAX_ total records)",
-                "lengthMenu": "Show _MENU_",
-                "search": "Search:",
-                "zeroRecords": "No matching records found",
+        	"language": {
+                "processing": "处理中...",
+                "lengthMenu": "显示 _MENU_ 项结果",
+                "zeroRecords": "没有匹配结果",
+                "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "infoFiltered": "(由 _MAX_ 项结果过滤)",
+                "search": "搜索:",
+                "emptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
                 "paginate": {
-                    "previous":"Prev",
-                    "next": "Next",
-                    "last": "Last",
-                    "first": "First"
+                    "first": "首页",
+                    "previous": "上页",
+                    "next": "下页",
+                    "last": "末页"
+                },
+                "aria": {
+                    "sortAscending": ": 以升序排列此列",
+                    "sortDescending": ": 以降序排列此列"
                 }
             },
 
@@ -163,23 +168,25 @@ var TableDatatablesManaged = function () {
         table.dataTable({
 
             // Internationalisation. For more info refer to http://datatables.net/manual/i18n
-            "language": {
-                "aria": {
-                    "sortAscending": ": activate to sort column ascending",
-                    "sortDescending": ": activate to sort column descending"
-                },
-                "emptyTable": "No data available in table",
-                "info": "Showing _START_ to _END_ of _TOTAL_ records",
-                "infoEmpty": "No records found",
-                "infoFiltered": "(filtered1 from _MAX_ total records)",
-                "lengthMenu": "Show _MENU_",
-                "search": "Search:",
-                "zeroRecords": "No matching records found",
+        	"language": {
+                "processing": "处理中...",
+                "lengthMenu": "显示 _MENU_ 项结果",
+                "zeroRecords": "没有匹配结果",
+                "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "infoFiltered": "(由 _MAX_ 项结果过滤)",
+                "search": "搜索:",
+                "emptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
                 "paginate": {
-                    "previous":"Prev",
-                    "next": "Next",
-                    "last": "Last",
-                    "first": "First"
+                    "first": "首页",
+                    "previous": "上页",
+                    "next": "下页",
+                    "last": "末页"
+                },
+                "aria": {
+                    "sortAscending": ": 以升序排列此列",
+                    "sortDescending": ": 以降序排列此列"
                 }
             },
             
@@ -189,13 +196,17 @@ var TableDatatablesManaged = function () {
             //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
 
             "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-            
+            "pagingType": "bootstrap_full_number",
+            "processing": true,
+            "serverSide": true,
+            "ajax": "/sysManager/queryAccount",
+            "displayStart": 1,
+            "pageLength": 15,
             "lengthMenu": [
                 [6, 15, 20, -1],
                 [6, 15, 20, "All"] // change per page values here
             ],
-            // set the initial value
-            "pageLength": 6,
+            // set the initial value 
             "columnDefs": [{  // set default column settings
                 'orderable': false,
                 'targets': [0]

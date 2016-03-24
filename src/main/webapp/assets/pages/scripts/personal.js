@@ -1,50 +1,62 @@
 var TableDatatablesManaged = function () {
- 
-
-       
-    var initTable3 = function () {
+  
+	var initTable3 = function () {
 
         var table = $('#sample_3');
 
         // begin: third table
         table.dataTable({
+
             // Internationalisation. For more info refer to http://datatables.net/manual/i18n
-        	//"pagingType": "bootstrap_full_number",
-        	"bPaginate": false,
-            "pagingType": "full_numbers",
-            "scrollX":true,
-        	"language" : {
-  				  "sProcessing" : "正在获取数据，请稍后...",  
-  		         "sLengthMenu": "_MENU_ 记录/页",
-  		         "sZeroRecords": "抱歉， 没有找到",
-  		         "sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
-  		         "sInfoEmpty": "显示第 0 至 0 项记录，共 0 项",
-  		         "sInfoFiltered": "(从 _MAX_ 条数据中检索)",
-  		         "sZeroRecords": "没有检索到数据",
-  		         "sSearch": "搜索:",
-  		         "oPaginate": {
-  		             "sFirst": "首页",
-  		             "sPrevious": "前一页",
-  		             "sNext": "后一页",
-  		             "sLast": "尾页"     
-  		         }, 
-        	},
-        	
-            // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
-            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/scripts/datatable.js). 
-            // So when dropdowns used the scrollable div should be removed. 
-            //"dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r>t<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>",
+        	"language": {
+                "processing": "处理中...",
+                "lengthMenu": "显示 _MENU_ 项结果",
+                "zeroRecords": "没有匹配结果",
+                "info": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                "infoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                "infoFiltered": "(由 _MAX_ 项结果过滤)",
+                "search": "搜索:",
+                "emptyTable": "表中数据为空",
+                "sLoadingRecords": "载入中...",
+                "paginate": {
+                    "first": "首页",
+                    "previous": "上页",
+                    "next": "下页",
+                    "last": "末页"
+                },
+                "aria": {
+                    "sortAscending": ": 以升序排列此列",
+                    "sortDescending": ": 以降序排列此列"
+                }
+            },
             
-            //"bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
-        	"processing": true,
+            // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
+            // setup uses scrollable div(table-scrollable) with overflow:auto to enable vertical scroll(see: assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js). 
+            // So when dropdowns used the scrollable div should be removed. 
+            //"dom": "<'row'<'col-md-6 col-sm-12'l><'col-md-6 col-sm-12'f>r>t<'row'<'col-md-5 col-sm-12'i><'col-md-7 col-sm-12'p>>",
+
+            "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+            "pagingType": "bootstrap_full_number",
+            "processing": true,
             "serverSide": true,
             "ajax": "/sysManager/queryAccount",
-            "displayStart": 1,
+            "displayStart": 0,
             "pageLength": 15,
             "lengthMenu": [
-                           [5, 15, 20, -1],
-                           [5, 15, 20, "All"] // change per page values here
+                [6, 15, 20, -1],
+                [6, 15, 20, "All"] // change per page values here
             ],
+            // set the initial value 
+            "columnDefs": [{  // set default column settings
+                'orderable': false,
+                'targets': [0]
+            }, {
+                "searchable": false,
+                "targets": [0]
+            }],
+            "order": [
+                [1, "asc"]
+            ] // set first column as a default sort by asc
         });
 
         var tableWrapper = jQuery('#sample_3_wrapper');
