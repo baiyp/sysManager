@@ -25,7 +25,7 @@ var TableDatatablesAjax = function () {
             onDataLoad: function(grid) {
                 // execute some code on ajax data load
             },
-            loadingMessage: 'Loading...',
+            loadingMessage: '正在加载数据,请稍等...',
             dataTable: { // here you can define a typical datatable settings from http://datatables.net/usage/options 
 
                 // Uncomment below line("dom" parameter) to fix the dropdown overflow issue in the datatable cells. The default datatable layout
@@ -43,6 +43,7 @@ var TableDatatablesAjax = function () {
                 "ajax": {
                     "url": "../demo/table_ajax.php", // ajax source
                 },
+                
                 "order": [
                     [1, "asc"]
                 ]// set first column as a default sort by asc

@@ -18,14 +18,16 @@ public class AccountController extends BaseController {
 	@Autowired
 	private AccountService accountService = null;
 	
-	@RequestMapping(value="/queryAccount",method=RequestMethod.POST)
+	@RequestMapping(value="/queryAccount")
 	public JsonView queryAccount(HttpServletRequest request,HttpServletResponse response){
 		
-		String sEcho = request.getParameter("sEcho");
-		int pageNo = Integer.parseInt(request.getParameter("iDisplayStart"));
+		String sEcho = request.getParameter("draw");
+		String start = request.getParameter("start");
+		String length = request.getParameter("length");
+		/*int pageNo = Integer.parseInt(request.getParameter("displayStart"));
 		int pageSize = Integer.parseInt(request.getParameter("iDisplayLength"));
-		int accountType = Integer.parseInt(request.getParameter("accountType")); 
-		accountService.queryAccount(pageNo,pageSize,accountType);
+		int accountType = Integer.parseInt(request.getParameter("accountType")); */
+		accountService.queryAccount(1,15,0);
   
 		return new JsonView();
 	}

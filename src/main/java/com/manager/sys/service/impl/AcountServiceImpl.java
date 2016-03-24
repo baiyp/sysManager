@@ -3,8 +3,10 @@
  */
 package com.manager.sys.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.manager.sys.dao.AccountDao;
 import com.manager.sys.service.AccountService;
 
 /**
@@ -13,12 +15,14 @@ import com.manager.sys.service.AccountService;
  */
 @Service("accountService")
 public class AcountServiceImpl implements AccountService {
-
+	
+	@Autowired
+	private AccountDao accountDao;
 
 	@Override
 	public String queryAccount(int pageNo, int pageSize, int accountType) {
 		//
-		return null;
+		return accountDao.queryPersonal(pageNo, pageSize).toString();
 	}
 
 

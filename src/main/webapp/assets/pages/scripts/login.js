@@ -47,15 +47,15 @@ var Login = function() {
 
             submitHandler: function(form) {
                 //form.submit();
-            	 $.post("/sysManager/userLogin",{username:$("#username").val(),password:$("#password").val()},function(data1){	
-            		 var r = data1.success;
+            	 $.post("/sysManager/userLogin",{username:$("#username").val(),password:$("#password").val()},function(data){	
+            		  
             		 //var data = eval( "("+data1+")" );
-            		 if(r== "true"){
+            		 if(data.success == true){
 	    					window.location.href="/sysManager/rounder/index.html";
 	    			 }else{
-	    				 $('.alert-danger', $('.login-form')).show().html(data1.message); 
+	    				 $('.alert-danger', $('.login-form')).show().html(data.message); 
 	    			 }
-            	 },"json"); 
+            	 }); 
             }
         });
 
