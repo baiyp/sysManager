@@ -1,6 +1,13 @@
 package com.manager.sys.service;
 
+import java.util.ArrayList;
+
+import com.manager.sys.model.Personal;
+
 public interface AccountService {
+	
+	
+	public int queryPersonalLimitCount();
 	
 	/**
 	 * 查询用户信息
@@ -9,7 +16,7 @@ public interface AccountService {
 	 * @param accountType
 	 * @return
 	 */
-	public String queryAccount(int pageNo,int pageSize,int accountType);
+	public ArrayList<Personal>  queryAccount(int pageNo,int pageSize,int accountType);
 	
 	/**
 	 * 查找用户选取

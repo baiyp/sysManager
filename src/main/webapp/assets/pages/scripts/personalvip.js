@@ -115,7 +115,7 @@ var TableDatatablesManaged = function () {
                              'orderable': false,
                              "searchable": false,
                              render: function (data,full, meta ) { 
-                                 return "<button class=\"btn btn-sm green btn-outline audit-submit margin-bottom\"><i class=\"fa fa-hand-pointer-o\"></i> 审核</button> <button class=\"btn btn-sm red btn-outline forbidden-submit\"><i class=\"fa fa-times\"></i> 禁用</button>";
+                                 return "<button class=\"btn btn-sm green btn-outline details-submit margin-bottom\"><i class=\"fa fa-hand-pointer-o\"></i>详情</button> <button class=\"btn btn-sm red btn-outline forbidden-submit\"><i class=\"fa fa-times\"></i> 禁用</button>";
                              }
                          }
           
@@ -125,10 +125,8 @@ var TableDatatablesManaged = function () {
             ] // set first column as a default sort by asc
         });
         
-        table.on("click",".audit-submit",function(){
-        	
-        	alert("udit-submit");
-        	
+        table.on("click",".details-submit",function(){ 
+        	alert("details-submit");
         });
         
         table.on("click",".forbidden-submit",function(){

@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.manager.sys.dao.AccountDao">
+ 
+	<!-- 查詢個人用戶信息 -->
+	<select id="queryPersonalLimitCount"  resultType="java.lang.Integer">  
+		SELECT count(*) FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.user_type=0
+    </select>		
+
 	<!-- 查詢個人用戶信息 -->
 	<select id="queryPersonal"  resultType="com.manager.sys.model.Personal">  
-		SELECT a.*,p.full_name,p.ID_number,p.sex,p.email,p.diploma,p.graduate_institutions,p.profession FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.user_type=0   LIMIT #{pageNo},#{pageSize}
+		SELECT p.full_name as full_name,p.id_number as id_number,p.sex,p.email,p.diploma,p.graduate_institutions,p.profession,a.* FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.user_type=0   LIMIT #{pageNo},#{pageSize}
     </select>
     <!-- 根据编号获得用户 -->
     <select id="getPersonal" parameterType="java.lang.Integer" resultType="com.manager.sys.model.Personal">  

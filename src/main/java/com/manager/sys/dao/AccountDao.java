@@ -19,6 +19,9 @@ import com.manager.sys.model.Personal;
 public interface AccountDao {
 	
 	
+	
+	public int queryPersonalLimitCount();
+	
 	/**
 	 * 
 	 * @param pageNo

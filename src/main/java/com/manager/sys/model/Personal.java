@@ -7,17 +7,31 @@ package com.manager.sys.model;
  * @author baiyp
  *
  */
-public class Personal extends Account {
+public class Personal extends BaseEntity {
+	
+	private String username;
+	
+	private String password;
+	
+	private int user_type;//用戶類別
+	
+	private int  user_level;//用戶等級
+	
+	private int register_date;//註冊時間
+	
+	private int audit_status;//0：普通会员、1：未审核、2：审核通过、审核未通过
+	
+	private int user_mode;//
 
 	private String full_name;//姓名
 	
-	private String ID_number;//ID_number
+	private String id_number;//ID_number
 	
-	private String date_birth;//出生日期
+	private long date_birth;//出生日期
 	
 	private int sex;//性別 0 男 1女
 	
-	private String Residence_address;//现居住地址
+	private String residence_address;//现居住地址
 	
 	private String email;//電子郵箱
 	
@@ -28,7 +42,7 @@ public class Personal extends Account {
 	
 	private String profession;//所学专业
 	
-	private String graduation_time;//毕业时间_UTC时间
+	private long graduation_time;//毕业时间_UTC时间
 	
 	
 	private String work_unit;//工作单位
@@ -39,7 +53,7 @@ public class Personal extends Account {
 	private String certificate;//资格证书
 	
 	
-	private String Working_year;//工作年份
+	private long working_year;//工作年份
 	
 	
 	private String deposit_bank;//开户银行
@@ -56,7 +70,27 @@ public class Personal extends Account {
 	private String salary;//月薪
 	
 	private String pay_account;//在线支付账号
+	
+	
+	
 
+	public String getId_number() {
+		return id_number;
+	}
+
+	public void setId_number(String id_number) {
+		this.id_number = id_number;
+	}
+
+	public String getResidence_address() {
+		return residence_address;
+	}
+
+	public void setResidence_address(String residence_address) {
+		this.residence_address = residence_address;
+	}
+
+	
 	public String getFull_name() {
 		return full_name;
 	}
@@ -65,21 +99,9 @@ public class Personal extends Account {
 		this.full_name = full_name;
 	}
 
-	public String getID_number() {
-		return ID_number;
-	}
+	 
 
-	public void setID_number(String iD_number) {
-		ID_number = iD_number;
-	}
-
-	public String getDate_birth() {
-		return date_birth;
-	}
-
-	public void setDate_birth(String date_birth) {
-		this.date_birth = date_birth;
-	}
+	
 
 	public int getSex() {
 		return sex;
@@ -89,13 +111,7 @@ public class Personal extends Account {
 		this.sex = sex;
 	}
 
-	public String getResidence_address() {
-		return Residence_address;
-	}
-
-	public void setResidence_address(String residence_address) {
-		Residence_address = residence_address;
-	}
+	 
 
 	public String getEmail() {
 		return email;
@@ -129,12 +145,30 @@ public class Personal extends Account {
 		this.profession = profession;
 	}
 
-	public String getGraduation_time() {
+	
+
+	public long getDate_birth() {
+		return date_birth;
+	}
+
+	public void setDate_birth(long date_birth) {
+		this.date_birth = date_birth;
+	}
+
+	public long getGraduation_time() {
 		return graduation_time;
 	}
 
-	public void setGraduation_time(String graduation_time) {
+	public void setGraduation_time(long graduation_time) {
 		this.graduation_time = graduation_time;
+	}
+
+	public long getWorking_year() {
+		return working_year;
+	}
+
+	public void setWorking_year(long working_year) {
+		this.working_year = working_year;
 	}
 
 	public String getWork_unit() {
@@ -161,13 +195,7 @@ public class Personal extends Account {
 		this.certificate = certificate;
 	}
 
-	public String getWorking_year() {
-		return Working_year;
-	}
-
-	public void setWorking_year(String working_year) {
-		Working_year = working_year;
-	}
+ 
 
 	public String getDeposit_bank() {
 		return deposit_bank;
@@ -224,6 +252,62 @@ public class Personal extends Account {
 	public void setPay_account(String pay_account) {
 		this.pay_account = pay_account;
 	}
- 
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getUser_type() {
+		return user_type;
+	}
+
+	public void setUser_type(int user_type) {
+		this.user_type = user_type;
+	}
+
+	public int getUser_level() {
+		return user_level;
+	}
+
+	public void setUser_level(int user_level) {
+		this.user_level = user_level;
+	}
+
+	public int getRegister_date() {
+		return register_date;
+	}
+
+	public void setRegister_date(int register_date) {
+		this.register_date = register_date;
+	}
+
+	public int getAudit_status() {
+		return audit_status;
+	}
+
+	public void setAudit_status(int audit_status) {
+		this.audit_status = audit_status;
+	}
+
+	public int getUser_mode() {
+		return user_mode;
+	}
+
+	public void setUser_mode(int user_mode) {
+		this.user_mode = user_mode;
+	}
+	 
 
 }

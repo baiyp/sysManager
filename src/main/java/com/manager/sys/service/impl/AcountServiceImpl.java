@@ -3,10 +3,13 @@
  */
 package com.manager.sys.service.impl;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.manager.sys.dao.AccountDao;
+import com.manager.sys.model.Personal;
 import com.manager.sys.service.AccountService;
 
 /**
@@ -18,11 +21,16 @@ public class AcountServiceImpl implements AccountService {
 	
 	@Autowired
 	private AccountDao accountDao;
+	
+	
+	public int queryPersonalLimitCount(){
+		return accountDao.queryPersonalLimitCount();
+	}
 
 	@Override
-	public String queryAccount(int pageNo, int pageSize, int accountType) {
+	public ArrayList<Personal> queryAccount(int pageNo, int pageSize, int accountType) {
 		//
-		return accountDao.queryPersonal(pageNo, pageSize).toString();
+		return accountDao.queryPersonal(pageNo, pageSize);
 	}
 
 

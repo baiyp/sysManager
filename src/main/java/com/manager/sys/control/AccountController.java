@@ -29,15 +29,10 @@ public class AccountController extends BaseController {
 		String sEcho = request.getParameter("draw");
 		String start = request.getParameter("start");
 		String length = request.getParameter("length");
-		/*int pageNo = Integer.parseInt(request.getParameter("displayStart"));
-		int pageSize = Integer.parseInt(request.getParameter("iDisplayLength"));
-		int accountType = Integer.parseInt(request.getParameter("accountType")); */
-		accountService.queryAccount(1,15,0);
-		page.setData(new ArrayList<Personal>());
+		page.setData(accountService.queryAccount(Integer.parseInt(start),Integer.parseInt(length),0));
 		page.setDraw(Integer.parseInt(sEcho));
-		page.setRecordsFiltered(12);
-		page.setRecordsTotal(23);
-		//page.setError("服务器出差");
+		page.setRecordsFiltered(accountService.queryPersonalLimitCount());
+		page.setRecordsTotal(accountService.queryPersonalLimitCount());
 		return page;
 	}
 

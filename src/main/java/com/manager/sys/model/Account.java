@@ -12,7 +12,7 @@ public class Account extends BaseEntity {
 	
 	private int register_date;//註冊時間
 	
-	private int Audit_status;//0：普通会员、1：未审核、2：审核通过、审核未通过
+	private int audit_status;//0：普通会员、1：未审核、2：审核通过、审核未通过
 	
 	private int user_mode;//
 
@@ -55,13 +55,13 @@ public class Account extends BaseEntity {
 	public void setRegister_date(int register_date) {
 		this.register_date = register_date;
 	}
-
+ 
 	public int getAudit_status() {
-		return Audit_status;
+		return audit_status;
 	}
 
 	public void setAudit_status(int audit_status) {
-		Audit_status = audit_status;
+		this.audit_status = audit_status;
 	}
 
 	public int getUser_mode() {
@@ -72,5 +72,7 @@ public class Account extends BaseEntity {
 		this.user_mode = user_mode;
 	}
 	
+	
+
  
 }
