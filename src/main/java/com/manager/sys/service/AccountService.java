@@ -2,6 +2,7 @@ package com.manager.sys.service;
 
 import java.util.ArrayList;
 
+import com.manager.sys.model.Enterprise;
 import com.manager.sys.model.Personal;
 
 public interface AccountService {
@@ -9,11 +10,14 @@ public interface AccountService {
 	
 	public int queryPersonalLimitCount();
 	
+	
+	public int queryEnterpriseLimitCount(int userType);
+	
 	/**
 	 * 查询用户信息
 	 * @param pageNo  
 	 * @param pageSize
-	 * @param accountType
+	 * @param accountType 0 是个人普通会员、大于0是个人VIP会员
 	 * @return
 	 */
 	public ArrayList<Personal>  queryAccount(int pageNo,int pageSize,int accountType);
@@ -33,6 +37,15 @@ public interface AccountService {
 	 * @return
 	 */
 	public String auditAccount(int accountId,int auditStatus);
+	
+	/**
+	 * 
+	 * @param pageNo   页码
+	 * @param pageSize  每页显示记录数
+	 * @param accountType 普通企业会员 、VIP企业会员 
+	 * @return
+	 */
+	public ArrayList<Enterprise> queryEnterprise(int pageNo,int pageSize,int accountType);
 	
 	
 	

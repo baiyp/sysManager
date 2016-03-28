@@ -5,7 +5,19 @@
 	<!-- 查詢個人用戶信息 -->
 	<select id="queryPersonalLimitCount"  resultType="java.lang.Integer">  
 		SELECT count(*) FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.user_type=0
-    </select>		
+    </select>
+    
+    <!-- 查詢個人用戶信息 -->
+	<select id="queryEnterpriseLimitCount"  resultType="java.lang.Integer">  
+		SELECT count(*) FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id where a.user_type=1 and a.user_level=0
+    </select>
+    
+    <!-- 查詢個人用戶信息 -->
+	<select id="queryEnterpriseVipLimitCount"  resultType="java.lang.Integer">  
+		SELECT count(*) FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id where a.user_type=1 and a.user_level>0
+    </select>
+    
+    		
 
 	<!-- 查詢個人用戶信息 -->
 	<select id="queryPersonal"  resultType="com.manager.sys.model.Personal">  
@@ -15,9 +27,13 @@
     <select id="getPersonal" parameterType="java.lang.Integer" resultType="com.manager.sys.model.Personal">  
 		SELECT a.*,p.full_name,p.ID_number,p.sex,p.email,p.diploma,p.graduate_institutions,p.profession FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.id =#{id}
     </select>
-    <!-- 查詢企業用戶信息 -->
+    <!-- 查詢普通企業用戶信息 -->
     <select id="queryEnterprise"  resultType="com.manager.sys.model.Enterprise">  
-		SELECT a.*,e.enterprise_name,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id where a.user_type=1   LIMIT #{pageNo},#{pageSize}
+		SELECT a.*,e.enterprise_name,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id where a.user_type=1  and a.user_level=0 LIMIT #{pageNo},#{pageSize}
+    </select>
+    <!-- 查詢普通企業用戶信息 -->
+    <select id="queryEnterpriseVip"  resultType="com.manager.sys.model.Enterprise">  
+		SELECT a.*,e.enterprise_name,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id where a.user_type=1 and a.user_level>0   LIMIT #{pageNo},#{pageSize}
     </select>
     <!-- 根據企業編號獲取企業信息 -->
     <select id="getEnterprise" parameterType="java.lang.Integer" resultType="com.manager.sys.model.Enterprise">  

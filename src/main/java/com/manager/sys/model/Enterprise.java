@@ -18,7 +18,7 @@ public class Enterprise extends Account {
 	
 	private String contact_number;//联系人电话
 	
-	private String company_telephone;//公司电话
+	private String enterprise_tel;//公司电话
 	
 	private String contacts_email;//联系人邮箱
 	
@@ -136,12 +136,14 @@ public class Enterprise extends Account {
 		this.contact_number = contact_number;
 	}
 
-	public String getCompany_telephone() {
-		return company_telephone;
+	 
+
+	public String getEnterprise_tel() {
+		return enterprise_tel;
 	}
 
-	public void setCompany_telephone(String company_telephone) {
-		this.company_telephone = company_telephone;
+	public void setEnterprise_tel(String enterprise_tel) {
+		this.enterprise_tel = enterprise_tel;
 	}
 
 	public String getContacts_email() {

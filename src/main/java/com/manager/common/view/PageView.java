@@ -20,6 +20,10 @@ public class PageView<T>  implements Serializable{
 	private ArrayList<T> data;//表中中需要显示的数据。这是一个对象数组，也可以只是数组，区别在于 纯数组前台就不需要用 columns绑定数据，会自动按照顺序去显示 ，而对象数组则需要使用 columns绑定数据才能正常显示。 注意这个 data的名称可以由 ajaxDT 的 ajax.dataSrcDT 控制
 
 	private String error;//可选。你可以定义一个错误来描述服务器出了问题后的友好提
+	
+	private int pageNo;
+	
+	private int pageSize;
 	 
 	
 	private HashMap<String,String>  orderBy ;
@@ -103,5 +107,23 @@ public class PageView<T>  implements Serializable{
 	public void setError(String error) {
 		this.error = error;
 	}
+
+	public int getPageNo() {
+		return pageNo;
+	}
+
+	public void setPageNo(int pageNo) {
+		this.pageNo = pageNo;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	
+	
  
 }

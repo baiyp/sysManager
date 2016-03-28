@@ -19,6 +19,9 @@ import com.manager.sys.model.Personal;
 public interface AccountDao {
 	
 	
+	public int queryEnterpriseLimitCount();
+	
+	public int queryEnterpriseVipLimitCount();
 	
 	public int queryPersonalLimitCount();
 	
@@ -45,6 +48,15 @@ public interface AccountDao {
 	 * @return
 	 */
 	public ArrayList<Enterprise> queryEnterprise(@Param("pageNo")int pageNo,@Param("pageSize") int pageSize);
+	
+	
+	/**
+	 * 
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	public ArrayList<Enterprise> queryEnterpriseVip(@Param("pageNo")int pageNo,@Param("pageSize") int pageSize);
 	
 	
 	/**

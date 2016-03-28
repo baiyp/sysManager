@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.manager.sys.dao.AccountDao;
+import com.manager.sys.model.Enterprise;
 import com.manager.sys.model.Personal;
 import com.manager.sys.service.AccountService;
 
@@ -45,5 +46,25 @@ public class AcountServiceImpl implements AccountService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ArrayList<Enterprise> queryEnterprise(int pageNo, int pageSize, int accountType) {
+		
+		if(accountType > 0){
+			return accountDao.queryEnterpriseVip(pageNo, pageSize);
+		}
+		
+		return accountDao.queryEnterprise(pageNo, pageSize);
+	}
+
+	@Override
+	public int queryEnterpriseLimitCount(int userType) {
+		if(userType > 0){
+			return accountDao.queryEnterpriseVipLimitCount();
+		}
+		return accountDao.queryEnterpriseLimitCount();
+	}
+	
+	
 
 }
