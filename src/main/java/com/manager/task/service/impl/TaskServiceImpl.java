@@ -51,21 +51,24 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public Task getTaskManage(int taskId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Task getTaskManage(int taskId) { 
+		return taskDao.getTaskManage(taskId);
 	}
 
 	@Override
 	public int auditTaskManage(int taskId, int status) {
-		// TODO Auto-generated method stub
-		return 0;
+		return taskDao.auditTaskManage(taskId,status);
 	}
 
 	@Override
 	public int AssignEnterprise(int taskId, int accountId) {
-		// TODO Auto-generated method stub
-		return 0;
+		/*1:更新中标企业任务信息标记 
+		 *2：更新认领未中标的企业标记（tender表 qualified ） 
+		 *3：更新任务表的任务状态标记（tendertask表  flag）*/
+		taskDao.updateTaskStatus(taskId);
+		taskDao.updateTenderNotWinning(taskId, accountId);
+		taskDao.updateTenderWinBidding(taskId, accountId);
+		return 1;
 	}
 
 }

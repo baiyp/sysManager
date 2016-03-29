@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.manager.common.view.JsonView;
 import com.manager.common.view.PageView;
 import com.manager.control.base.BaseController;
 import com.manager.sys.model.Task;
@@ -54,6 +55,42 @@ public class TaskController extends BaseController {
 	}
 	
 	/**
+	 * 获取单个任务信息
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/getTaskManage")
+	public Task getTaskManage(HttpServletRequest request,HttpServletResponse response){
+		int taskId = Integer.parseInt(request.getParameter("taskId"));
+		return taskService.getTaskManage(taskId);
+	}
+	
+	/**
+	 * 审核公司上报的任务信息
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/auditTaskManage")
+	@ResponseBody
+	public JsonView auditTaskManage(HttpServletRequest request,HttpServletResponse response){
+		JsonView json = new JsonView();
+		int taskId = Integer.parseInt(request.getParameter("taskId"));
+		int status = Integer.parseInt(request.getParameter("status"));
+		int result = taskService.auditTaskManage(taskId, status);
+		if(result == 0){
+			json.setMessage("任务信息审核失败");
+			json.setMessageCode("10001");
+			json.setSuccess(false);
+		}else{
+			json.setMessage("任务信息审核成功");
+			json.setMessageCode("10001");
+		}
+		return json;
+	}
+	
+	/**
 	 * 审核后的任务信息列表
 	 * @param request
 	 * @param response
@@ -72,7 +109,12 @@ public class TaskController extends BaseController {
 		page.setRecordsTotal(taskService.queryTaskAssignCount());
 		return page;
 	}
-	
+	/**
+	 * 获取单个任务认领的公司信息
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value="/queryTaskClaimEn")
 	@ResponseBody
 	public PageView<Task> queryTaskClaimEn(HttpServletRequest request,HttpServletResponse response){
@@ -88,12 +130,36 @@ public class TaskController extends BaseController {
 		return page;
 	}
 	
+	/**
+	 * 分派任务给企业 一个任务只能分派给一个企业，不能进行拆分
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/assignEnterprise")
+	@ResponseBody
+	public JsonView AssignEnterprise(HttpServletRequest request,HttpServletResponse response){
+		JsonView json = new JsonView();
+		int taskId = Integer.parseInt(request.getParameter("taskId"));
+		int accountId = Integer.parseInt(request.getParameter("accountId"));
+		int result = taskService.AssignEnterprise(taskId,accountId);
+		if(result == 0){
+			json.setMessage("任务分派失败");
+			json.setMessageCode("10001");
+			json.setSuccess(false);
+		}else{
+			json.setMessage("任务分派失败");
+			json.setMessageCode("10001");
+		}
+		return json; 
+	}
+	
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		
 
 	}
 

@@ -61,11 +61,11 @@ var TableDatatablesManaged = function () {
             "columnDefs": [
                         
                          {"targets":[0],
-                             "orderable":false,
-                             "searchable":false,
-                             "render":function(data,full,meta){
-                           	  	return "<input type=\"checkbox\" class=\"checkboxes\" value="+data+" /> </td>";
-                              }
+                          "orderable":false,
+                          "searchable":false,
+                          "render":function(data,full,meta){
+                           	  			return "<input type=\"checkbox\" class=\"checkboxes\" value="+data+" /> </td>";
+                          			}
                            	 
                           },
                           {   "targets":[3],
@@ -114,7 +114,7 @@ var TableDatatablesManaged = function () {
                              "width" :'10%',
                              'orderable': false,
                              "searchable": false,
-                             render: function (data,full, meta ) { 
+                             render: function (data,full,meta) { 
                                  return "<button class=\"btn btn-sm green btn-outline audit-submit margin-bottom ajaxify\" href=\"form_fileupload.html\" ajaxScript=\"../assets/pages/scripts/form-fileupload.js\"><i class=\"fa fa-hand-pointer-o\"></i> 审核</button> <button class=\"btn btn-sm red btn-outline forbidden-submit\"><i class=\"fa fa-times\"></i> 禁用</button>";
                              }
                          }
