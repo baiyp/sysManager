@@ -3,6 +3,8 @@
 <configuration>
     <mappers>
     	<package name="mappings/modules/sys/UserDao.xml"/>
+    	<package name="mappings/modules/sys/AccountDao.xml"/>
+    	<package name="mappings/modules/sys/TaskDao.xml"/>
     </mappers>
    <plugins>
    	<plugin interceptor="com.manager.common.plugin.PagePlugin"></plugin>

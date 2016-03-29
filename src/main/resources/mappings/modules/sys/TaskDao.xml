@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manager.task.dao.TaskDao">
+	<!-- 获取企业发布任务信息 -->	
+	<select id="queryTaskManage" parameterType="com.manager.sys.model.Task" resultType="com.manager.sys.model.Task">  
+  		SELECT t.*,tc.name as taskTypeName,e.enterprise_name FROM tendertask t LEFT JOIN TASKCATEGORY tc on tc.id = t.category  left join account a on t.publisher = a.id  left join enterprise e on a.id= e.account_id  where review !=1 LIMIT #{pageNo},#{pageSize}
+    </select> 
+    
+    <!-- 获取企业发布任务信息总数 -->	
+	<select id="queryTaskManageCount"  resultType="java.lang.Integer">  
+  		SELECT count(*) FROM tendertask t LEFT JOIN TASKCATEGORY tc on tc.id = t.category  left join account a on t.publisher = a.id  left join enterprise e on a.id= e.account_id  where review !=1 
+    </select> 
+    
+    <!-- 获取企业发布任务审核通过信息，用来管理用户认领的信息 -->	
+	<select id="queryTaskAssign" parameterType="com.manager.sys.model.Task" resultType="com.manager.sys.model.Task">  
+  		SELECT * FROM sys_user
+    </select> 
+    
+     <!-- 获取企业发布任务审核通过信息总数，用来管理用户认领的信息 -->	
+	<select id="queryTaskAssignCount" parameterType="java.lang.Integer" resultType="com.manager.sys.model.Task">  
+  		SELECT * FROM sys_user
+    </select> 
+    
+    <!-- 获取每一个任务认领的公司列表 -->
+	<select id="queryTaskClaimEn" parameterType="com.manager.sys.model.Task" resultType="com.manager.sys.model.Task">  
+  		SELECT * FROM sys_user
+    </select> 
+    
+    <!--获取每一个任务认领的公司总数-->
+	<select id="queryTaskClaimenCount" parameterType="java.lang.Integer" resultType="com.manager.sys.model.Task">  
+  		SELECT * FROM sys_user
+    </select> 
+ 
+    
+    	
+</mapper>

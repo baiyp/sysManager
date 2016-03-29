@@ -39,7 +39,7 @@ var TableDatatablesManaged = function () {
             "pagingType": "bootstrap_full_number",
             "processing": true,
             "serverSide": true,
-            "ajax": "/sysManager/queryAccount",
+            "ajax": "/sysManager/taskManage",
             "displayStart": 0,
             "pageLength": 15,
             "lengthMenu": [
@@ -47,15 +47,12 @@ var TableDatatablesManaged = function () {
                 [6, 15, 20, "All"] // change per page values here
             ],
             "columns": [{"data":"id"},
-                      {"data": "username"},
-                      {"data": "full_name"},
-                      {"data": "sex"},
-                      {"data": "diploma"},
-                      {"data": "graduate_institutions"},
-                      {"data": "profession"},
-                      {"data": "work_unit"},
-                      {"data": "register_date"},
-                      {"data": "audit_status"},
+                      {"data": "title"},
+                      {"data": "taskTypeName"},
+                      {"data": "enterprise_name"},
+                      {"data": "time"},
+                      {"data": "edit_time"},
+                      {"data": "review"},
                       {"data": "id"}
             ],
             "columnDefs": [
@@ -68,22 +65,8 @@ var TableDatatablesManaged = function () {
                               }
                            	 
                           },
-                          {   "targets":[3],
-                              "orderable":false,
-                              "searchable":false,
-                              "render":function(data,full,meta){
-                            	 var html  = "" ;
-                            	 if(data == 0){
-                            		  html = "男";
-                            	  }else{
-                            		  html = "女";
-                            	  }
-                            	  return html;
-                               }
-                            	 
-                          },
                           {
-                        	  "targets":[8],
+                        	  "targets":[4],
                         	  "orderable":false,
                         	  "searchable":false,
                         	  "render":function(data,full,meta){
@@ -94,7 +77,19 @@ var TableDatatablesManaged = function () {
                         		  return d.getFullYear()+"-"+(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" +d.getMinutes() +":" + d.getSeconds();
                         	  }
                           },
-                          {   "targets":[9],
+                          {
+                        	  "targets":[5],
+                        	  "orderable":false,
+                        	  "searchable":false,
+                        	  "render":function(data,full,meta){
+                        		  if(data == 0){
+                        			  return "";
+                        		  }
+                        		  var d = new Date(data*1000);
+                        		  return d.getFullYear()+"-"+(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" +d.getMinutes() +":" + d.getSeconds();
+                        	  }
+                          },
+                          {   "targets":[6],
                               "orderable":false,
                               "searchable":false,
                               "render":function(data,full,meta){
@@ -110,7 +105,7 @@ var TableDatatablesManaged = function () {
                                }
                           },
                           {
-                             "targets": [10],
+                             "targets": [7],
                              "width" :'10%',
                              'orderable': false,
                              "searchable": false,

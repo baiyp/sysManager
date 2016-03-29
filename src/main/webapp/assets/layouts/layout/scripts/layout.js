@@ -267,12 +267,26 @@ var Layout = function () {
             App.scrollTop();
 
             var url = $(this).attr("href");
+            var ajaxScript = $(this).attr("ajaxScript");
+            alert("ajaxScript: " + ajaxScript);
             var pageContent = $('.page-content');
             var pageContentBody = $('.page-content .page-content-body');
 
             App.startPageLoading();
+            
+            pageContentBody.load(url,function(){
+            	$.getScript("../assets/global/scripts/app.min.js",function(){
+	            	if(ajaxScript == undefined || ajaxScript == ""){
+	            		App.stopPageLoading();
+	            	}else{
+	            		$.getScript(ajaxScript,function(){
+	                		App.stopPageLoading();
+	                	});
+	            	}
+            	});
+            });
 
-            if (App.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page 
+            /* if (App.getViewPort().width < resBreakpointMd && $('.page-sidebar').hasClass("in")) { // close the menu on mobile view while laoding a page 
                 $('.page-header .responsive-toggler').click();
             }
 
@@ -291,7 +305,7 @@ var Layout = function () {
                     pageContentBody.html('<h4>Could not load the requested content.</h4>');
                     App.stopPageLoading();
                 }
-            });
+            });*/
         });
 
         // handle scrolling to top on responsive menu toggler click when header is fixed for mobile view
