@@ -52,7 +52,7 @@ public interface TaskDao {
 	 * @param pageSize
 	 * @return ArrayList<Task>
 	 */
-	public ArrayList<Task>  queryTaskClaimEn(@Param("pageNo")int pageNo,@Param("pageSize") int pageSize,int taskId);
+	public ArrayList<Task>  queryTaskClaimEn(@Param("pageNo")int pageNo,@Param("pageSize") int pageSize,@Param("taskId") int taskId);
 	
 	
 	/**

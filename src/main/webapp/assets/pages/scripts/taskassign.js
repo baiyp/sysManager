@@ -39,7 +39,7 @@ var TableDatatablesManaged = function () {
             "pagingType": "bootstrap_full_number",
             "processing": true,
             "serverSide": true,
-            "ajax": "/sysManager/queryAccount",
+            "ajax": "/sysManager/taskAssign",
             "displayStart": 0,
             "pageLength": 15,
             "lengthMenu": [
@@ -47,15 +47,14 @@ var TableDatatablesManaged = function () {
                 [6, 15, 20, "All"] // change per page values here
             ],
             "columns": [{"data":"id"},
-                      {"data": "username"},
-                      {"data": "full_name"},
-                      {"data": "sex"},
-                      {"data": "diploma"},
-                      {"data": "graduate_institutions"},
-                      {"data": "profession"},
-                      {"data": "work_unit"},
-                      {"data": "register_date"},
-                      {"data": "audit_status"},
+                      {"data": "title"},
+                      {"data": "taskTypeName"},
+                      {"data": "enterprise_name"},
+                      {"data": "time"},
+                      {"data": "edit_time"},
+                      {"data": "view_count"},
+                      {"data": "bid_count"},
+                      {"data": "flag"},
                       {"data": "id"}
             ],
             "columnDefs": [
@@ -68,22 +67,8 @@ var TableDatatablesManaged = function () {
                               }
                            	 
                           },
-                          {   "targets":[3],
-                              "orderable":false,
-                              "searchable":false,
-                              "render":function(data,full,meta){
-                            	 var html  = "" ;
-                            	 if(data == 0){
-                            		  html = "男";
-                            	  }else{
-                            		  html = "女";
-                            	  }
-                            	  return html;
-                               }
-                            	 
-                          },
                           {
-                        	  "targets":[8],
+                        	  "targets":[4],
                         	  "orderable":false,
                         	  "searchable":false,
                         	  "render":function(data,full,meta){
@@ -94,28 +79,40 @@ var TableDatatablesManaged = function () {
                         		  return d.getFullYear()+"-"+(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" +d.getMinutes() +":" + d.getSeconds();
                         	  }
                           },
-                          {   "targets":[9],
+                          {
+                        	  "targets":[5],
+                        	  "orderable":false,
+                        	  "searchable":false,
+                        	  "render":function(data,full,meta){
+                        		  if(data == 0){
+                        			  return "";
+                        		  }
+                        		  var d = new Date(data*1000);
+                        		  return d.getFullYear()+"-"+(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" +d.getMinutes() +":" + d.getSeconds();
+                        	  }
+                          },
+                          {   "targets":[8],
                               "orderable":false,
                               "searchable":false,
-                              "render":function(data,full,meta){
+                              "render":function(data,full,meta){//任务状态：0进行中；1 已完成；2 无人认领
                             	 var html  = "" ;
                             	 if(data == 2){
-                            		  html = "审核通过";
+                            		  html = "无人认领";
                             	  }else if(data == 1){
-                            		  html = "审核未通过";
+                            		  html = "已完成";
                             	  }else{
-                            		  html="未审核";
+                            		  html="进行中";
                             	  }
                             	  return html;
                                }
                           },
                           {
-                             "targets": [10],
+                             "targets": [9],
                              "width" :'10%',
                              'orderable': false,
                              "searchable": false,
                              render: function (data,full, meta ) { 
-                                 return "<button class=\"btn btn-sm green btn-outline audit-submit margin-bottom ajaxify\" href=\"form_fileupload.html\" ajaxScript=\"../assets/pages/scripts/form-fileupload.js\"><i class=\"fa fa-hand-pointer-o\"></i> 审核</button> <button class=\"btn btn-sm red btn-outline forbidden-submit\"><i class=\"fa fa-times\"></i> 禁用</button>";
+                                 return "<button class=\"btn btn-sm green btn-outline audit-submit margin-bottom ajaxify\" href=\"form_fileupload.html\" ajaxScript=\"../assets/pages/scripts/form-fileupload.js\"><i class=\"fa fa-hand-pointer-o\"></i>选派</button> <button class=\"btn btn-sm red btn-outline forbidden-submit\"><i class=\"fa fa-times\"></i>终止</button>";
                              }
                          }
           

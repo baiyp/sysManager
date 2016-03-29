@@ -25,6 +25,8 @@ public interface AccountDao {
 	
 	public int queryPersonalLimitCount();
 	
+	public int queryPersonalVipLimitCount();
+	
 	/**
 	 * 
 	 * @param pageNo
@@ -33,6 +35,16 @@ public interface AccountDao {
 	 */
 	public ArrayList<Personal> queryPersonal(@Param("pageNo")int pageNo,@Param("pageSize") int pageSize);
 	
+	
+	/**
+	 * 
+	 * @param pageNo
+	 * @param pageSize
+	 * @return
+	 */
+	public ArrayList<Personal> queryPersonalVip(@Param("pageNo")int pageNo,@Param("pageSize") int pageSize);
+	
+	 
 	/**
 	 * 
 	 * @param accountId
@@ -64,7 +76,7 @@ public interface AccountDao {
 	 * @param accountId
 	 * @return
 	 */
-	public Enterprise getEnterprise(int accountId);
+	public Enterprise queryEnterprise(int accountId);
 	
 	
 	/**
@@ -74,6 +86,10 @@ public interface AccountDao {
 	 * @return
 	 */
 	public int auditAccount(@Param("id") int id,@Param("status") int status);
+	
+	
+	
+	public int forbiddenAccount(int accountId);
 	
 	
 	

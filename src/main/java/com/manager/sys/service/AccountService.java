@@ -8,7 +8,7 @@ import com.manager.sys.model.Personal;
 public interface AccountService {
 	
 	
-	public int queryPersonalLimitCount();
+	public int queryPersonalLimitCount(int userType);
 	
 	
 	public int queryEnterpriseLimitCount(int userType);
@@ -27,16 +27,24 @@ public interface AccountService {
 	 * @param accountId
 	 * @return
 	 */
-	public String queryAccountDetailed(int accountId);
+	public Personal queryPersonalDetailed(int accountId);
 	
 	
 	/**
-	 * 审核用户信息（包括企业用户和个人用户）
+	 * 查找企业选取
+	 * @param accountId
+	 * @return
+	 */
+	public Enterprise queryEnterpriseDetailed(int accountId);
+	
+	
+	/**
+	 * 审核用户信息（包括企业用户和个人用户)
 	 * @param accountId
 	 * @param auditStatus
 	 * @return
 	 */
-	public String auditAccount(int accountId,int auditStatus);
+	public int auditAccount(int accountId,int auditStatus);
 	
 	/**
 	 * 
@@ -46,6 +54,10 @@ public interface AccountService {
 	 * @return
 	 */
 	public ArrayList<Enterprise> queryEnterprise(int pageNo,int pageSize,int accountType);
+	
+	
+	
+	public int forbiddenAccount(int accountId);
 	
 	
 	

@@ -95,9 +95,9 @@ var TableDatatablesManaged = function () {
                               "render":function(data,full,meta){
                             	 var html  = "" ;
                             	 if(data == 2){
-                            		  html = "审核通过";
-                            	  }else if(data == 1){
                             		  html = "审核未通过";
+                            	  }else if(data == 1){
+                            		  html = "审核通过";
                             	  }else{
                             		  html="未审核";
                             	  }

@@ -39,7 +39,7 @@ var TableDatatablesManaged = function () {
             "pagingType": "bootstrap_full_number",
             "processing": true,
             "serverSide": true,
-            "ajax": "/sysManager/queryAccount",
+            "ajax": "/sysManager/queryAccount?userType=1",
             "displayStart": 0,
             "pageLength": 15,
             "lengthMenu": [

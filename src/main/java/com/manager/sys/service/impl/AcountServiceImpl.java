@@ -24,36 +24,37 @@ public class AcountServiceImpl implements AccountService {
 	private AccountDao accountDao;
 	
 	
-	public int queryPersonalLimitCount(){
-		return accountDao.queryPersonalLimitCount();
+	public int queryPersonalLimitCount(int userType){
+		if(userType == 0){
+			return accountDao.queryPersonalLimitCount();
+		}
+		return accountDao.queryPersonalVipLimitCount();
 	}
 
 	@Override
 	public ArrayList<Personal> queryAccount(int pageNo, int pageSize, int accountType) {
-		//
-		return accountDao.queryPersonal(pageNo, pageSize);
+		if(accountType == 0){
+			return accountDao.queryPersonal(pageNo, pageSize);
+		}
+		return accountDao.queryPersonalVip(pageNo, pageSize);
 	}
 
 
 	@Override
-	public String queryAccountDetailed(int accountId){
-		return null;
+	public Personal queryPersonalDetailed(int accountId){
+		return accountDao.getPersonal(accountId);
 	}
-
-
+ 
 	@Override
-	public String auditAccount(int accountId, int auditStatus) {
-		// TODO Auto-generated method stub
-		return null;
+	public int auditAccount(int accountId, int auditStatus) {
+		return accountDao.auditAccount(accountId, auditStatus);
 	}
 
 	@Override
-	public ArrayList<Enterprise> queryEnterprise(int pageNo, int pageSize, int accountType) {
-		
+	public ArrayList<Enterprise> queryEnterprise(int pageNo, int pageSize, int accountType) { 
 		if(accountType > 0){
 			return accountDao.queryEnterpriseVip(pageNo, pageSize);
-		}
-		
+		} 
 		return accountDao.queryEnterprise(pageNo, pageSize);
 	}
 
@@ -65,6 +66,14 @@ public class AcountServiceImpl implements AccountService {
 		return accountDao.queryEnterpriseLimitCount();
 	}
 	
-	
+	@Override
+	public Enterprise queryEnterpriseDetailed(int accountId) { 
+		return accountDao.queryEnterprise(accountId);
+	}
+
+	@Override
+	public int forbiddenAccount(int accountId) {
+		return accountDao.forbiddenAccount(accountId);
+	}
 
 }

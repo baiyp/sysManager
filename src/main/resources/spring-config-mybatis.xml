@@ -79,7 +79,7 @@
     
     <!-- 扫描basePackage下所有以@MyBatisDao注解的接口 -->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-    	<property name="basePackage" value="com.manager.sys.dao"/>
+    	<property name="basePackage" value="com.manager.*.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
         
     </bean>
