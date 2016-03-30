@@ -53,8 +53,6 @@ var TableDatatablesManaged = function () {
                       {"data": "en_bus_license_no"},//执照编号 
                       {"data": "business_entity"},//企业法人
                       {"data": "enterprise_tel"},//企业电话
-                      {"data": "contacts"},//联系人
-                      {"data": "contact_number"},//联系人电话
                       {"data": "registered_capital"},//注册资本
                       {"data": "business_volume"},//年营业额
                       {"data": "register_date"},//注册时间 
@@ -74,9 +72,10 @@ var TableDatatablesManaged = function () {
                           },
                           
                           {
-                        	  "targets":[10],
+                        	  "targets":[8],
                         	  "orderable":false,
                         	  "searchable":false,
+                        	  "width" :'100',
                         	  "render":function(data,full,meta){
                         		  if(data == 0){
                         			  return "";
@@ -85,7 +84,20 @@ var TableDatatablesManaged = function () {
                         		  return d.getFullYear()+"-"+(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" +d.getMinutes() +":" + d.getSeconds();
                         	  }
                           },
-                          {   "targets":[12],
+                          {   "targets":[9],
+                              "orderable":false,
+                              "searchable":false,
+                              "render":function(data,full,meta){
+                            	 var html  = "" ;
+                            	 if(data == 0){
+                            		  html = "启用";
+                            	  }else{
+                            		  html="禁用";
+                            	  }
+                            	  return html;
+                               }
+                          },
+                          {   "targets":[10],
                               "orderable":false,
                               "searchable":false,
                               "render":function(data,full,meta){
@@ -101,8 +113,8 @@ var TableDatatablesManaged = function () {
                                }
                           },
                           {
-                             "targets": [13],
-                             "width" :'10%',
+                             "targets": [11],
+                             "width" :'150',
                              'orderable': false,
                              "searchable": false,
                              render: function (data,full, meta ) { 

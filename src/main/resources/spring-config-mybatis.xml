@@ -33,9 +33,9 @@
 	    <!-- 数据源驱动类可不写，Druid默认会自动根据URL识别DriverClass -->
 	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<!-- 基本属性 url、user、password -->
-		<property name="url" value="jdbc:mysql://101.200.136.243:3306/jjwl" />
-		<property name="username" value="jjwl" />
-		<property name="password" value="jjwl_1212" />
+		<property name="url" value="jdbc:mysql://127.0.0.1:3306/demo" />
+		<property name="username" value="root" />
+		<property name="password" value="123456" />
 		<!-- 配置初始化大小、最小、最大 -->
 		<property name="initialSize" value="10"/>
 		<property name="minIdle" value="5"/> 

@@ -5,6 +5,7 @@
     	<package name="mappings/modules/sys/UserDao.xml"/>
     	<package name="mappings/modules/sys/AccountDao.xml"/>
     	<package name="mappings/modules/sys/TaskDao.xml"/>
+    	<package name="mappings/modules/sys/AnnouncementDao.xml"/>
     </mappers>
    <plugins>
    	<plugin interceptor="com.manager.common.plugin.PagePlugin"></plugin>

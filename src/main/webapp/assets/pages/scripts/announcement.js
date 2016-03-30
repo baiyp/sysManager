@@ -39,43 +39,32 @@ var TableDatatablesManaged = function () {
             "pagingType": "bootstrap_full_number",
             "processing": true,
             "serverSide": true,
-            "ajax": "/sysManager/queryEnterprise?userinfo=0",//userinfo 0 表示普通企业用户  1企业VIP用户
+            "ajax": "/sysManager/queryAnnouncement",
             "displayStart": 0,
             "pageLength": 15,
             "lengthMenu": [
                 [6, 15, 20, -1],
                 [6, 15, 20, "All"] // change per page values here
             ],
-
             "columns": [{"data":"id"},
-                      {"data": "username"},//登录账号
-                      {"data": "enterprise_name"},//企业名称
-                      {"data": "en_bus_license_no"},//执照编号 
-                      {"data": "business_entity"},//企业法人
-                      {"data": "enterprise_tel"},//企业电话 
-                      {"data": "registered_capital"},//注册资本
-                      {"data": "business_volume"},//年营业额
-                      {"data": "register_date"},//注册时间 
-                      {"data": "user_mode"},//账号状态
-                      {"data": "audit_status"},//用户状态
+                      {"data": "title"},
+                      {"data": "user_id"},
+                      {"data": "create_Date"}, 
                       {"data": "id"}
             ],
             "columnDefs": [
-                        
                          {"targets":[0],
-                             "orderable":false,
-                             "searchable":false,
-                             "render":function(data,full,meta){
-                           	  	return "<input type=\"checkbox\" class=\"checkboxes\" value="+data+" /> </td>";
-                              }
+                          "orderable":false,
+                          "searchable":false,
+                          "render":function(data,full,meta){
+                           	  			return "<input type=\"checkbox\" class=\"checkboxes\" value="+data+" /> </td>";
+                          			}
                            	 
                           },
-                          
                           {
-                        	  "targets":[8],
+                        	  "targets":[3],
                         	  "orderable":false,
                         	  "searchable":false,
-                        	  "width" :'120',
                         	  "render":function(data,full,meta){
                         		  if(data == 0){
                         			  return "";
@@ -84,55 +73,22 @@ var TableDatatablesManaged = function () {
                         		  return d.getFullYear()+"-"+(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" +d.getMinutes() +":" + d.getSeconds();
                         	  }
                           },
-                          {   "targets":[9],
-                              "orderable":false,
-                              "searchable":false,
-                              "render":function(data,full,meta){
-                            	 var html  = "" ;
-                            	 if(data == 0){
-                            		  html = "启用";
-                            	  }else{
-                            		  html="禁用";
-                            	  }
-                            	  return html;
-                               }
-                          },
-                          {   "targets":[10],
-                              "orderable":false,
-                              "searchable":false,
-                              "render":function(data,full,meta){
-                            	 var html  = "" ;
-                            	 if(data == 2){
-                            		  html = "审核通过";
-                            	  }else if(data == 1){
-                            		  html = "审核未通过";
-                            	  }else{
-                            		  html="未审核";
-                            	  }
-                            	  return html;
-                               }
-                          },
                           {
-                             "targets": [11],
-                             "width" :'150',
+                             "targets": [4],
+                             "width" :'15%',
                              'orderable': false,
                              "searchable": false,
-                             render: function (data,full, meta ) { 
-                                 return "<button class=\"btn btn-sm green btn-outline audit-submit margin-bottom\"><i class=\"fa fa-hand-pointer-o\"></i> 审核</button> <button class=\"btn btn-sm red btn-outline forbidden-submit\"><i class=\"fa fa-times\"></i> 禁用</button>";
+                             render: function (data,full,meta) { 
+                                 return "<button class=\"btn btn-sm green btn-outline audit-submit margin-bottom ajaxify\" href=\"form_fileupload.html\" ajaxScript=\"../assets/pages/scripts/form-fileupload.js\"><i class=\"fa fa-hand-pointer-o\"></i> 查看</button> <button class=\"btn btn-sm red btn-outline forbidden-submit\"><i class=\"fa fa-times\"></i>删除</button>";
                              }
                          }
           
             ],
             "order": [
                 [1, "asc"]
-            ] // set first column as a default sort by asc
+            ]
         });
-        
-        table.on("click",".audit-submit",function(){
-        	
-        	alert("udit-submit");
-        	
-        });
+ 
         
         table.on("click",".forbidden-submit",function(){
         	alert("forbidden-submit");

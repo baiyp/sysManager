@@ -106,7 +106,7 @@ var TableDatatablesManaged = function () {
                           },
                           {
                              "targets": [7],
-                             "width" :'10%',
+                             "width" :'150',
                              'orderable': false,
                              "searchable": false,
                              render: function (data,full, meta ) { 

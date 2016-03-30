@@ -8,7 +8,7 @@
     </select>
     
     <!-- 查詢個人用戶信息 -->
-	<select id="queryPersonaViplLimitCount"  resultType="java.lang.Integer">  
+	<select id="queryPersonalVipLimitCount"  resultType="java.lang.Integer">  
 		SELECT count(*) FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.user_type=0 and a.user_level > 0;
     </select>
     

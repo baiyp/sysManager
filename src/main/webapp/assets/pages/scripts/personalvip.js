@@ -111,7 +111,7 @@ var TableDatatablesManaged = function () {
                           },
                           {
                              "targets": [10],
-                             "width" :'10%',
+                             "width" :'15%',
                              'orderable': false,
                              "searchable": false,
                              render: function (data,full, meta ) { 
