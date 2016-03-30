@@ -8,48 +8,58 @@
 
 <div class="row">
                         
-                        <div class="col-sm-12">
-                            <!-- BEGIN EXAMPLE TABLE PORTLET-->
-                            <div class="portlet box red">
-                                <div class="portlet-title">
-                                    <div class="caption">
-                                        <i class="fa fa-cogs"></i>公告信息列表 </div>
-                                     <div class="actions">
-                                        <a href="javascript:;" class="btn btn-default btn-sm">
-                                            <i class="fa fa-plus"></i> 添加 </a>
-                                        <a href="javascript:;" class="btn btn-default btn-sm">
-                                            <i class="fa fa-pencil"></i> 修改 </a>
-                                        <a href="javascript:;" class="btn btn-default btn-sm">
-                                            <i class="fa fa-print"></i> 导出公告 </a>
-                                    </div>
+    <div class="col-sm-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet box red">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>公告信息列表 </div>
+                 <div class="actions">
+                    <a href="ui_modals_ajax_sample.html" data-target="#ajax" class="btn btn-default btn-sm" data-toggle="modal">
+                        <i class="fa fa-plus"></i> 添加 </a>
+                    <a href="javascript:;" class="btn btn-default btn-sm">
+                        <i class="fa fa-pencil"></i> 修改 </a>
+                    <a href="javascript:;" class="btn btn-default btn-sm">
+                        <i class="fa fa-print"></i> 导出公告 </a>
+                </div>
+            </div>
+            <div class="modal fade" id="ajax" role="basic" aria-hidden="true">
+                  <div class="modal-dialog" >
+                      <div class="modal-content" style="width:700px;height:500px">
+                          <div class="modal-body">
+                              <img src="../assets/global/img/loading-spinner-grey.gif" alt="" class="loading">
+                              <span> &nbsp;&nbsp;Loading... </span>
+                          </div>
+                      </div>
+                  </div>
+             </div>
+            <div class="portlet-body">
+                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_3">
+                    <thead>
+                        <tr>
+                            <th class="table-checkbox">
+                                <input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes" /> </th>
+                             <th> 标题 </th>
+                             <th> 发布人 </th>
+                             <th> 发布时间 </th>
+                             <th> 操作 </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                         
+                      <!--td>
+                                <div class="margin-bottom-5">
+                                    <button class="btn btn-sm green btn-outline filter-submit margin-bottom">
+                                        <i class="fa fa-search"></i> 审核</button>
                                 </div>
-                                <div class="portlet-body">
-                                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_3">
-                                        <thead>
-                                            <tr>
-                                                <th class="table-checkbox">
-                                                    <input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes" /> </th>
-	                                                <th> 标题 </th>
-	                                                <th> 发布人 </th>
-	                                                <th> 发布时间 </th>
-	                                                <th> 操作 </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                             
-                                             <!--td>
-                                                        <div class="margin-bottom-5">
-                                                            <button class="btn btn-sm green btn-outline filter-submit margin-bottom">
-                                                                <i class="fa fa-search"></i> 审核</button>
-                                                        </div>
-                                                        <button class="btn btn-sm red btn-outline filter-cancel"> <i class="fa fa-times"></i> 禁用</button>
-                                               </td-->
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <!-- END EXAMPLE TABLE PORTLET-->
-                        </div>
-                    </div>
+                                <button class="btn btn-sm red btn-outline filter-cancel"> <i class="fa fa-times"></i> 禁用</button>
+                     </td-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>
 
            
