@@ -47,7 +47,8 @@ public class AcountServiceImpl implements AccountService {
  
 	@Override
 	public int auditAccount(int accountId, int auditStatus) {
-		return accountDao.auditAccount(accountId, auditStatus);
+		accountDao.auditAccount(accountId, auditStatus);
+		return 1;
 	}
 
 	@Override
@@ -73,7 +74,12 @@ public class AcountServiceImpl implements AccountService {
 
 	@Override
 	public int forbiddenAccount(int accountId) {
-		return accountDao.forbiddenAccount(accountId);
+		try{
+			accountDao.forbiddenAccount(accountId);
+		}catch(Exception e){
+			return 0;
+		}
+		return 1;
 	}
 
 }

@@ -24,16 +24,16 @@
     
     <!-- 查詢個人用戶信息 -->
 	<select id="queryPersonalVip"  resultType="com.manager.sys.model.Personal">  
-		SELECT p.full_name as full_name,p.id_number as id_number,p.sex,p.email,p.diploma,p.graduate_institutions,p.profession,a.* FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.user_type=0 and a.user_level>0  LIMIT #{pageNo},#{pageSize}
+		SELECT p.work_unit,p.full_name as full_name,p.id_number as id_number,p.sex,p.email,p.diploma,p.graduate_institutions,p.profession,a.* FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.user_type=0 and a.user_level>0  LIMIT #{pageNo},#{pageSize}
     </select>		
 
 	<!-- 查詢個人用戶信息 -->
 	<select id="queryPersonal"  resultType="com.manager.sys.model.Personal">  
-		SELECT p.full_name as full_name,p.id_number as id_number,p.sex,p.email,p.diploma,p.graduate_institutions,p.profession,a.* FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.user_type=0  and a.user_level=0 LIMIT #{pageNo},#{pageSize}
+		SELECT p.work_unit,p.full_name as full_name,p.id_number as id_number,p.sex,p.email,p.diploma,p.graduate_institutions,p.profession,a.* FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.user_type=0  and a.user_level=0 LIMIT #{pageNo},#{pageSize}
     </select>
     <!-- 根据编号获得用户 -->
     <select id="getPersonal" parameterType="java.lang.Integer" resultType="com.manager.sys.model.Personal">  
-		SELECT a.*,p.full_name,p.ID_number,p.sex,p.email,p.diploma,p.graduate_institutions,p.profession FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.id =#{id}
+		SELECT a.*,p.full_name,p.positional_titles,p.work_unit,p.ID_number,p.sex,p.email,p.diploma,p.graduate_institutions,p.profession FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.id =#{id}
     </select>
     <!-- 查詢普通企業用戶信息 -->
     <select id="queryEnterprise"  resultType="com.manager.sys.model.Enterprise">  
@@ -48,14 +48,14 @@
 		SELECT a.*,e.enterprise_name,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id where a.id=#{id}
     </select>
     <!-- 審核企業、個人用戶 -->
-    <select id="auditAccount"  resultType="java.lang.Integer">  
-		update  ACCOUNT set Audit_status=#{status} where id = #{id}
-    </select>
+    <update  id="auditAccount">  
+		update  ACCOUNT set user_level = 1,Audit_status=#{status} where id = #{id}
+    </update>
     
     <!-- 審核企業、個人用戶 -->
-    <select id="forbiddenAccount"  resultType="java.lang.Integer">  
+    <update id="forbiddenAccount" parameterType="java.lang.Integer">  
 		update  ACCOUNT set user_mode=1 where id = #{id}
-    </select>
+    </update>
     
 
 </mapper>

@@ -85,11 +85,11 @@ public interface AccountDao {
 	 * @param status
 	 * @return
 	 */
-	public int auditAccount(@Param("id") int id,@Param("status") int status);
+	public void auditAccount(@Param("id") int id,@Param("status") int status);
 	
 	
 	
-	public int forbiddenAccount(int accountId);
+	public void forbiddenAccount(int accountId);
 	
 	
 	
