@@ -69,7 +69,7 @@ public class AcountServiceImpl implements AccountService {
 	
 	@Override
 	public Enterprise queryEnterpriseDetailed(int accountId) { 
-		return accountDao.queryEnterprise(accountId);
+		return accountDao.getEnterprise(accountId);
 	}
 
 	@Override

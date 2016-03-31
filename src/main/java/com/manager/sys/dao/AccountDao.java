@@ -76,7 +76,7 @@ public interface AccountDao {
 	 * @param accountId
 	 * @return
 	 */
-	public Enterprise queryEnterprise(int accountId);
+	public Enterprise getEnterprise(int accountId);
 	
 	
 	/**

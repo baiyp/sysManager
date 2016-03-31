@@ -1,5 +1,22 @@
 var TableDatatablesManaged = function () {
   
+	var alertMessage = function(mssage,type){
+		
+		App.alert({
+            container:"#bootstrap_alerts_demo",// $('#alert_container').val(), // alerts parent container(by default placed after the page breadcrumbs)
+            place: "append",//$('#alert_place').val(), // append or prepent in container 
+            type: type,//$('#alert_type').val(),  // alert's type
+            message: mssage,////$('#alert_message').val(),  // alert's message
+            close: "1",//$('#alert_close').is(":checked"), // make alert closable
+            reset: "1",//$('#alert_reset').is(":checked"), // close all previouse alerts first
+            focus: "1",//$('#alert_focus').is(":checked"), // auto scroll to the alert after shown
+            closeInSeconds: "3",//$('#alert_close_in_seconds').val(), // auto close after defined seconds
+            icon: ""//$('#alert_icon').val() // put icon before the message
+        });
+		
+	}
+	
+	
 	var initTable3 = function () {
 
         var table = $('#sample_3');
@@ -118,7 +135,7 @@ var TableDatatablesManaged = function () {
                              'orderable': false,
                              "searchable": false,
                              render: function (data,full, meta ) { 
-                                 return "<button class=\"btn btn-sm green btn-outline audit-submit margin-bottom\"><i class=\"fa fa-hand-pointer-o\"></i> 审核</button> <button class=\"btn btn-sm red btn-outline forbidden-submit\"><i class=\"fa fa-times\"></i> 禁用</button>";
+                            	 return "<button data-target=\"#ajax\" data-toggle=\"modal\" href=\"enterpriseDetail.html\" class=\"btn btn-sm green btn-outline audit-submit margin-bottom\" dataUrl="+meta.id+" ><i class=\"fa fa-hand-pointer-o\"></i>详情</button> <button class=\"btn btn-sm red btn-outline forbidden-submit\" dataUrl="+meta.id+"|"+meta.username+"><i class=\"fa fa-times\"></i> 禁用</button>";
                              }
                          }
           
@@ -128,14 +145,42 @@ var TableDatatablesManaged = function () {
             ] // set first column as a default sort by asc
         });
         
-        table.on("click",".audit-submit",function(){
-        	
-        	alert("udit-submit");
-        	
+        table.on("click",".audit-submit",function(){ 
+        	$('.modal').attr("dataAjax",$(this).attr("dataUrl"));
         });
-        
+     
         table.on("click",".forbidden-submit",function(){
-        	alert("forbidden-submit");
+        	var dataUrl = $(this).attr("dataUrl");
+        	var arr=new Array();
+        	if(dataUrl != undefined){
+        		arr=dataUrl.split('|');
+            	var id = arr[0];
+            	var username = arr[1];
+            	bootbox.setLocale("zh_CN");
+            	bootbox.confirm("你你确定要禁用"+username+"账号吗?", function(result) {
+                   	if(result == true){
+                   		$.ajax( {  
+                   				url:'/sysManager/forbiddenAccount',// 跳转到 action  
+                   				data:{"accountId" :id},  
+                   				type:'post',  
+                   				cache:false,  
+                   				dataType:'json',  
+                   				success:function(data) {
+                   					if(data.success == true){
+                   						alertMessage("账号"+username+"禁用成功","success"); 
+                   						//table.ajax.reload();
+                   					}else{
+                   						alertMessage("账号"+username+"禁用失败","danger");
+                   					} 
+                   				},  
+                   				error : function() {
+                   					alertMessage("账号"+username+"禁用失败","danger");
+                   				}  
+                   		 }); 
+                   	}
+                });
+        		
+        	}
         });
         
 
