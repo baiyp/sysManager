@@ -12,24 +12,24 @@
     </select>
     
     <!--审核企业发布的任务信息-->	
-	<select id="auditTaskManage"  resultType="java.lang.Integer">  
+	<update id="auditTaskManage">  
   		  update tendertask set  review=#{review} where id = #{taskId}
-    </select>
+    </update>
     
     <!--更新任务表的任务状态信息 任务状态：0进行中；1 已完成；2 无人认领-->	
-	<select id="updateTaskStatus"  resultType="java.lang.Integer">  
+	<update id="updateTaskStatus">  
   		  update tendertask set  flag=1 where id = #{taskId}
-    </select> 
+    </update> 
     
     <!--更新Tender的中标状态信息 是否中标 0未中 1未通过，2通过-->	
-	<select id="updateTenderWinBidding"  resultType="java.lang.Integer">  
-  		  update tender set  qualified=2 where task_id = #{taskId} and account_id=#{accountId}
-    </select> 
+	<update id="updateTenderWinBidding">  
+  		  update tender set  qualified=2 where Id = #{taskId} and account_id=#{accountId}
+    </update> 
     
     <!--更新任务认领的未中标状态信息 是否中标 0未中 1未通过，2通过-->	
-	<select id="updateTenderNotWinning"  resultType="java.lang.Integer">  
-  		  update tender set  qualified=1 where task_id = #{taskId} and account_id!=#{accountId}
-    </select> 
+	<update id="updateTenderNotWinning">  
+  		  update tender set  qualified=1 where Id = #{taskId} and account_id!=#{accountId}
+    </update> 
     
     <!-- 获取企业发布任务信息总数 -->	
 	<select id="queryTaskManageCount"  resultType="java.lang.Integer">  
@@ -48,7 +48,7 @@
     
     <!-- 获取每一个任务认领的公司列表 -->
 	<select id="queryTaskClaimEn" parameterType="com.manager.sys.model.Task" resultType="com.manager.sys.model.Task">  
-  		SELECT t.title,tc.name as taskTypeName,e.enterprise_name,tt.* FROM tendertask t LEFT JOIN TASKCATEGORY tc on tc.id = t.category  left join account a on t.publisher = a.id  left join enterprise e on a.id= e.account_id left join tender tt on tt.task_id=t.id where t.review=1 and t.id=#{taskId}  LIMIT #{pageNo},#{pageSize}
+  		SELECT a.id as accountid,t.title,tc.name as taskTypeName,e.enterprise_name,tt.* FROM tendertask t LEFT JOIN TASKCATEGORY tc on tc.id = t.category  left join account a on t.publisher = a.id  left join enterprise e on a.id= e.account_id left join tender tt on tt.task_id=t.id where t.review=1 and t.id=#{taskId}  LIMIT #{pageNo},#{pageSize}
     </select> 
     
     <!--获取每一个任务认领的公司总数-->

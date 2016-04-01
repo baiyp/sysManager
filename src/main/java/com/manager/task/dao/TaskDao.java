@@ -83,12 +83,16 @@ public interface TaskDao {
 	
 	
 	
+	public void deletTaskManage(@Param("taskId") int taskId);
+	
+	
+	
 	/**
 	 * 更新任务表的任务状态信息（flag 任务状态：0进行中；1 已完成；2 无人认领）
 	 * @param taskId
 	 * @return
 	 */
-	public int updateTaskStatus(@Param("taskId") int taskId);
+	public void updateTaskStatus(@Param("taskId") int taskId);
 	
 	
 	/**
@@ -97,7 +101,7 @@ public interface TaskDao {
 	 * @param accountId
 	 * @return
 	 */
-	public int updateTenderWinBidding(@Param("taskId") int taskId,@Param("accountId") int accountId);
+	public void updateTenderWinBidding(@Param("taskId") int taskId,@Param("accountId") int accountId);
 	
 	/**
 	 * 更新任务认领的未中标状态信息
@@ -105,7 +109,7 @@ public interface TaskDao {
 	 * @param accountId
 	 * @return
 	 */
-	public int updateTenderNotWinning(@Param("taskId") int taskId,@Param("accountId") int accountId);
+	public void updateTenderNotWinning(@Param("taskId") int taskId,@Param("accountId") int accountId);
 	
 	
 	

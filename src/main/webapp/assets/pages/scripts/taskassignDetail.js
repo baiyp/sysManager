@@ -1,5 +1,5 @@
-var TableDatatablesManaged = function () {
-	
+var FormValidation = function () {
+
 	var alertMessage = function(mssage,type){
 		
 		App.alert({
@@ -15,10 +15,10 @@ var TableDatatablesManaged = function () {
         });
 		
 	}
-  
-	var initTable3 = function () {
+	
+	var sample_33 = function (taskId) {
 
-        var table = $('#sample_3');
+        var table = $('#sample_33');
 
         //
         table.dataTable({
@@ -54,7 +54,7 @@ var TableDatatablesManaged = function () {
             "pagingType": "bootstrap_full_number",
             "processing": true,
             "serverSide": true,
-            "ajax": "/sysManager/taskManage",
+            "ajax": "/sysManager/queryTaskClaimEn?taskId=" + taskId,
             "displayStart": 0,
             "pageLength": 15,
             "lengthMenu": [
@@ -62,12 +62,7 @@ var TableDatatablesManaged = function () {
                 [6, 15, 20, "All"] // change per page values here
             ],
             "columns": [{"data":"id"},
-                      {"data": "title"},
-                      {"data": "taskTypeName"},
-                      {"data": "enterprise_name"},
-                      {"data": "time"},
-                      {"data": "edit_time"},
-                      {"data": "review"},
+                      {"data": "enterprise_name"}, 
                       {"data": "id"}
             ],
             "columnDefs": [
@@ -80,52 +75,14 @@ var TableDatatablesManaged = function () {
                               }
                            	 
                           },
+                          
                           {
-                        	  "targets":[4],
-                        	  "orderable":false,
-                        	  "searchable":false,
-                        	  "render":function(data,full,meta){
-                        		  if(data == 0){
-                        			  return "";
-                        		  }
-                        		  var d = new Date(data*1000);
-                        		  return d.getFullYear()+"-"+(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" +d.getMinutes() +":" + d.getSeconds();
-                        	  }
-                          },
-                          {
-                        	  "targets":[5],
-                        	  "orderable":false,
-                        	  "searchable":false,
-                        	  "render":function(data,full,meta){
-                        		  if(data == 0){
-                        			  return "";
-                        		  }
-                        		  var d = new Date(data*1000);
-                        		  return d.getFullYear()+"-"+(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" +d.getMinutes() +":" + d.getSeconds();
-                        	  }
-                          },
-                          {   "targets":[6],
-                              "orderable":false,
-                              "searchable":false,
-                              "render":function(data,full,meta){
-                            	 var html  = "" ;
-                            	 if(data == 2){
-                            		  html = "审核未通过";
-                            	  }else if(data == 1){
-                            		  html = "审核通过";
-                            	  }else{
-                            		  html="未审核";
-                            	  }
-                            	  return html;
-                               }
-                          },
-                          {
-                             "targets": [7],
+                             "targets": [2],
                              "width" :'150',
                              'orderable': false,
                              "searchable": false,
-                             render: function (data,full, meta ) { 
-                            	 return "<button data-target=\"#ajax\" data-toggle=\"modal\" href=\"taskAudit.html\" class=\"btn btn-sm green btn-outline audit-submit margin-bottom\" dataUrl="+meta.id+" ><i class=\"fa fa-hand-pointer-o\"></i> 审核</button> <button class=\"btn btn-sm red btn-outline forbidden-submit\" dataUrl="+meta.id+"|"+meta.username+"><i class=\"fa fa-times\"></i>删除</button>";
+                             render: function (data,full, meta) { 
+                            	 return "<button class=\"btn btn-sm green btn-outline audit-submit margin-bottom\" dataUrl="+meta.id+"|"+meta.accountid+"><i class=\"fa fa-times\"></i>确认</button>";
                              }
                          }
           
@@ -135,30 +92,29 @@ var TableDatatablesManaged = function () {
             ] // set first column as a default sort by asc
         });
         
-        table.on("click",".audit-submit",function(){ 
-        	$('.modal').attr("dataAjax",$(this).attr("dataUrl"));
-        });
+        /*table.on("click",".audit-submit",function(){ 
+        	//$('.modal').attr("dataAjax",$(this).attr("dataUrl"));
+        });*/
      
-        table.on("click",".forbidden-submit",function(){
+        table.on("click",".audit-submit",function(){
         	var dataUrl = $(this).attr("dataUrl");
         	var arr=new Array();
         	if(dataUrl != undefined){
         		arr=dataUrl.split('|');
             	var id = arr[0];
-            	var username = arr[1];
+            	var accountid = arr[1];
             	bootbox.setLocale("zh_CN");
-            	bootbox.confirm("你你确定要删除该任务吗?", function(result) {
+            	bootbox.confirm("你确定将任务分派给该公司吗?", function(result) {
                    	if(result == true){
                    		$.ajax( {  
-                   				url:'/sysManager/deleteTaskManage',// 跳转到 action  
-                   				data:{"taskId" :id},  
+                   				url:'/sysManager/assignEnterprise',// 跳转到 action  
+                   				data:{"taskId" :id,"accountId":accountid},  
                    				type:'post',  
                    				cache:false,  
                    				dataType:'json',  
                    				success:function(data) {
                    					if(data.success == true){
-                   						alertMessage(data.message,"success"); 
-                   						//table.ajax.reload();
+                   						alertMessage(data.message,"success");
                    					}else{
                    						alertMessage(data.message,"danger");
                    					} 
@@ -169,12 +125,12 @@ var TableDatatablesManaged = function () {
                    		 }); 
                    	}
                 });
-        		
+            	$('#ajax').modal('hide');
         	}
         });
         
 
-        var tableWrapper = jQuery('#sample_3_wrapper');
+        var tableWrapper = jQuery('#sample_33_wrapper');
 
         table.find('.group-checkable').change(function () {
             var set = jQuery(this).attr("data-set");
@@ -189,23 +145,81 @@ var TableDatatablesManaged = function () {
             jQuery.uniform.update(set);
         });
     }
+	 
+    var handleValidation1 = function() {
+            var form1 = $('#form_sample_1');
+            form1.validate({
+                errorElement: 'span', //default input error message container
+                errorClass: 'help-block help-block-error', // default input error message class
+                focusInvalid: false, // do not focus the last invalid input
+                ignore: "",  // validate all fields including form hidden input
+                invalidHandler: function (event, validator) { //display error alert on form submit              
+                    success1.hide();
+                    error1.show();
+                    App.scrollTo(error1, -200);
+                },
 
-    return {
- 
+                highlight: function (element) { // hightlight error inputs
+                    $(element).closest('.form-group').addClass('has-error'); // set error class to the control group
+                },
+
+                unhighlight: function (element) { // revert the change done by hightlight
+                    $(element).closest('.form-group').removeClass('has-error'); // set error class to the control group
+                },
+
+                success: function (label) {
+                    label.closest('.form-group').removeClass('has-error'); // set success class to the control group
+                }, 
+                submitHandler: function (form) {
+                	/*$.ajax( {  
+            			url:'/sysManager/auditAccount',//跳转到 action  
+            			data:{"accountId" :$(".accountId").attr("value"),"auditStatus":2},  
+            			type:'post',  
+            			cache:false,  
+            			dataType:'json',  
+            			success:function(data) {
+            				if(data.success = true){
+            					alertMessage("选派公司成功","danger");
+
+            				}else{
+            					alertMessage("选派公司失败","danger");
+            				}
+            			},  
+            			error : function() {
+            				alertMessage("选派公司失败","danger");
+            			}  
+            	 });*/
+                	$('#ajax').modal('hide');
+                }
+            });
+    } 
+    return { 
         init: function () {
-            if (!jQuery().dataTable) {
-                return;
-            }
- 
-            initTable3();
+        	sample_33($('.modal').attr("dataAjax"));
+            handleValidation1();
         }
-
     };
 
 }();
 
-if (App.isAngularJsApp() === false) { 
-    jQuery(document).ready(function() {
-        TableDatatablesManaged.init();
-    });
-}
+jQuery(document).ready(function() {
+ 
+	/*$.ajax( {  
+			url:'/sysManager/getTaskManage',// 跳转到 action  
+			data:{"taskId" :$('.modal').attr("dataAjax")},  
+			type:'post',  
+			cache:false,  
+			dataType:'json',  
+			success:function(data) {
+				var d = new Date(data.endtime*1000);
+        		$(".accountId").attr("value",data.id);
+				$(".taskTitle").html($(".taskTitle").html()+data.title);
+				$(".taskTypeName").html($(".taskTypeName").html()+data.taskTypeName);
+				$(".endtime").html($(".endtime").html()+d.getFullYear()+"-"+(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" +d.getMinutes() +":" + d.getSeconds());
+				$(".content").html($(".content").html()+data.content);
+			},
+			error : function() {
+			}  
+	 });*/
+    FormValidation.init();
+});

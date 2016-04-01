@@ -6,6 +6,8 @@ public class Task extends BaseEntity {
 	
 	private String taskTypeName;
 	
+	private String accountid;
+	
 	private int endtime;
 	
 	private String title;
@@ -13,6 +15,14 @@ public class Task extends BaseEntity {
 	
 	private String content;
 	
+	public String getAccountid() {
+		return accountid;
+	}
+
+	public void setAccountid(String accountid) {
+		this.accountid = accountid;
+	}
+
 	private String time;
 	
 	private int edit_time;

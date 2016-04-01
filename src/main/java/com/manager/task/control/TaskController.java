@@ -55,12 +55,37 @@ public class TaskController extends BaseController {
 	}
 	
 	/**
+	 * 获取任务信息
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/deleteTaskManage")
+	@ResponseBody
+	public JsonView deleteTaskManage(HttpServletRequest request,HttpServletResponse response){
+		JsonView json = new JsonView();
+		PageView<Task> page = new PageView<Task>();
+		String taskId = request.getParameter("taskId");
+		int result = taskService.deletTaskManage(Integer.parseInt(taskId));
+		if(result == 1){
+			json.setMessage("删除任务信息成功");
+			json.setMessageCode("10001");
+		}else{
+			json.setMessage("删除任务信息失败");
+			json.setMessageCode("10001");
+			json.setSuccess(false);
+		}
+		return json;
+	}
+	
+	/**
 	 * 获取单个任务信息
 	 * @param request
 	 * @param response
 	 * @return
 	 */
 	@RequestMapping(value="/getTaskManage")
+	@ResponseBody
 	public Task getTaskManage(HttpServletRequest request,HttpServletResponse response){
 		int taskId = Integer.parseInt(request.getParameter("taskId"));
 		return taskService.getTaskManage(taskId);
@@ -143,11 +168,11 @@ public class TaskController extends BaseController {
 		int taskId = Integer.parseInt(request.getParameter("taskId"));
 		int accountId = Integer.parseInt(request.getParameter("accountId"));
 		int result = taskService.AssignEnterprise(taskId,accountId);
-		if(result == 0){
-			json.setMessage("任务分派失败");
-			json.setMessageCode("10001");
-			json.setSuccess(false);
+		if(result == 1){
+			json.setMessage("任务分派成功");
+			json.setMessageCode("10001"); 
 		}else{
+			json.setSuccess(false);
 			json.setMessage("任务分派失败");
 			json.setMessageCode("10001");
 		}

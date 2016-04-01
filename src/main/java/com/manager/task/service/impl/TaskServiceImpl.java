@@ -71,4 +71,10 @@ public class TaskServiceImpl implements TaskService {
 		return 1;
 	}
 
+	@Override
+	public int deletTaskManage(int taskId) {
+		//taskDao.updateTaskStatus(taskId);
+		return 1;
+	}
+
 }

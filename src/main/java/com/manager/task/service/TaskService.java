@@ -82,5 +82,13 @@ public interface TaskService {
 	 * @return
 	 */
 	public int AssignEnterprise(int taskId,int accountId);
+	
+	
+	/**
+	 * 
+	 * @param taskId
+	 * @return
+	 */
+	public int deletTaskManage(int taskId);
 
 }
