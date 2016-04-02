@@ -69,13 +69,27 @@
 		<property name="configLocation" value="classpath:${ehcache.configFile}" />
 	</bean>
 	
+	<bean id="pagePlugin" class="com.manager.common.plugin.PagePlugin">
+		<property name="properties">
+			<props>
+				<prop key="dialect">MYSQL</prop>
+        		<prop key="pageSqlId">*query*</prop>
+			</props>
+		</property>
+	</bean>
+	
 		<!-- MyBatis begin -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
    		<!-- property name="configLocation" value="classpath:mybatis-config.xml"></property-->
         <property name="dataSource" ref="dataSource"/>
         <property name="mapperLocations" value="classpath:mappings/modules/sys/*.xml" />
+        <property name="plugins">
+        	<array>
+	        		<ref bean="pagePlugin"/>
+        	</array>
+        
+        </property>
     </bean>
-    
     
     <!-- 扫描basePackage下所有以@MyBatisDao注解的接口 -->
     <bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">

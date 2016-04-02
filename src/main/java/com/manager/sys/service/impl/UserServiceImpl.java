@@ -7,8 +7,7 @@ import java.util.Map;
 import org.apache.shiro.authc.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.manager.common.PageView;
+ 
 import com.manager.sys.dao.UserDao;
 import com.manager.sys.model.User;
 import com.manager.sys.service.UserService;
@@ -20,16 +19,6 @@ public class UserServiceImpl  implements UserService{
 	@Autowired
 	private UserDao userDao;
 	
-	
-	@Override
-	public PageView query(PageView pageView, User t) {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("paging",pageView);
-		map.put("t",t);
-		List<User> list = userDao.query(map);
-		pageView.setRecords(list);
-		return pageView;
-	}
 
 	@Override
 	public List<User> queryAll(User t) {
@@ -72,14 +61,13 @@ public class UserServiceImpl  implements UserService{
 		return userDao.countAccount(user);
 	}
 
-	@Override
-	public PageView queryNoMatch(User user, PageView pageView) {
-		return null;
-	}
+ 
 
 	@Override
 	public User userLogin(String userName, String password) {
 		return userDao.userLogin(userName, password);
 	}
+
+ 
 
 }

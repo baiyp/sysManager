@@ -26,9 +26,9 @@ public class PageView<T>  implements Serializable{
 	private int pageSize;
 	 
 	
-	private HashMap<String,String>  orderBy ;
+	private HashMap<String,String>  orderMap;
 	
-	private HashMap<String,String>  search;
+	private HashMap<String,String>  searchMap;
 	
 	private List<T> aaData;
 	 
@@ -42,22 +42,20 @@ public class PageView<T>  implements Serializable{
 	}
 
  
-	 
-
-	public HashMap<String, String> getOrderBy() {
-		return orderBy;
+	public HashMap<String, String> getOrderMap() {
+		return orderMap;
 	}
 
-	public void setOrderBy(HashMap<String, String> orderBy) {
-		this.orderBy = orderBy;
+	public void setOrderMap(HashMap<String, String> orderMap) {
+		this.orderMap = orderMap;
 	}
 
-	public HashMap<String, String> getSearch() {
-		return search;
+	public HashMap<String, String> getSearchMap() {
+		return searchMap;
 	}
 
-	public void setSearch(HashMap<String, String> search) {
-		this.search = search;
+	public void setSearchMap(HashMap<String, String> searchMap) {
+		this.searchMap = searchMap;
 	}
 
 	public int getDefaultPageSize() {

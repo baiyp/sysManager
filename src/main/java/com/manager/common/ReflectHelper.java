@@ -86,6 +86,10 @@ public class ReflectHelper {
 		return (T) value;
 	}
 
+
+
+	
+	
 	/**
 	 * 设置obj对象fieldName的属性值
 	 * @param obj
@@ -96,8 +100,7 @@ public class ReflectHelper {
 	 * @throws IllegalArgumentException
 	 * @throws IllegalAccessException
 	 */
-	public static boolean setValueByFieldName(Object obj, String fieldName,
-			Object value) {
+	public static boolean setValueByFieldName(Object obj, String fieldName,Object value) {
 		try {
 			//java.lang.Class.getDeclaredField()方法用法实例教程 - 方法返回一个Field对象，它反映此Class对象所表示的类或接口的指定已声明字段。
 			//此方法返回这个类中的指定字段的Field对象
@@ -125,4 +128,8 @@ public class ReflectHelper {
 		}
 		return false;
 	}
+	
+	
+	
+	
 }

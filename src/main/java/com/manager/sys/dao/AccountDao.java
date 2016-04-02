@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.manager.common.view.PageView;
 import com.manager.sys.model.Account;
 import com.manager.sys.model.Enterprise;
 import com.manager.sys.model.Personal;
@@ -33,7 +34,7 @@ public interface AccountDao {
 	 * @param pageSize
 	 * @return
 	 */
-	public ArrayList<Personal> queryPersonal(@Param("pageNo")int pageNo,@Param("pageSize") int pageSize);
+	public ArrayList<Personal> queryPersonal(PageView page);
 	
 	
 	/**
@@ -42,7 +43,7 @@ public interface AccountDao {
 	 * @param pageSize
 	 * @return
 	 */
-	public ArrayList<Personal> queryPersonalVip(@Param("pageNo")int pageNo,@Param("pageSize") int pageSize);
+	public ArrayList<Personal> queryPersonalVip(PageView page);
 	
 	 
 	/**

@@ -3,32 +3,46 @@
  */
 package com.manager.common.dialect.db;
 
-import com.manager.common.dialect.Dialect;
+import com.manager.common.view.PageView;
 
 /**
  * @author baiyp
  *
  */
-public class MySqlDialect implements Dialect {
+public class MySqlDialect extends BaseSqlDialect {
 
 	 
 	@Override
-	public String getLimitString(String querySqlString, int offset, int limit) {
-		return querySqlString + " limit " + offset + " ," + limit;
+	public String getLimitString(String querySqlString,PageView page) {
+		StringBuilder pageSql = new StringBuilder(); 
+		int pageSize = page.getPageSize(); 
+		if(pageSize == 0){
+			pageSize = page.getDefaultPageSize();
+		} 
+		String begin =String.valueOf((page.getPageNo()) * pageSize);
+		
+		pageSql.append(querySqlString).append(" limit ").append(begin).append(",").append(pageSize);
+		 
+		return pageSql.toString();
 	}
 
  
 	@Override
 	public String getCountString(String querySqlString) {
-		 
-		int limitIndex = querySqlString.lastIndexOf("limit");
-
-		if(limitIndex != -1){
-			querySqlString = querySqlString.substring(0, limitIndex != -1 ? limitIndex : querySqlString.length() - 1);
+		
+		int lastIndex = querySqlString.lastIndexOf("limit");
+		
+		int beginIndex = querySqlString.toUpperCase().indexOf("FROM");
+		
+		if(lastIndex != -1){
+			querySqlString = querySqlString.substring(beginIndex,lastIndex != -1 ? lastIndex : querySqlString.length() - 1);
 		}
 
-		return "SELECT COUNT(*) FROM (" + querySqlString + ") tem";
+		return "SELECT COUNT(*) " + querySqlString;
 	}
+	
+	
+	
 
 
 	@Override

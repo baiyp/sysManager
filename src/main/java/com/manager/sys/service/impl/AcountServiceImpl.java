@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.manager.common.view.PageView;
 import com.manager.sys.dao.AccountDao;
 import com.manager.sys.model.Enterprise;
 import com.manager.sys.model.Personal;
@@ -32,11 +33,11 @@ public class AcountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public ArrayList<Personal> queryAccount(int pageNo, int pageSize, int accountType) {
+	public ArrayList<Personal> queryAccount(PageView page, int accountType) {
 		if(accountType == 0){
-			return accountDao.queryPersonal(pageNo, pageSize);
+			return accountDao.queryPersonal(page);
 		}
-		return accountDao.queryPersonalVip(pageNo, pageSize);
+		return accountDao.queryPersonalVip(page);
 	}
 
 

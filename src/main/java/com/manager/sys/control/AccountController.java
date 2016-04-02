@@ -30,11 +30,11 @@ public class AccountController extends BaseController {
 		String start = request.getParameter("start");
 		String length = request.getParameter("length");
 		int userType = Integer.parseInt(request.getParameter("userType"));
-		
-		page.setData(accountService.queryAccount(Integer.parseInt(start),Integer.parseInt(length),userType));
+		page.setPageNo(Integer.parseInt(start));
+		page.setPageSize(Integer.parseInt(length));
+		page.setData(accountService.queryAccount(page,userType));
 		page.setDraw(Integer.parseInt(sEcho));
-		page.setRecordsFiltered(accountService.queryPersonalLimitCount(userType));
-		page.setRecordsTotal(accountService.queryPersonalLimitCount(userType));
+		page.setRecordsFiltered(page.getRecordsTotal());
 		return page;
 	}
 	

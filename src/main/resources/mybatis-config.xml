@@ -7,7 +7,5 @@
     	<package name="mappings/modules/sys/TaskDao.xml"/>
     	<package name="mappings/modules/sys/AnnouncementDao.xml"/>
     </mappers>
-   <plugins>
-   	<plugin interceptor="com.manager.common.plugin.PagePlugin"></plugin>
-   </plugins>
+ 
 </configuration>
