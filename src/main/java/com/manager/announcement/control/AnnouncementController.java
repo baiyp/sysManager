@@ -41,14 +41,9 @@ public class AnnouncementController extends BaseController {
 	@RequestMapping(value="/queryAnnouncement")
 	@ResponseBody
 	public PageView<Announcement> queryAnnouncement(HttpServletRequest request,HttpServletResponse response){
-		PageView<Announcement> page = new PageView<Announcement>(); 
-		String sEcho = request.getParameter("draw");
-		String start = request.getParameter("start");
-		String length = request.getParameter("length"); 
-		page.setData(announcementService.queryAnnouncement(Integer.parseInt(start),Integer.parseInt(length)));
-		page.setDraw(Integer.parseInt(sEcho));
-		page.setRecordsFiltered(announcementService.queryAnnouncementCount());
-		page.setRecordsTotal(announcementService.queryAnnouncementCount()); 
+		PageView<Announcement> page = super.getPageView(request, response); 
+		page.setData(announcementService.queryAnnouncement(page));
+		 
 		return page;
 	}
 	

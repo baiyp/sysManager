@@ -25,15 +25,9 @@ public class AccountController extends BaseController {
 	@RequestMapping(value="/queryAccount")
 	@ResponseBody
 	public PageView<Personal> queryAccount(HttpServletRequest request,HttpServletResponse response){
-		PageView<Personal> page = new PageView<Personal>();
-		String sEcho = request.getParameter("draw");
-		String start = request.getParameter("start");
-		String length = request.getParameter("length");
+		PageView page = super.getPageView(request, response);
 		int userType = Integer.parseInt(request.getParameter("userType"));
-		page.setPageNo(Integer.parseInt(start));
-		page.setPageSize(Integer.parseInt(length));
-		page.setData(accountService.queryAccount(page,userType));
-		page.setDraw(Integer.parseInt(sEcho));
+		page.setData(accountService.queryAccount(page,userType)); 
 		page.setRecordsFiltered(page.getRecordsTotal());
 		return page;
 	}
@@ -90,15 +84,10 @@ public class AccountController extends BaseController {
 	@RequestMapping(value="/queryEnterprise")
 	@ResponseBody
 	public PageView<Enterprise> queryEnterprise(HttpServletRequest request,HttpServletResponse response){
-		PageView<Enterprise> page = new PageView<Enterprise>();
-		String sEcho = request.getParameter("draw");
-		String start = request.getParameter("start");
-		String length = request.getParameter("length");
+		PageView page = super.getPageView(request, response);
 		int userInfo = Integer.parseInt(request.getParameter("userinfo"));
-		page.setData(accountService.queryEnterprise(Integer.parseInt(start),Integer.parseInt(length),userInfo));
-		page.setDraw(Integer.parseInt(sEcho));
-		page.setRecordsFiltered(accountService.queryEnterpriseLimitCount(userInfo));
-		page.setRecordsTotal(accountService.queryEnterpriseLimitCount(userInfo)); 
+		page.setData(accountService.queryEnterprise(page,userInfo));
+		page.setRecordsFiltered(page.getRecordsTotal());
 		return page;
 	}
 

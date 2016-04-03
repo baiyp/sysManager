@@ -8,11 +8,7 @@ import com.manager.sys.model.Personal;
 
 public interface AccountService {
 	
-	
-	public int queryPersonalLimitCount(int userType);
-	
-	
-	public int queryEnterpriseLimitCount(int userType);
+ 
 	
 	/**
 	 * 查询用户信息
@@ -54,7 +50,7 @@ public interface AccountService {
 	 * @param accountType 普通企业会员 、VIP企业会员 
 	 * @return
 	 */
-	public ArrayList<Enterprise> queryEnterprise(int pageNo,int pageSize,int accountType);
+	public ArrayList<Enterprise> queryEnterprise(PageView pageView,int accountType);
 	
 	
 	

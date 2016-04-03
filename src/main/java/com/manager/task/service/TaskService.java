@@ -5,6 +5,7 @@ package com.manager.task.service;
 
 import java.util.ArrayList;
 
+import com.manager.common.view.PageView;
 import com.manager.sys.model.Task;
 
 /**
@@ -20,15 +21,10 @@ public interface TaskService {
 	 * @param pageSize
 	 * @return
 	 */
-	public ArrayList<Task> queryTaskManage(int pageNo,int pageSize);
+	public ArrayList<Task> queryTaskManage(PageView page);
 	 
 	
-	/**
-	 * 获取任务列表总数
-	 * @return
-	 */
-	public int queryTaskManageCount();
-	
+
 	/**
 	 * 获取单个任务信息
 	 * @param taskId
@@ -50,14 +46,9 @@ public interface TaskService {
 	 * @param pageSize
 	 * @return
 	 */
-	public ArrayList<Task> queryTaskAssign(int pageNo,int pageSize);
+	public ArrayList<Task> queryTaskAssign(PageView page);
 	
-	/**
-	 * 
-	 * @return
-	 */
-	public int queryTaskAssignCount();
-	
+
 	/**
 	 * 查询单个任务所认领公司信息列表
 	 * @param pageNo
@@ -65,16 +56,8 @@ public interface TaskService {
 	 * @param taskId
 	 * @return
 	 */
-	public ArrayList<Task> queryTaskClaimEn(int pageNo,int pageSize,int taskId);
-	
-	
-	/**
-	 * 查询单个任务所认领公司的总数
-	 * @param taskId
-	 * @return
-	 */
-	public int queryTaskClaimEnCount(int taskId);
-	
+	public ArrayList<Task> queryTaskClaimEn(PageView page,int taskId);
+
 	/**
 	 * 选派中标企业
 	 * @param taskId

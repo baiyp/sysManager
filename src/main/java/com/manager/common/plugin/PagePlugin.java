@@ -62,8 +62,7 @@ public class PagePlugin implements Interceptor {
 			 if(param instanceof PageView){
 				 pageView = (PageView) param;
 				 String sql = boundSql.getSql();
-				 Connection conn = (Connection) invocation.getArgs()[0];
-				 
+				 Connection conn = (Connection) invocation.getArgs()[0]; 
 				 String pageSql =dialect.getLimitString(sql,pageView);
 				 String sqlCount = dialect.getCountString(pageSql);
 				 BaseSqlDialect.setPageParameter(sqlCount,conn, mappingStatement, boundSql,param, pageView);

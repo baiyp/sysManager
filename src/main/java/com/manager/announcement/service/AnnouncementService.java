@@ -5,6 +5,7 @@ package com.manager.announcement.service;
 
 import java.util.ArrayList;
 
+import com.manager.common.view.PageView;
 import com.manager.sys.model.Announcement;
 
 /**
@@ -44,7 +45,7 @@ public interface AnnouncementService {
 	 * @param pageSize
 	 * @return
 	 */
-	public ArrayList<Announcement> queryAnnouncement(int pageNo, int pageSize);
+	public ArrayList<Announcement> queryAnnouncement(PageView page);
 	
 	
 	/**
@@ -52,9 +53,7 @@ public interface AnnouncementService {
 	 * @return
 	 */
 	public int deleteAnnouncement(int annoId);
-	
-	
-	public int queryAnnouncementCount();
+	 
 	
 	
 	

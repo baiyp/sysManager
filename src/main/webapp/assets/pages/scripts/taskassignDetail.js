@@ -56,7 +56,7 @@ var FormValidation = function () {
             "serverSide": true,
             "ajax": "/sysManager/queryTaskClaimEn?taskId=" + taskId,
             "displayStart": 0,
-            "pageLength": 15,
+            "pageLength": 10,
             "lengthMenu": [
                 [6, 15, 20, -1],
                 [6, 15, 20, "All"] // change per page values here

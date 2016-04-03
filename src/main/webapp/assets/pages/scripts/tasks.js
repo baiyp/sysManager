@@ -1,8 +1,5 @@
 var AppTask = function () {
-
     return {
-
-        //main function to initiate the module
         init: function () {
 			$('.task-list input[type="checkbox"]').change(function() {
 				if ($(this).is(':checked')) { 

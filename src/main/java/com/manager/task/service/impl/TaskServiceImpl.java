@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.manager.common.view.PageView;
 import com.manager.sys.model.Task;
 import com.manager.task.dao.TaskDao;
 import com.manager.task.service.TaskService;
@@ -21,34 +22,24 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public ArrayList<Task> queryTaskManage(int pageNo, int pageSize) {
-		return taskDao.queryTaskManage(pageNo, pageSize);
+	public ArrayList<Task> queryTaskManage(PageView page) {
+		return taskDao.queryTaskManage(page);
 	}
 
-	@Override
-	public int queryTaskManageCount() {
-		return taskDao.queryTaskManageCount();
-	}
+
 
 	@Override
-	public ArrayList<Task> queryTaskAssign(int pageNo, int pageSize) {
-		return taskDao.queryTaskAssign(pageNo, pageSize);
+	public ArrayList<Task> queryTaskAssign(PageView page) {
+		return taskDao.queryTaskAssign(page);
 	}
 
-	@Override
-	public int queryTaskAssignCount() { 
-		return taskDao.queryTaskAssignCount();
-	}
+
 
 	@Override
-	public ArrayList<Task> queryTaskClaimEn(int pageNo, int pageSize, int taskId) {
-		return taskDao.queryTaskClaimEn(pageNo, pageSize, taskId);
+	public ArrayList<Task> queryTaskClaimEn(PageView page, int taskId) {
+		return taskDao.queryTaskClaimEn(page, taskId);
 	}
-
-	@Override
-	public int queryTaskClaimEnCount(int taskId) { 
-		return taskDao.queryTaskClaimenCount(taskId);
-	}
+ 
 
 	@Override
 	public Task getTaskManage(int taskId) { 
@@ -76,5 +67,7 @@ public class TaskServiceImpl implements TaskService {
 		//taskDao.updateTaskStatus(taskId);
 		return 1;
 	}
+
+ 
 
 }

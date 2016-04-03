@@ -43,14 +43,9 @@ public class TaskController extends BaseController {
 	@RequestMapping(value="/taskManage")
 	@ResponseBody
 	public PageView<Task> queryTaskManage(HttpServletRequest request,HttpServletResponse response){
-		PageView<Task> page = new PageView<Task>();
-		String sEcho = request.getParameter("draw");
-		String start = request.getParameter("start");
-		String length = request.getParameter("length");
-		page.setData(taskService.queryTaskManage(Integer.parseInt(start),Integer.parseInt(length)));
-		page.setDraw(Integer.parseInt(sEcho));
-		page.setRecordsFiltered(taskService.queryTaskManageCount());
-		page.setRecordsTotal(taskService.queryTaskManageCount());
+		PageView<Task> page = super.getPageView(request, response);
+		page.setData(taskService.queryTaskManage(page)); 
+		page.setRecordsFiltered(page.getRecordsTotal());
 		return page;
 	}
 	
@@ -124,14 +119,9 @@ public class TaskController extends BaseController {
 	@RequestMapping(value="/taskAssign")
 	@ResponseBody
 	public PageView<Task> queryTaskAssign(HttpServletRequest request,HttpServletResponse response){
-		PageView<Task> page = new PageView<Task>(); 
-		String sEcho = request.getParameter("draw");
-		String start = request.getParameter("start");
-		String length = request.getParameter("length");
-		page.setData(taskService.queryTaskAssign(Integer.parseInt(start),Integer.parseInt(length)));
-		page.setDraw(Integer.parseInt(sEcho));
-		page.setRecordsFiltered(taskService.queryTaskAssignCount());
-		page.setRecordsTotal(taskService.queryTaskAssignCount());
+		PageView<Task> page = super.getPageView(request, response);
+		page.setData(taskService.queryTaskAssign(page)); 
+		page.setRecordsFiltered(page.getRecordsTotal()); 
 		return page;
 	}
 	/**
@@ -143,15 +133,10 @@ public class TaskController extends BaseController {
 	@RequestMapping(value="/queryTaskClaimEn")
 	@ResponseBody
 	public PageView<Task> queryTaskClaimEn(HttpServletRequest request,HttpServletResponse response){
-		PageView<Task> page = new PageView<Task>(); 
-		String sEcho = request.getParameter("draw");
-		String start = request.getParameter("start");
-		String length = request.getParameter("length");
+		PageView<Task> page = super.getPageView(request, response);
 		int taskId = Integer.parseInt(request.getParameter("taskId"));
-		page.setData(taskService.queryTaskClaimEn(Integer.parseInt(start),Integer.parseInt(length),taskId));
-		page.setDraw(Integer.parseInt(sEcho));
-		page.setRecordsFiltered(taskService.queryTaskClaimEnCount(taskId));
-		page.setRecordsTotal(taskService.queryTaskClaimEnCount(taskId));
+		page.setData(taskService.queryTaskClaimEn(page,taskId)); 
+		page.setRecordsFiltered(page.getRecordsTotal()); 
 		return page;
 	}
 	

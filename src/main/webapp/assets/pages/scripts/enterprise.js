@@ -56,14 +56,13 @@ var TableDatatablesManaged = function () {
             "pagingType": "bootstrap_full_number",
             "processing": true,
             "serverSide": true,
-            "ajax": "/sysManager/queryEnterprise?userinfo=0",//userinfo 0 表示普通企业用户  1企业VIP用户
-            "displayStart": 0,
-            "pageLength": 15,
-            "lengthMenu": [
+            "ajax":"/sysManager/queryEnterprise?userinfo=0",//userinfo 0 表示普通企业用户  1企业VIP用户
+            "displayStart":0,
+            "pageLength":10,
+            "lengthMenu":[
                 [6, 15, 20, -1],
                 [6, 15, 20, "All"] // change per page values here
             ],
-
             "columns": [{"data":"id"},
                       {"data": "username"},//登录账号
                       {"data": "enterprise_name"},//企业名称

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.manager.common.view.PageView;
 import com.manager.sys.model.Announcement;
 
 /**
@@ -38,18 +39,13 @@ public interface AnnouncementDao{
 	 * @param pageSize
 	 * @return
 	 */
-	public ArrayList<Announcement> queryAnnouncement(@Param("pageNo") int pageNo,@Param("pageSize")int pageSize);
+	public ArrayList<Announcement> queryAnnouncement(PageView page);
 	
 	/**
 	 * @param annoId
 	 * @return
 	 */
 	public Announcement getAnnouncement(int annoId);
-	
-	
-	/**
-	 * @return
-	 */
-	public int queryAnnouncementCount();
+ 
 	
 }

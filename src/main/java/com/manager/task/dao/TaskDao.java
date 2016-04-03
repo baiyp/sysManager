@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.manager.common.view.PageView;
 import com.manager.sys.model.Task;
 
 /**
@@ -31,48 +32,25 @@ public interface TaskDao {
 	 * @param pageSize
 	 * @return ArrayList<Task>
 	 */
-	public ArrayList<Task>  queryTaskManage(@Param("pageNo")int pageNo,@Param("pageSize") int pageSize);
- 
+	public ArrayList<Task>  queryTaskManage(PageView page);
+
+	
+	/**
+	 * 
+	 * @param pageNo
+	 * @param pageSize
+	 * @return ArrayList<Task>
+	 */
+	public ArrayList<Task>  queryTaskAssign(PageView page);
+	
 
 	/**
-	 * 
-	 * @return
-	 */
-	public int queryTaskManageCount();
-	
-	
-	/**
-	 * 
 	 * @param pageNo
 	 * @param pageSize
 	 * @return ArrayList<Task>
 	 */
-	public ArrayList<Task>  queryTaskAssign(@Param("pageNo")int pageNo,@Param("pageSize") int pageSize);
-	
-	/**
-	 * 
-	 * @return
-	 */
-	public int queryTaskAssignCount();
-	
-	
-	/**
-	 * @param pageNo
-	 * @param pageSize
-	 * @return ArrayList<Task>
-	 */
-	public ArrayList<Task>  queryTaskClaimEn(@Param("pageNo")int pageNo,@Param("pageSize") int pageSize,@Param("taskId") int taskId);
-	
-	
-	/**
-	 * 
-	 * @param taskId
-	 * @return
-	 */
-	public int queryTaskClaimenCount(int taskId);
-	
-	
-	
+	public ArrayList<Task>  queryTaskClaimEn(PageView page,@Param("taskId") int taskId);
+
 	/**
 	 * 
 	 * @param taskId
@@ -83,6 +61,9 @@ public interface TaskDao {
 	
 	
 	
+	/**
+	 * @param taskId
+	 */
 	public void deletTaskManage(@Param("taskId") int taskId);
 	
 	

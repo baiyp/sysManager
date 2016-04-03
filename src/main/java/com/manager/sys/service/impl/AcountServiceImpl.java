@@ -23,14 +23,7 @@ public class AcountServiceImpl implements AccountService {
 	
 	@Autowired
 	private AccountDao accountDao;
-	
-	
-	public int queryPersonalLimitCount(int userType){
-		if(userType == 0){
-			return accountDao.queryPersonalLimitCount();
-		}
-		return accountDao.queryPersonalVipLimitCount();
-	}
+ 
 
 	@Override
 	public ArrayList<Personal> queryAccount(PageView page, int accountType) {
@@ -53,21 +46,13 @@ public class AcountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public ArrayList<Enterprise> queryEnterprise(int pageNo, int pageSize, int accountType) { 
+	public ArrayList<Enterprise> queryEnterprise(PageView pageView, int accountType) { 
 		if(accountType > 0){
-			return accountDao.queryEnterpriseVip(pageNo, pageSize);
+			return accountDao.queryEnterpriseVip(pageView);
 		} 
-		return accountDao.queryEnterprise(pageNo, pageSize);
+		return accountDao.queryEnterprise(pageView);
 	}
-
-	@Override
-	public int queryEnterpriseLimitCount(int userType) {
-		if(userType > 0){
-			return accountDao.queryEnterpriseVipLimitCount();
-		}
-		return accountDao.queryEnterpriseLimitCount();
-	}
-	
+ 
 	@Override
 	public Enterprise queryEnterpriseDetailed(int accountId) { 
 		return accountDao.getEnterprise(accountId);

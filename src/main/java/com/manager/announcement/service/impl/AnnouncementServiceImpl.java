@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.manager.announcement.dao.AnnouncementDao;
 import com.manager.announcement.service.AnnouncementService;
+import com.manager.common.view.PageView;
 import com.manager.sys.model.Announcement;
 
 @Service("announcementService")
@@ -31,18 +32,13 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 	}
 
 	@Override
-	public ArrayList<Announcement> queryAnnouncement(int pageNo, int pageSize) {
-		return announcementDao.queryAnnouncement(pageNo, pageSize);
+	public ArrayList<Announcement> queryAnnouncement(PageView page) {
+		return announcementDao.queryAnnouncement(page);
 	}
 
 	@Override
 	public int deleteAnnouncement(int annoId) {
 		return 0;
 	}
-
-	@Override
-	public int queryAnnouncementCount() { 
-		return announcementDao.queryAnnouncementCount();
-	}
-
+ 
 }
