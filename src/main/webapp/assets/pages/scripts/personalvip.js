@@ -1,20 +1,5 @@
 var TableDatatablesManaged = function () {
-	
-	var alertMessage = function(mssage,type){
-		
-		App.alert({
-            container:"#bootstrap_alerts_demo",// $('#alert_container').val(), // alerts parent container(by default placed after the page breadcrumbs)
-            place: "append",//$('#alert_place').val(), // append or prepent in container 
-            type: type,//$('#alert_type').val(),  // alert's type
-            message: mssage,////$('#alert_message').val(),  // alert's message
-            close: "1",//$('#alert_close').is(":checked"), // make alert closable
-            reset: "1",//$('#alert_reset').is(":checked"), // close all previouse alerts first
-            focus: "1",//$('#alert_focus').is(":checked"), // auto scroll to the alert after shown
-            closeInSeconds: "3",//$('#alert_close_in_seconds').val(), // auto close after defined seconds
-            icon: ""//$('#alert_icon').val() // put icon before the message
-        });
-		
-	}
+ 
   
 	var initTable3 = function () {
 
@@ -55,7 +40,7 @@ var TableDatatablesManaged = function () {
             "pagingType": "bootstrap_full_number",
             "processing": true,
             "serverSide": true,
-            "ajax": "/sysManager/queryAccount?userType=1",
+            "ajax": WebUtil.getMainRoot()+"/queryAccount?userType=1",
             "displayStart": 0,
             "pageLength": 10,
             "lengthMenu": [
@@ -174,14 +159,14 @@ var TableDatatablesManaged = function () {
                    				dataType:'json',  
                    				success:function(data) {
                    					if(data.success == true){
-                   						alertMessage("账号"+username+"禁用成功","success"); 
+                   						WebUtil.alertMessage("账号"+username+"禁用成功","success"); 
                    						//table.ajax.reload();
                    					}else{
-                   						alertMessage("账号"+username+"禁用失败","danger");
+                   						WebUtil.alertMessage("账号"+username+"禁用失败","danger");
                    					} 
                    				},  
                    				error : function() {
-                   					alertMessage("账号"+username+"禁用失败","danger");
+                   					WebUtil.alertMessage("账号"+username+"禁用失败","danger");
                    				}  
                    		 }); 
                    	}

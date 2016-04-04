@@ -3,10 +3,11 @@
 <mapper namespace="com.manager.announcement.dao.AnnouncementDao">
 	<!-- 获取公告信息-->	
 	<select id="getAnnouncement" parameterType="java.lang.Integer" resultType="com.manager.sys.model.Announcement">  
-  		SELECT * FROM announcement where del_Flag=0 and id=#{id}
+  		SELECT a.*,u.user_name as userName FROM announcement a left join sys_user u on a.user_id = u.id where a.del_Flag=0 and a.id=#{id}
     </select>
+ 
     <select id="queryAnnouncement" resultType="com.manager.sys.model.Announcement">  
-  		SELECT * FROM announcement where del_Flag=0  <!--limit #{pageNo},#{pageSize}-->
+  		SELECT a.*,u.user_name as userName FROM announcement a left join sys_user u on a.user_id = u.id where a.del_Flag=0  <!--limit #{pageNo},#{pageSize}-->
     </select>
 
     <!-- 添加公告信息 -->

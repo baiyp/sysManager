@@ -15,6 +15,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.manager.common.DateUtils;
+import com.manager.common.Global;
+import com.manager.sys.model.User;
  
 
 /**
@@ -37,6 +39,17 @@ public class LogInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+		
+		User user = (User) request.getSession().getAttribute(Global.USER_SESSION);
+		String path = request.getServletPath();
+		
+		 if(!(path.indexOf("/login.html") > -1 || path.indexOf(".css") > -1 || path.indexOf(".js") > -1  || path.indexOf("/userLogin") > -1)){
+           if (user == null) {
+        	   response.sendRedirect("/sysManager/login.html");				
+        	    return false;
+	       } 
+	     }
+ 
 		if(logger.isDebugEnabled()){
 			long startTime = System.currentTimeMillis();
 			startTimeThreadLocal.set(startTime);

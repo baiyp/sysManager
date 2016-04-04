@@ -19,7 +19,7 @@ public class MySqlDialect extends BaseSqlDialect {
 		if(pageSize == 0){
 			pageSize = page.getDefaultPageSize();
 		} 
-		String begin =String.valueOf((page.getPageNo()) * pageSize);
+		String begin =String.valueOf(page.getPageNo());
 		
 		pageSql.append(querySqlString).append(" limit ").append(begin).append(",").append(pageSize);
 		 

@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.manager.common.sms.MessageSender;
 import com.manager.common.view.PageView;
 import com.manager.sys.dao.AccountDao;
+import com.manager.sys.model.Account;
 import com.manager.sys.model.Enterprise;
 import com.manager.sys.model.Personal;
 import com.manager.sys.service.AccountService;
@@ -41,7 +43,13 @@ public class AcountServiceImpl implements AccountService {
  
 	@Override
 	public int auditAccount(int accountId, int auditStatus) {
-		accountDao.auditAccount(accountId, auditStatus);
+		if(auditStatus == 1){
+			accountDao.auditAccount(accountId, auditStatus,0);
+		}else{
+			accountDao.auditAccount(accountId, auditStatus,1);
+			Account account = accountDao.getAccount(accountId);
+			MessageSender.sendMessage("加加物联网提示：您的VIP会员申请已通过，可以正常使用【加加物联网】",account.getUsername());
+		}
 		return 1;
 	}
 

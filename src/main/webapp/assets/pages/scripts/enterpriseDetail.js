@@ -40,7 +40,7 @@ var FormValidation = function () {
 
 jQuery(document).ready(function() {
 	$.ajax( {  
-			url:'/sysManager/getEnterprise',// 跳转到 action  
+			url:WebUtil.getMainRoot()+'/getEnterprise',// 跳转到 action  
 			data:{"accountId" :$('.modal').attr("dataAjax")},  
 			type:'post',  
 			cache:false,  

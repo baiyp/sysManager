@@ -49,7 +49,7 @@ var FormValidation = function () {
             			dataType:'json',  
             			success:function(data) {
             				if(data.success = true){
-            					alertMessage("企业用户审核成功","danger");
+            					alertMessage("企业用户审核成功","success");
 
             				}else{
             					alertMessage("企业用户审核失败","danger");

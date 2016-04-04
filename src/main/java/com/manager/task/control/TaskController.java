@@ -3,6 +3,11 @@
  */
 package com.manager.task.control;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.manager.common.view.JsonView;
 import com.manager.common.view.PageView;
 import com.manager.control.base.BaseController;
+import com.manager.sys.model.Coworkinfo;
 import com.manager.sys.model.Task;
 import com.manager.task.service.TaskService;
 
@@ -47,6 +53,23 @@ public class TaskController extends BaseController {
 		page.setData(taskService.queryTaskManage(page)); 
 		page.setRecordsFiltered(page.getRecordsTotal());
 		return page;
+	}
+	
+	/**
+	 * 添加任务合同信息
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@RequestMapping(value="/addTaskCoworkinfo")
+	@ResponseBody
+	public Coworkinfo addTaskCoworkinfo(HttpServletRequest request,HttpServletResponse response){
+		
+		System.out.println("1234234234234234");
+		
+		
+		
+		return null;
 	}
 	
 	/**
@@ -133,7 +156,7 @@ public class TaskController extends BaseController {
 	@RequestMapping(value="/queryTaskClaimEn")
 	@ResponseBody
 	public PageView<Task> queryTaskClaimEn(HttpServletRequest request,HttpServletResponse response){
-		PageView<Task> page = super.getPageView(request, response);
+		PageView page = super.getPageView(request, response);
 		int taskId = Integer.parseInt(request.getParameter("taskId"));
 		page.setData(taskService.queryTaskClaimEn(page,taskId)); 
 		page.setRecordsFiltered(page.getRecordsTotal()); 
@@ -145,14 +168,32 @@ public class TaskController extends BaseController {
 	 * @param request
 	 * @param response
 	 * @return
+	 * @throws ParseException 
 	 */
 	@RequestMapping(value="/assignEnterprise")
 	@ResponseBody
-	public JsonView AssignEnterprise(HttpServletRequest request,HttpServletResponse response){
+	public JsonView AssignEnterprise(HttpServletRequest request,HttpServletResponse response) throws ParseException{
 		JsonView json = new JsonView();
+		Coworkinfo work = new Coworkinfo();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		int taskId = Integer.parseInt(request.getParameter("taskId"));
 		int accountId = Integer.parseInt(request.getParameter("accountId"));
-		int result = taskService.AssignEnterprise(taskId,accountId);
+		String remark = request.getParameter("remark");
+		String contract_no = request.getParameter("contract_no");
+		int work_days = Integer.parseInt(request.getParameter("work_days"));
+		BigDecimal contract_sum = BigDecimal.valueOf(Double.parseDouble(request.getParameter("contract_sum")));
+		String work_qualification = request.getParameter("work_qualification");
+		String datepicker = request.getParameter("datepicker");
+		Date d = dateFormat.parse(datepicker);
+		work.setContract_no(contract_no);
+		work.setContract_sum(contract_sum);
+		work.setTask_id(taskId);
+		work.setStart_time(d.getTime()/1000);
+		work.setWork_qualification(work_qualification);
+		work.setWork_days(work_days);
+		work.setRemark(remark);
+		work.setWork_contractor_id(accountId); 
+		int result = taskService.AssignEnterprise(work); 
 		if(result == 1){
 			json.setMessage("任务分派成功");
 			json.setMessageCode("10001"); 

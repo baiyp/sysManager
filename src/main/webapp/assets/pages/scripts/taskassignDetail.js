@@ -1,20 +1,5 @@
 var FormValidation = function () {
-
-	var alertMessage = function(mssage,type){
-		
-		App.alert({
-            container:"#bootstrap_alerts_demo",// $('#alert_container').val(), // alerts parent container(by default placed after the page breadcrumbs)
-            place: "append",//$('#alert_place').val(), // append or prepent in container 
-            type: type,//$('#alert_type').val(),  // alert's type
-            message: mssage,////$('#alert_message').val(),  // alert's message
-            close: "1",//$('#alert_close').is(":checked"), // make alert closable
-            reset: "1",//$('#alert_reset').is(":checked"), // close all previouse alerts first
-            focus: "1",//$('#alert_focus').is(":checked"), // auto scroll to the alert after shown
-            closeInSeconds: "3",//$('#alert_close_in_seconds').val(), // auto close after defined seconds
-            icon: ""//$('#alert_icon').val() // put icon before the message
-        });
-		
-	}
+ 
 	
 	var sample_33 = function (taskId) {
 
@@ -54,7 +39,7 @@ var FormValidation = function () {
             "pagingType": "bootstrap_full_number",
             "processing": true,
             "serverSide": true,
-            "ajax": "/sysManager/queryTaskClaimEn?taskId=" + taskId,
+            "ajax": WebUtil.getMainRoot()+"/queryTaskClaimEn?taskId=" + taskId,
             "displayStart": 0,
             "pageLength": 10,
             "lengthMenu": [
@@ -67,65 +52,75 @@ var FormValidation = function () {
             ],
             "columnDefs": [
                         
-                         {"targets":[0],
+                         /*{"targets":[0],
                              "orderable":false,
                              "searchable":false,
                              "render":function(data,full,meta){
                            	  	return "<input type=\"checkbox\" class=\"checkboxes\" value="+data+" /> </td>";
                               }
                            	 
-                          },
-                          
-                          {
-                             "targets": [2],
-                             "width" :'150',
+                          },*/  
+                         {
+                             "targets": [1],
                              'orderable': false,
                              "searchable": false,
                              render: function (data,full, meta) { 
-                            	 return "<button class=\"btn btn-sm green btn-outline audit-submit margin-bottom\" dataUrl="+meta.id+"|"+meta.accountid+"><i class=\"fa fa-times\"></i>确认</button>";
+                            	 return data;
+                             }
+                         },
+                          {
+                             "targets": [2],
+                             "width" :'30%',
+                             'orderable': false,
+                             "searchable": false,
+                             render: function (data,full, meta) { 
+                            	 return "<button class=\" btn green btn-outline sbold taskAssignUpdate\" data-target=\"#stack1\" data-toggle=\"modal\" dataUrl="+meta.id+"|"+meta.accountid+"><i class=\"fa fa-hand-pointer-o\"></i>确认</button>";
                              }
                          }
           
             ],
             "order": [
                 [1, "asc"]
-            ] // set first column as a default sort by asc
+            ]
         });
+ 
         
         /*table.on("click",".audit-submit",function(){ 
         	//$('.modal').attr("dataAjax",$(this).attr("dataUrl"));
         });*/
      
-        table.on("click",".audit-submit",function(){
+        table.on("click",".taskAssignUpdate",function(){
         	var dataUrl = $(this).attr("dataUrl");
         	var arr=new Array();
         	if(dataUrl != undefined){
         		arr=dataUrl.split('|');
-            	var id = arr[0];
-            	var accountid = arr[1];
-            	bootbox.setLocale("zh_CN");
+            	var taskId = arr[0];
+            	var accountid = arr[1]; 
+            	$("#taskId").attr("value",taskId);
+            	$("#accountId").attr("value",accountid); 
+            	/*bootbox.setLocale("zh_CN");
             	bootbox.confirm("你确定将任务分派给该公司吗?", function(result) {
                    	if(result == true){
                    		$.ajax( {  
-                   				url:'/sysManager/assignEnterprise',// 跳转到 action  
+                   				url:WebUtil.getMainRoot()+'/assignEnterprise',// 跳转到 action  
                    				data:{"taskId" :id,"accountId":accountid},  
                    				type:'post',  
                    				cache:false,  
                    				dataType:'json',  
                    				success:function(data) {
                    					if(data.success == true){
-                   						alertMessage(data.message,"success");
+                   						WebUtil.alertMessage(data.message,"success");
                    					}else{
-                   						alertMessage(data.message,"danger");
+                   						WebUtil.alertMessage(data.message,"danger");
                    					} 
                    				},  
                    				error : function() {
-                   					alertMessage(data.message,"danger");
+                   					WebUtil.alertMessage(data.message,"danger");
                    				}  
                    		 }); 
                    	}
-                });
-            	$('#ajax').modal('hide');
+                });*/
+            	//$('#ajax').modal('hide');
         	}
         });
         
@@ -170,7 +165,10 @@ var FormValidation = function () {
                 success: function (label) {
                     label.closest('.form-group').removeClass('has-error'); // set success class to the control group
                 }, 
-                submitHandler: function (form) {
+                submitHandler: function (form) { 
+                    	  
+                	
+                	
                 	/*$.ajax( {  
             			url:'/sysManager/auditAccount',//跳转到 action  
             			data:{"accountId" :$(".accountId").attr("value"),"auditStatus":2},  

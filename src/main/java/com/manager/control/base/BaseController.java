@@ -3,11 +3,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 
-import com.manager.common.Common;
 import com.manager.common.view.PageView;
-import com.manager.sys.model.Personal; 
+ 
 
 /**
  * 

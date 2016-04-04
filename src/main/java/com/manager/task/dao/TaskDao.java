@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import com.manager.common.view.PageView;
+import com.manager.sys.model.Coworkinfo;
 import com.manager.sys.model.Task;
 
 /**
@@ -16,6 +17,10 @@ import com.manager.sys.model.Task;
  */
 
 public interface TaskDao {
+	
+ 
+	
+	public Coworkinfo getTaskCoworkinfo(int taskId);
 	
 	
 	
@@ -66,6 +71,12 @@ public interface TaskDao {
 	 */
 	public void deletTaskManage(@Param("taskId") int taskId);
 	
+	
+	/**
+	 *添加任务状态信息
+	 *@param work
+	 */
+	public void insetCoworkinfo(Coworkinfo work);
 	
 	
 	/**

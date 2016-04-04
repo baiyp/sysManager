@@ -71,6 +71,46 @@ public class Enterprise extends Account {
 	private String enterprise_website;//企业网站
 	
 	private String enterprise_email;//企业邮箱
+	
+	private String province;
+	
+	private String city;
+	
+	private int  category;//任务类别编码
+	
+	private String title;//任务标题
+ 
+	public String getProvince() {
+		return province;
+	}
+
+	public void setProvince(String province) {
+		this.province = province;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public int getCategory() {
+		return category;
+	}
+
+	public void setCategory(int category) {
+		this.category = category;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public String getEnterprise_name() {
 		return enterprise_name;

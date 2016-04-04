@@ -4,7 +4,8 @@ import java.io.UnsupportedEncodingException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping; 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.manager.common.Base64;
+import com.manager.common.Global;
 import com.manager.common.view.JsonView;
 import com.manager.control.base.BaseController;
 import com.manager.sys.model.User;
@@ -28,6 +30,7 @@ public class UserController extends BaseController{
 	@RequestMapping(value="/userLogin")
 	@ResponseBody
 	public JsonView loginUser(HttpServletRequest request,HttpServletResponse response) {
+		HttpSession session = request.getSession();
 		JsonView json = new JsonView();
 		User user = new User();
 		String userName = request.getParameter("username");
@@ -35,14 +38,14 @@ public class UserController extends BaseController{
 		user.setLogin_name(userName);
 		user.setPassword(password);
 		User user1 = userService.countUser(user);
-		 
+		
 		if(user1 == null){//登录错误
 			json.setSuccess(false);
 			json.setMessage("账号不存在或密码错误！");
 			json.setMessageCode("0");
 			return json;//"{\"result\":\"1\",\"m\":\""++"\"}";
 		}
-		 
+		session.setAttribute(Global.USER_SESSION,user1);
 		json.setMessageCode("2");
 		//登录成功进入主页面
 		return json;//"{\"result\":\"2\"}";

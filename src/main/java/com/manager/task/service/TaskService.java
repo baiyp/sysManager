@@ -6,6 +6,7 @@ package com.manager.task.service;
 import java.util.ArrayList;
 
 import com.manager.common.view.PageView;
+import com.manager.sys.model.Coworkinfo;
 import com.manager.sys.model.Task;
 
 /**
@@ -13,6 +14,11 @@ import com.manager.sys.model.Task;
  * @category 任务管理模块
  */
 public interface TaskService {
+	
+	
+	
+	
+	public Coworkinfo getTaskCoworkinfo(int taskId);
 	
 	
 	/**
@@ -64,7 +70,7 @@ public interface TaskService {
 	 * @param accountId
 	 * @return
 	 */
-	public int AssignEnterprise(int taskId,int accountId);
+	public int AssignEnterprise(Coworkinfo work);
 	
 	
 	/**

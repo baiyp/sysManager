@@ -11,6 +11,11 @@
   		SELECT t.*,tc.name as taskTypeName,e.enterprise_name FROM tendertask t LEFT JOIN TASKCATEGORY tc on tc.id = t.category  left join account a on t.publisher = a.id  left join enterprise e on a.id= e.account_id where t.id =#{taskId}
     </select>
     
+     <!-- 获取企业发布任务信息 -->	
+	<select id="getTaskCoworkinfo" parameterType="java.lang.Integer" resultType="com.manager.sys.model.Coworkinfo">  
+  		SELECT * FROM coworkinfo WHERE task_Id = #{taskId}
+    </select>
+    
     <!--审核企业发布的任务信息-->	
 	<update id="auditTaskManage">  
   		  update tendertask set  review=#{review} where id = #{taskId}
@@ -29,7 +34,11 @@
     <!--更新任务认领的未中标状态信息 是否中标 0未中 1未通过，2通过-->	
 	<update id="updateTenderNotWinning">  
   		  update tender set  qualified=1 where Id = #{taskId} and account_id!=#{accountId}
-    </update> 
+    </update>
+    
+    <insert id="insetCoworkinfo" parameterType="com.manager.sys.model.Coworkinfo"> 
+    	INSERT INTO coworkinfo(contract_no,work_name,work_days,start_time,contract_sum,work_type,work_place,work_qualification,work_owner_id,work_owner_name,work_contractor_id,work_contractor_name,win_time,task_id,remark) values(#{contract_no},#{work_name},#{work_days},#{start_time},#{contract_sum},#{work_type},#{work_place},#{work_qualification},#{work_owner_id},#{work_owner_name},#{work_contractor_id},#{work_contractor_name},#{win_time},#{task_id},#{remark})
+    </insert>
 
     
     <!-- 获取企业发布任务审核通过信息，用来管理用户认领的信息 -->	
@@ -40,7 +49,7 @@
     
     <!-- 获取每一个任务认领的公司列表 -->
 	<select id="queryTaskClaimEn" parameterType="com.manager.sys.model.Task" resultType="com.manager.sys.model.Task">  
-  		SELECT a.id as accountid,t.title,tc.name as taskTypeName,e.enterprise_name,tt.* FROM tendertask t LEFT JOIN TASKCATEGORY tc on tc.id = t.category  left join account a on t.publisher = a.id  left join enterprise e on a.id= e.account_id left join tender tt on tt.task_id=t.id where t.review=1 and t.id=#{taskId} <!--LIMIT #{pageNo},#{pageSize}-->
+  		SELECT a.id as accountid,t.*,tc.name as taskTypeName,e.enterprise_name FROM tendertask t LEFT JOIN TASKCATEGORY tc on tc.id = t.category  left join account a on t.publisher = a.id  left join enterprise e on a.id= e.account_id left join tender tt on tt.task_id=t.id where t.review=1 and t.id=#{taskId}  <!--LIMIT #{pageNo},#{pageSize}-->
     </select> 
 
 

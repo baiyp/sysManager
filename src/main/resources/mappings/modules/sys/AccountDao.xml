@@ -5,12 +5,22 @@
     
     <!-- 查詢個人用戶信息 -->
 	<select id="queryPersonalVip"  resultType="com.manager.sys.model.Personal">  
-		SELECT p.work_unit,p.full_name as full_name,p.id_number as id_number,p.sex,p.email,p.diploma,p.graduate_institutions,p.profession,a.* FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.user_type=0 and a.user_level>0 <!-- LIMIT #{pageNo},#{pageSize}-->
-    </select>		
+		SELECT p.work_unit,p.full_name as full_name,p.id_number as id_number,p.sex,p.email,p.diploma,p.graduate_institutions,p.profession,a.* FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.user_type=0 and a.user_level>0  
+    </select>
+    
+     <!-- 查詢個人用戶信息 -->
+	<select id="getAccount"  resultType="com.manager.sys.model.Account" parameterType="java.lang.Integer">  
+		SELECT * FROM account WHERE id =#{accountId}
+    </select>
+    
+        
+    <select id="getTaskEnterprise" parameterType="java.lang.Integer" resultType="com.manager.sys.model.Enterprise">
+   		 SELECT t.id,t.category,t.title,a.id as accountId,e.enterprise_name FROM tendertask t left join  account a on t.publisher= a.id LEFT JOIN enterprise e on e.account_id = a.id where t.id=#{taskId}
+    </select>
 
 	<!-- 查詢個人用戶信息 -->
 	<select id="queryPersonal"  resultType="com.manager.sys.model.Personal">  
-		SELECT p.work_unit,p.full_name as full_name,p.id_number as id_number,p.sex,p.email,p.diploma,p.graduate_institutions,p.profession,a.* FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.user_type=0  and a.user_level=0 <!-- LIMIT #{pageNo},#{pageSize}-->
+		SELECT p.work_unit,p.full_name as full_name,p.id_number as id_number,p.sex,p.email,p.diploma,p.graduate_institutions,p.profession,a.* FROM ACCOUNT a LEFT JOIN personal p on a.id = p.account_id where a.user_type=0  and a.user_level=0  
     </select>
     <!-- 根据编号获得用户 -->
     <select id="getPersonal" parameterType="java.lang.Integer" resultType="com.manager.sys.model.Personal">  
@@ -18,19 +28,19 @@
     </select>
     <!-- 查詢普通企業用戶信息 -->
     <select id="queryEnterprise"  resultType="com.manager.sys.model.Enterprise">  
-		SELECT a.*,e.enterprise_name,e.bank_account,e.deposit_bank,e.output_value,e.business_volume,e.registered_capital,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id where a.user_type=1  and a.user_level=0 <!--LIMIT #{pageNo},#{pageSize}-->
+		SELECT a.*,e.enterprise_name,e.bank_account,e.deposit_bank,e.output_value,e.business_volume,e.registered_capital,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id where a.user_type=1  and a.user_level=0 
     </select>
     <!-- 查詢普通企業用戶信息 -->
     <select id="queryEnterpriseVip"  resultType="com.manager.sys.model.Enterprise">  
-		SELECT a.*,e.enterprise_name,e.bank_account,e.deposit_bank,e.output_value,e.business_volume,e.registered_capital,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id where a.user_type=1 and a.user_level>0  <!-- LIMIT #{pageNo},#{pageSize}-->
+		SELECT a.*,e.enterprise_name,e.bank_account,e.deposit_bank,e.output_value,e.business_volume,e.registered_capital,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id where a.user_type=1 and a.user_level>0   
     </select>
     <!-- 根據企業編號獲取企業信息 -->
     <select id="getEnterprise" parameterType="java.lang.Integer" resultType="com.manager.sys.model.Enterprise">  
-		SELECT a.*,e.enterprise_name,e.bank_account,e.deposit_bank,e.output_value,e.business_volume,e.registered_capital,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website  FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id where a.id=#{id}
+		SELECT a.*,e.province,e.city,e.enterprise_name,e.bank_account,e.deposit_bank,e.output_value,e.business_volume,e.registered_capital,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website  FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id where a.id=#{id}
     </select>
     <!-- 審核企業、個人用戶 -->
     <update  id="auditAccount">  
-		update  ACCOUNT set user_level = 1,Audit_status=#{status} where id = #{id}
+		update  ACCOUNT set user_level = #{level},Audit_status=#{status} where id = #{id}
     </update>
     
     <!-- 審核企業、個人用戶 -->

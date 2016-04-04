@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import org.apache.ibatis.executor.statement.RoutingStatementHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
@@ -58,16 +60,34 @@ public class PagePlugin implements Interceptor {
 			 MappedStatement mappingStatement = (MappedStatement) metaStatementHandler.getValue("delegate.mappedStatement");
  
 			 Object param = boundSql.getParameterObject();
-			 PageView<?> pageView = null;
-			 if(param instanceof PageView){
-				 pageView = (PageView) param;
+			 if(param == null){
+				 return invocation.proceed();
+			 }else{
+			 
+				 PageView<?> pageView = null; 
+				 
+				 if(param instanceof PageView){
+					 pageView = (PageView) param;
+					
+				 }else if (param instanceof Map) {
+						for (Entry entry : (Set<Entry>) ((Map) param)
+								.entrySet()) {
+							if (entry.getValue() instanceof PageView) {
+								pageView = (PageView) entry.getValue();
+								break;
+							}
+						}
+				 }
+				 if (pageView == null) {
+						return invocation.proceed();
+				 }
 				 String sql = boundSql.getSql();
 				 Connection conn = (Connection) invocation.getArgs()[0]; 
 				 String pageSql =dialect.getLimitString(sql,pageView);
 				 String sqlCount = dialect.getCountString(pageSql);
 				 BaseSqlDialect.setPageParameter(sqlCount,conn, mappingStatement, boundSql,param, pageView);
 				 ReflectHelper.setValueByFieldName(boundSql, "sql", pageSql);
-			 }
+			}
 
 		}
 	

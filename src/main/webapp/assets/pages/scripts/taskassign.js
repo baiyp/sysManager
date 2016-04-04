@@ -1,28 +1,100 @@
 var TableDatatablesManaged = function () {
 	
-	var alertMessage = function(mssage,type){
-		
-		App.alert({
-            container:"#bootstrap_alerts_demo",// $('#alert_container').val(), // alerts parent container(by default placed after the page breadcrumbs)
-            place: "append",//$('#alert_place').val(), // append or prepent in container 
-            type: type,//$('#alert_type').val(),  // alert's type
-            message: mssage,////$('#alert_message').val(),  // alert's message
-            close: "1",//$('#alert_close').is(":checked"), // make alert closable
-            reset: "1",//$('#alert_reset').is(":checked"), // close all previouse alerts first
-            focus: "1",//$('#alert_focus').is(":checked"), // auto scroll to the alert after shown
-            closeInSeconds: "3",//$('#alert_close_in_seconds').val(), // auto close after defined seconds
-            icon: ""//$('#alert_icon').val() // put icon before the message
+    var initPickers = function () {
+        //init date pickers
+        $('.date-picker').datepicker({
+            rtl: App.isRTL(),
+            autoclose: true
         });
-		
-	}
+    }
+     
+    var handleValidation1 = function() { 
+
+            var form1 = $('#form_sample_1');
+            var error1 = $('.alert-danger',form1);
+            var success1 = $('.alert-success',form1);
+
+            form1.validate({
+                errorElement: 'span', //default input error message container
+                errorClass: 'help-block help-block-error', // default input error message class
+                focusInvalid: false, // do not focus the last invalid input
+                ignore: "",  // validate all fields including form hidden input
+                messages: {
+                    select_multi: {
+                        maxlength: jQuery.validator.format("Max {0} items allowed for selection"),
+                        minlength: jQuery.validator.format("At least {0} items must be selected")
+                    }
+                },
+                rules: {
+                	contract_no: {//合同编号
+                        minlength: 2,
+                        maxlength:20,
+                        required: true
+                    },
+                    work_days: {//工期天数
+                    	maxlength:5,
+                        required: true
+                    },
+                    datepicker: {//工期天数
+                        required: true
+                    },
+                    contract_sum: {//交易金额
+                        required: true,
+                        number: true
+                    },
+                    work_qualification: {//加工资质
+                        required: true
+                    }
+                },
+
+                invalidHandler: function (event, validator) { //display error alert on form submit              
+                    success1.hide();
+                    error1.show();
+                    App.scrollTo(error1, -200);
+                },
+
+                highlight: function (element) { // hightlight error inputs
+                    $(element).closest('.form-group').addClass('has-error'); // set error class to the control group
+                },
+
+                unhighlight: function (element) { // revert the change done by hightlight
+                    $(element).closest('.form-group').removeClass('has-error'); // set error class to the control group
+                },
+
+                success: function (label) {
+                    label
+                        .closest('.form-group').removeClass('has-error'); // set success class to the control group
+                }, 
+                submitHandler: function (form) { 
+                    $.post('/sysManager/assignEnterprise',{contract_no:$("#contract_no").val(),work_qualification:$("#work_qualification").val(),remark:$("#remark").val(),taskId:$("#taskId").val(),accountId:$("#accountId").val(),work_days:$("#work_days").val(),datepicker:$("#datepicker").val(),contract_sum:$("#contract_sum").val()},function(data){
+                    	if(data.success == true){ 
+                    		$('#stack1').modal('hide');
+                    		$('#ajax').modal('hide');
+                    		WebUtil.alertMessage(data.message,"success");
+                    		$('#taskassign').DataTable().ajax.reload(null,false);//刷新
+   	    			 	}else{
+   	    			 		WebUtil.alertMessage(data.message,"danger");
+   	    			 	}
+                    	
+               	 	},"json");
+                }
+            });
+            
+            form1.on("click",".taskAssignUpClose",function(){
+            	$('#stack1').modal('hide');
+            });
+    }
+ 
+    
+    
+ 
 	var initTable3 = function () {
 
-        var table = $('#sample_3');
+        var table = $('#taskassign');
 
         // begin: third table
         table.dataTable({
-
-            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+ 
         	"language": {
                 "processing": "处理中...",
                 "lengthMenu": "显示 _MENU_ 项结果",
@@ -54,14 +126,15 @@ var TableDatatablesManaged = function () {
             "pagingType": "bootstrap_full_number",
             "processing": true,
             "serverSide": true,
-            "ajax": "/sysManager/taskAssign",
+            "ajax": WebUtil.getMainRoot()+"/taskAssign",
             "displayStart": 0,
-            "pageLength": 15,
+            "pageLength": 10,
             "lengthMenu": [
                 [6, 15, 20, -1],
                 [6, 15, 20, "All"] // change per page values here
             ],
-            "columns": [{"data":"id"},
+            "columns": [
+                       {"data": "id"},
                       {"data": "title"},
                       {"data": "taskTypeName"},
                       {"data": "enterprise_name"},
@@ -81,6 +154,13 @@ var TableDatatablesManaged = function () {
                            	  	return "<input type=\"checkbox\" class=\"checkboxes\" value="+data+" /> </td>";
                               }
                            	 
+                          },
+                         {
+                        	  "targets":[1],
+                        	  "width" :'250',
+                        	  "render":function(data,full,meta){ 
+                        		  return data;
+                        	  }
                           },
                           {
                         	  "targets":[4],
@@ -134,12 +214,13 @@ var TableDatatablesManaged = function () {
             ],
             "order": [
                 [1, "asc"]
-            ] // set first column as a default sort by asc
+            ]
         });
         
         table.on("click",".audit-submit",function(){ 
         	$('.modal').attr("dataAjax",$(this).attr("dataUrl"));
         });
+ 
      
         table.on("click",".forbidden-submit",function(){
         	var dataUrl = $(this).attr("dataUrl");
@@ -152,21 +233,20 @@ var TableDatatablesManaged = function () {
             	bootbox.confirm("你确定要终止选派吗?", function(result) {
                    	if(result == true){
                    		$.ajax( {  
-                   				url:'/sysManager/deleteTaskManage',// 跳转到 action  
+                   				url:WebUtil.getMainRoot()+'/deleteTaskManage',// 跳转到 action  
                    				data:{"taskId" :id},  
                    				type:'post',  
                    				cache:false,  
                    				dataType:'json',  
                    				success:function(data) {
                    					if(data.success == true){
-                   						alertMessage(data.message,"success"); 
-                   						//table.ajax.reload();
+                   						WebUtil.alertMessage(data.message,"success");  
                    					}else{
-                   						alertMessage(data.message,"danger");
+                   						WebUtil.alertMessage(data.message,"danger");
                    					} 
                    				},  
                    				error : function() {
-                   					alertMessage(data.message,"danger");
+                   					WebUtil.alertMessage(data.message,"danger");
                    				}  
                    		 }); 
                    	}
@@ -176,7 +256,7 @@ var TableDatatablesManaged = function () {
         });
         
 
-        var tableWrapper = jQuery('#sample_3_wrapper');
+        var tableWrapper = jQuery('#taskassign_wrapper');
 
         table.find('.group-checkable').change(function () {
             var set = jQuery(this).attr("data-set");
@@ -193,13 +273,12 @@ var TableDatatablesManaged = function () {
     }
 
     return {
-
-        //main function to initiate the module
         init: function () {
             if (!jQuery().dataTable) {
                 return;
             }
- 
+            initPickers();
+            handleValidation1();
             initTable3();
         }
 

@@ -1,21 +1,5 @@
 var FormValidation = function () {
-
-	var alertMessage = function(mssage,type){
-		
-		App.alert({
-            container:"#bootstrap_alerts_demo",// $('#alert_container').val(), // alerts parent container(by default placed after the page breadcrumbs)
-            place: "append",//$('#alert_place').val(), // append or prepent in container 
-            type: type,//$('#alert_type').val(),  // alert's type
-            message: mssage,////$('#alert_message').val(),  // alert's message
-            close: "1",//$('#alert_close').is(":checked"), // make alert closable
-            reset: "1",//$('#alert_reset').is(":checked"), // close all previouse alerts first
-            focus: "1",//$('#alert_focus').is(":checked"), // auto scroll to the alert after shown
-            closeInSeconds: "3",//$('#alert_close_in_seconds').val(), // auto close after defined seconds
-            icon: ""//$('#alert_icon').val() // put icon before the message
-        });
-		
-	}
-	 
+ 
     var handleValidation1 = function() {
             var form1 = $('#form_sample_1');
             form1.validate({
@@ -42,21 +26,21 @@ var FormValidation = function () {
                 }, 
                 submitHandler: function (form) {
                 	$.ajax( {  
-            			url:'/sysManager/auditAccount',//跳转到 action  
+            			url:WebUtil.getMainRoot()+'/auditAccount',//跳转到 action  
             			data:{"accountId" :$(".accountId").attr("value"),"auditStatus":2},  
             			type:'post',  
             			cache:false,  
             			dataType:'json',  
             			success:function(data) {
             				if(data.success = true){
-            					alertMessage("任务审核成功","danger");
+            					WebUtil.alertMessage("任务审核成功","success");
 
             				}else{
-            					alertMessage("任务审核失败","danger");
+            					WebUtil.alertMessage("任务审核失败","danger");
             				}
             			},  
             			error : function() {
-            				alertMessage("任务审核失败","danger");
+            				WebUtil.alertMessage("任务审核失败","danger");
             			}  
             	 });
                 	$('#ajax').modal('hide');
@@ -73,7 +57,7 @@ var FormValidation = function () {
 
 jQuery(document).ready(function() {
 	$.ajax( {  
-			url:'/sysManager/getTaskManage',// 跳转到 action  
+			url:WebUtil.getMainRoot()+'/getTaskManage',// 跳转到 action  
 			data:{"taskId" :$('.modal').attr("dataAjax")},  
 			type:'post',  
 			cache:false,  

@@ -43,7 +43,7 @@ public class AnnouncementController extends BaseController {
 	public PageView<Announcement> queryAnnouncement(HttpServletRequest request,HttpServletResponse response){
 		PageView<Announcement> page = super.getPageView(request, response); 
 		page.setData(announcementService.queryAnnouncement(page));
-		 
+		page.setRecordsFiltered(page.getRecordsTotal());
 		return page;
 	}
 	

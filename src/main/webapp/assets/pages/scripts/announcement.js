@@ -39,7 +39,7 @@ var TableDatatablesManaged = function () {
             "pagingType": "bootstrap_full_number",
             "processing": true,
             "serverSide": true,
-            "ajax": "/sysManager/queryAnnouncement",
+            "ajax": WebUtil.getMainRoot()+"/queryAnnouncement",
             "displayStart": 0,
             "pageLength": 15,
             "lengthMenu": [
@@ -48,7 +48,7 @@ var TableDatatablesManaged = function () {
             ],
             "columns": [{"data":"id"},
                       {"data": "title"},
-                      {"data": "user_id"},
+                      {"data": "userName"},
                       {"data": "create_Date"}, 
                       {"data": "id"}
             ],

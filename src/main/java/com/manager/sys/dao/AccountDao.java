@@ -71,13 +71,22 @@ public interface AccountDao {
 	public Enterprise getEnterprise(int accountId);
 	
 	
+	
+	
+	/**
+	 * 
+	 * @param taskId
+	 * @return
+	 */
+	public Enterprise getTaskEnterprise(int taskId);	
+	
 	/**
 	 * 
 	 * @param id
 	 * @param status
 	 * @return
 	 */
-	public void auditAccount(@Param("id") int id,@Param("status") int status);
+	public void auditAccount(@Param("id") int id,@Param("status") int status,@Param("level") int level);
 	
 	
 	
@@ -85,7 +94,7 @@ public interface AccountDao {
 	
 	
 	
-	
-	
+	public Account getAccount(int accountId);
+
 
 }
