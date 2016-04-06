@@ -18,8 +18,10 @@
 	<bean name="shiroFilterChainDefinitions" class="java.lang.String">
 		<constructor-arg>
 			<value>
-      		/assets/** = anon
+      		/assets/** = anon <!--允许匿名访问-->
       		/multipartFileUpload/** = anon
+      		/login.html = anon
+      		/rounder/** = authc <!-- 需要用户认证才能进行访问 -->
 			</value>
 		</constructor-arg>
 	</bean>
@@ -55,7 +57,7 @@
 	
 	<!-- CAS认证过滤器 -->  
 	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter">  
-		<property name="failureUrl" value="${managerPath}/login"/>
+		<property name="failureUrl" value="error.html"/>
 	</bean>
 	
 		<!-- 自定义会话管理配置 -->
@@ -87,8 +89,9 @@
 	<!-- 安全认证过滤器 -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean"><!-- shiro通过一个filter控制权限-->
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="rounder/index.html" /><!-- 登陆页 -->
-		<property name="successUrl" value="${managerPath}?login" /><!-- 登陆成功之后跳转的页面 -->
+		<property name="loginUrl" value="/login.html" /><!-- 登陆页 -->
+		<property name="successUrl" value="rounder/index.html" /><!-- 登陆成功之后跳转的页面 -->
+		<property name="unauthorizedUrl" value="authc.html"></property><!-- 没有权限默认跳转的页面 -->
 		<property name="filters">
             <map>
                 <entry key="cas" value-ref="casFilter"/>

@@ -6,13 +6,14 @@
    	<param-name>uploadPath</param-name>
    	<param-value>E:/software/apache-tomcat-6.0.16/</param-value>
    </context-param>
-   <listener>
+ 
+    <listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	  <context-param>
+	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring-config-*.xml</param-value>
-	  </context-param>
+	</context-param>
  
    <!--Apache Shiro-->
 	<filter>
