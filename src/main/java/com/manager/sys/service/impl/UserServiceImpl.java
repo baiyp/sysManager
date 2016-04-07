@@ -54,16 +54,12 @@ public class UserServiceImpl  implements UserService{
 	}
 
 	@Override
-	public User countUser(User user) {
-		return userDao.countAccount(user);
+	public User userLogin(String userName, String password) {
+		 
+		return null;
 	}
 
  
-
-	@Override
-	public User userLogin(String userName, String password) {
-		return userDao.userLogin(userName, password);
-	}
 
  
 

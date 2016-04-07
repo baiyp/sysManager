@@ -33,9 +33,16 @@ public class User extends BaseEntity{
 	
 	private String remarks;
 	
- 
-
+	private boolean locked;
+	
 	 
+	public boolean isLocked() {
+		return locked;
+	}
+
+	public void setLocked(boolean locked) {
+		this.locked = locked;
+	}
 
 	public String getLogin_name() {
 		return login_name;

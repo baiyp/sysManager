@@ -4,11 +4,15 @@
 	<!-- 根据编号获得用户 -->	
 	<select id="getUser" parameterType="com.manager.sys.model.User" resultType="com.manager.sys.model.User">  
   		SELECT * FROM sys_user
-    </select> 
+    </select>
     
-    
+    <!-- 根据编号获得用户 -->	
+	<select id="findByUsername" parameterType="java.lang.String" resultType="java.lang.Integer">  
+  		SELECT count(*) FROM sys_user where login_name =#{username} 
+    </select>  
+     
     <!-- 验证用户登陆 -->
-	<select id="countAccount" parameterType="com.manager.sys.model.User" resultType="com.manager.sys.model.User">
+	<select id="userLogin" parameterType="com.manager.sys.model.User" resultType="com.manager.sys.model.User">
 		select
 			*
 		from sys_user where

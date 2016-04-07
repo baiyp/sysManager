@@ -5,8 +5,7 @@ import com.manager.sys.model.User;
 
 public interface UserService extends BaseService<User>{
 	
-	
-	public User countUser(User user);
+	 
 	
 	
 	public User userLogin(String userName,String password);

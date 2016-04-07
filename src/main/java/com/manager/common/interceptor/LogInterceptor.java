@@ -40,7 +40,7 @@ public class LogInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		User user = (User) request.getSession().getAttribute(Global.USER_SESSION);
+		/*User user = (User) request.getSession().getAttribute(Global.USER_SESSION);
 		String path = request.getServletPath();
 		
 		 if(!(path.indexOf("/login.html") > -1 || path.indexOf(".css") > -1 || path.indexOf(".js") > -1  || path.indexOf("/userLogin") > -1)){
@@ -48,7 +48,7 @@ public class LogInterceptor implements HandlerInterceptor {
         	   response.sendRedirect("/sysManager/login.html");				
         	    return false;
 	       } 
-	     }
+	     }*/
  
 		if(logger.isDebugEnabled()){
 			long startTime = System.currentTimeMillis();
