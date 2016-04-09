@@ -12,7 +12,7 @@
 
     <!-- 添加公告信息 -->
     <insert id="addAnnouncement" parameterType="com.manager.sys.model.Announcement" useGeneratedKeys="true" keyProperty="id">
-    	insert into announcement(title,content,user_id,create_Date) values (#{title},#{content},#{user_id},#{create_Date})
+    	insert into announcement(title,content,user_id,create_Date) values (#{title},#{content},#{userId},#{create_Date})
     </insert>
      <!-- 添加公告信息 -->
     <update id="updateAnnouncement" parameterType="com.manager.sys.model.Announcement"> 
@@ -20,6 +20,6 @@
     </update>
      <!-- 添加公告信息 -->
     <update id="deleteAnnouncement" parameterType="java.lang.Integer"> 
-    	update announcement set del_Flag=1 where id = #{id}
+    	update announcement set del_flag=1 where id=#{id}
     </update>
 </mapper>

@@ -3,6 +3,8 @@
  */
 package com.manager.announcement.control;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,8 +34,22 @@ public class AnnouncementController extends BaseController {
 	@ResponseBody
 	public JsonView addAnnouncement(HttpServletRequest request,HttpServletResponse response){
 		JsonView json = new JsonView();
-		
-		
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		Announcement anno = new Announcement();
+		anno.setContent(content);
+		anno.setCreate_Date(String.valueOf(new Date().getTime()/1000));
+		anno.setTitle(title);
+		anno.setUserId(1);
+		int result = announcementService.addAnnouncement(anno);
+		if(result == 0){
+			json.setMessage("添加公告信息失败");
+			json.setSuccess(false);
+			json.setMessageCode("100001");
+		}else{
+			json.setMessage("添加公告信息成功");
+			json.setMessageCode("100001");
+		}
 		return json;
 	}
 	
@@ -48,9 +64,10 @@ public class AnnouncementController extends BaseController {
 	}
 	
 	@RequestMapping(value="/getAnnouncement")
-	public Announcement getAnnouncement(HttpServletRequest request,HttpServletResponse response){
-		
-		return null;
+	@ResponseBody
+	public Announcement getAnnouncement(HttpServletRequest request,HttpServletResponse response){ 
+		int noticeId = Integer.parseInt(request.getParameter("noticeId")); 
+		return  announcementService.getAnnouncement(noticeId);
 	}
 	
 	
@@ -66,9 +83,18 @@ public class AnnouncementController extends BaseController {
 	
 	@RequestMapping(value="/deleteAnnouncement")
 	@ResponseBody
-	public JsonView deleteAnnouncement(HttpServletResponse request,HttpServletResponse response){
+	public JsonView deleteAnnouncement(HttpServletRequest request,HttpServletResponse response){
 		JsonView json = new JsonView();
-		
+		int noticeId = Integer.parseInt(request.getParameter("noticeId")); 
+		int result = announcementService.deleteAnnouncement(noticeId); 
+		if(result == 0){
+			json.setMessage("删除公告信息失败");
+			json.setMessageCode("10001");
+			json.setSuccess(false);
+		}else{
+			json.setMessage("删除公告信息成功");
+			json.setMessageCode("10001");
+		}
 		return json;
 	}
 	
@@ -76,8 +102,7 @@ public class AnnouncementController extends BaseController {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static void main(String[] args) { 
 
 	}
 

@@ -13,16 +13,12 @@ var ComponentsEditors = function () {
     }
 
     var handleSummernote = function () {
-        $('#summernote_1').summernote({height: 300});
-        //API:
-        //var sHTML = $('#summernote_1').code(); // get code
-        //$('#summernote_1').destroy(); // destroy
+        $('#summernote_1').summernote({height: 300}); 
     }
 
     return {
         //main function to initiate the module
         init: function () {
-            handleWysihtml5();
             handleSummernote();
         }
     };

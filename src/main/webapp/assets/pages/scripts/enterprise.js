@@ -125,13 +125,11 @@ var TableDatatablesManaged = function () {
             ],
             "order": [
                 [1, "asc"]
-            ] // set first column as a default sort by asc
+            ]
         });
-        
         table.on("click",".audit-submit",function(){ 
         	$('.modal').attr("dataAjax",$(this).attr("dataUrl"));
         });
-     
         table.on("click",".forbidden-submit",function(){
         	var dataUrl = $(this).attr("dataUrl");
         	var arr=new Array();
@@ -144,17 +142,17 @@ var TableDatatablesManaged = function () {
                    	if(result == true){
                    		$.ajax( {  
                    				url:'/sysManager/forbiddenAccount',// 跳转到 action  
-                   				data:{"accountId" :id},  
+                   				data:{"accountId":id},  
                    				type:'post',  
                    				cache:false,  
                    				dataType:'json',  
                    				success:function(data) {
                    					if(data.success == true){
-                   						WebUtil.alertMessage("账号"+username+"禁用成功","success"); 
-                   						//table.ajax.reload();
+                   						WebUtil.alertMessage("账号"+username+"禁用成功","success");
                    					}else{
                    						WebUtil.alertMessage("账号"+username+"禁用失败","danger");
-                   					} 
+                   					}
+                   					$('#sample_3').DataTable().ajax.reload(null,false);
                    				},  
                    				error : function() {
                    					WebUtil.alertMessage("账号"+username+"禁用失败","danger");
@@ -162,7 +160,6 @@ var TableDatatablesManaged = function () {
                    		 }); 
                    	}
                 });
-        		
         	}
         });
         

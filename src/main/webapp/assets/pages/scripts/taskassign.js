@@ -1,7 +1,6 @@
 var TableDatatablesManaged = function () {
 	
     var initPickers = function () {
-        //init date pickers
         $('.date-picker').datepicker({
             rtl: App.isRTL(),
             autoclose: true
@@ -91,8 +90,7 @@ var TableDatatablesManaged = function () {
 	var initTable3 = function () {
 
         var table = $('#taskassign');
-
-        // begin: third table
+  
         table.dataTable({
  
         	"language": {
@@ -206,7 +204,7 @@ var TableDatatablesManaged = function () {
                              "width" :'150',
                              'orderable': false,
                              "searchable": false,
-                             render: function (data,full, meta ) { 
+                             render: function (data,full, meta) {
                             	 return "<button data-target=\"#ajax\" data-toggle=\"modal\" href=\"taskxuanpai.html\" class=\"btn btn-sm green btn-outline audit-submit margin-bottom\" dataUrl="+meta.id+" ><i class=\"fa fa-hand-pointer-o\"></i>选派</button> <button class=\"btn btn-sm red btn-outline forbidden-submit\" dataUrl="+meta.id+"|"+meta.username+"><i class=\"fa fa-times\"></i>终止</button>";
                              }
                          }
@@ -217,7 +215,7 @@ var TableDatatablesManaged = function () {
             ]
         });
         
-        table.on("click",".audit-submit",function(){ 
+        table.on("click",".audit-submit",function(){
         	$('.modal').attr("dataAjax",$(this).attr("dataUrl"));
         });
  
@@ -233,8 +231,8 @@ var TableDatatablesManaged = function () {
             	bootbox.confirm("你确定要终止选派吗?", function(result) {
                    	if(result == true){
                    		$.ajax( {  
-                   				url:WebUtil.getMainRoot()+'/deleteTaskManage',// 跳转到 action  
-                   				data:{"taskId" :id},  
+                   				url:WebUtil.getMainRoot()+'/suspendTask',// 跳转到 action  
+                   				data:{"taskId":id},  
                    				type:'post',  
                    				cache:false,  
                    				dataType:'json',  
@@ -243,7 +241,8 @@ var TableDatatablesManaged = function () {
                    						WebUtil.alertMessage(data.message,"success");  
                    					}else{
                    						WebUtil.alertMessage(data.message,"danger");
-                   					} 
+                   					}
+                   					$('#taskassign').DataTable().ajax.reload(null,false);
                    				},  
                    				error : function() {
                    					WebUtil.alertMessage(data.message,"danger");
@@ -255,7 +254,6 @@ var TableDatatablesManaged = function () {
         	}
         });
         
-
         var tableWrapper = jQuery('#taskassign_wrapper');
 
         table.find('.group-checkable').change(function () {

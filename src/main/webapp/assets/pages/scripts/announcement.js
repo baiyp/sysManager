@@ -6,7 +6,6 @@ var TableDatatablesManaged = function () {
 
         // begin: third table
         table.dataTable({
-
             // Internationalisation. For more info refer to http://datatables.net/manual/i18n
         	"language": {
                 "processing": "处理中...",
@@ -78,8 +77,9 @@ var TableDatatablesManaged = function () {
                              "width" :'15%',
                              'orderable': false,
                              "searchable": false,
-                             render: function (data,full,meta) { 
-                                 return "<button class=\"btn btn-sm green btn-outline audit-submit margin-bottom ajaxify\" href=\"form_fileupload.html\" ajaxScript=\"../assets/pages/scripts/form-fileupload.js\"><i class=\"fa fa-hand-pointer-o\"></i> 查看</button> <button class=\"btn btn-sm red btn-outline forbidden-submit\"><i class=\"fa fa-times\"></i>删除</button>";
+                             render: function (data,full,meta) {
+                            	 //<button class=\"btn btn-sm green btn-outline audit-submit margin-bottom ajaxify\" href=\"form_fileupload.html\" ajaxScript=\"../assets/pages/scripts/form-fileupload.js\"><i class=\"fa fa-hand-pointer-o\"></i> 查看</button> <button class=\"btn btn-sm red btn-outline forbidden-submit\"><i class=\"fa fa-times\"></i>删除</button>
+                                 return "<button  data-target=\"#ajax\" dataUrl="+meta.id+" data-toggle=\"modal\" class=\"btn btn-sm green btn-outline  audit-submit margin-bottom\" href=\"noticeDetails.html\"><i class=\"fa fa-hand-pointer-o\"></i> 查看</button> <button dataUrl="+meta.id+" class=\"btn btn-sm red btn-outline forbidden-submit\"><i class=\"fa fa-times\"></i>删除</button>";
                              }
                          }
           
@@ -89,9 +89,40 @@ var TableDatatablesManaged = function () {
             ]
         });
  
+       table.on("click",".audit-submit",function(){
+    	   $('.modal').attr("dataAjax",$(this).attr("dataUrl"));
+       });
         
+        
+ 
         table.on("click",".forbidden-submit",function(){
-        	alert("forbidden-submit");
+        	var dataUrl = $(this).attr("dataUrl"); 
+        	if(dataUrl != undefined){ 
+            	bootbox.setLocale("zh_CN");
+            	bootbox.confirm("你确定要删除该公告信息吗?", function(result) {
+                   	if(result == true){
+                   		$.ajax( {  
+                   				url:WebUtil.getMainRoot()+'/deleteAnnouncement',// 跳转到 action  
+                   				data:{"noticeId" :dataUrl},  
+                   				type:'post',  
+                   				cache:false,  
+                   				dataType:'json',  
+                   				success:function(data) {
+                   					if(data.success == true){
+                   						WebUtil.alertMessage(data.message,"success");
+                   					}else{
+                   						WebUtil.alertMessage(data.message,"danger");
+                   					}
+                   					$('#sample_3').DataTable().ajax.reload(null,false);
+                   				},  
+                   				error : function() {
+                   					WebUtil.alertMessage("删除该公告信息失败","danger");
+                   				}  
+                   		 }); 
+                   	}
+                });
+        		
+        	}
         });
         
 

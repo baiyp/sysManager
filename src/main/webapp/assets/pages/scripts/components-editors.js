@@ -1,6 +1,6 @@
-var FormValidation = function () {
-
-    // basic validation
+var ComponentsEditors = function () {
+	
+	// basic validation
     var handleValidation1 = function() { 
 
             var form1 = $('#form_sample_1');
@@ -19,13 +19,9 @@ var FormValidation = function () {
                     }
                 },
                 rules: {
-                    name: {
+                	title: {
                         minlength: 2,
                         required: true
-                    },
-                    email: {
-                        required: true,
-                        email: true
                     }
                 },
 
@@ -53,22 +49,33 @@ var FormValidation = function () {
                 submitHandler: function (form) {
                     success1.show();
                     error1.hide();
+                    $.post(WebUtil.getMainRoot()+'/addAnnouncement',{title:$("#title").val(),content:$("#editor1").val()},function(data){
+                    	if(data.success == true){
+                    		WebUtil.alertMessage(data.message,"success");
+                    		
+   	    			 	}else{
+   	    			 		WebUtil.alertMessage(data.message,"danger");
+   	    			 	}
+                    	//$('#taskassign').DataTable().ajax.reload(null,false);//刷新
+                    	
+               	 	},"json");
                 }
             });
-
-
-    } 
+    }
+  
+    var ckeditorJquery = function () { 
+    	$('textarea#editor1').ckeditor();
+    }
+  
     return { 
         init: function () {
- 
-            handleValidation1(); 
-
+        	ckeditorJquery();
+        	handleValidation1();
         }
-
     };
 
 }();
 
 jQuery(document).ready(function() {
-    FormValidation.init();
+   ComponentsEditors.init(); 
 });

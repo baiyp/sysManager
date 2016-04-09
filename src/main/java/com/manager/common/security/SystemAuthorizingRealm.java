@@ -60,7 +60,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 				}*/
 				return new SimpleAuthenticationInfo(user.getLogin_name(),user.getPassword(),getName());
 			}
-		}
+		} 
 		 
 	}
  

@@ -17,10 +17,7 @@ public interface TaskService {
 	
 	
 	
-	
-	public Coworkinfo getTaskCoworkinfo(int taskId);
-	
-	
+ 
 	/**
 	 * 获取任务列表
 	 * @param pageNo
@@ -79,5 +76,12 @@ public interface TaskService {
 	 * @return
 	 */
 	public int deletTaskManage(int taskId);
+	
+	/**
+	 * 
+	 * @param taskId
+	 * @return
+	 */
+	public int updateTaskStatus(int taskId);
 
 }

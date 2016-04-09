@@ -11,7 +11,7 @@ import java.util.List;
 public interface Base<T> {
 	
 	/**
-	 * 获取所有信息
+ 
 	 * @return
 	 */
 	public List<T> queryAll(T t);

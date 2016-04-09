@@ -19,11 +19,7 @@ import com.manager.sys.model.Task;
 public interface TaskDao {
 	
  
-	
-	public Coworkinfo getTaskCoworkinfo(int taskId);
-	
-	
-	
+  
 	/**
 	 * 
 	 * @param taskId
@@ -85,6 +81,11 @@ public interface TaskDao {
 	 * @return
 	 */
 	public void updateTaskStatus(@Param("taskId") int taskId);
+	
+	
+	
+	
+	public void deleteTask(@Param("taskId") int taskId);
 	
 	
 	/**

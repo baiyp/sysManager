@@ -18,12 +18,17 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
 	@Override
 	public int addAnnouncement(Announcement anno) {
-		return 0;
+		try{
+			announcementDao.addAnnouncement(anno);
+		}catch(Exception e){
+			return 0;
+		}
+		return 1;
 	}
 
 	@Override
 	public Announcement getAnnouncement(int annoId) {
-		return null;
+		return announcementDao.getAnnouncement(annoId);
 	}
 
 	@Override
@@ -38,7 +43,12 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
 	@Override
 	public int deleteAnnouncement(int annoId) {
-		return 0;
+		try{
+			announcementDao.deleteAnnouncement(annoId);
+		}catch(Exception e){
+			return 0;
+		}
+		return 1;
 	}
  
 }

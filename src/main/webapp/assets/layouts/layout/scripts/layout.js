@@ -268,7 +268,6 @@ var Layout = function () {
 
             var url = $(this).attr("href");
             var ajaxScript = $(this).attr("ajaxScript");
-            alert("ajaxScript: " + ajaxScript);
             var pageContent = $('.page-content');
             var pageContentBody = $('.page-content .page-content-body');
 

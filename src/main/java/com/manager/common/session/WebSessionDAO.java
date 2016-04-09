@@ -16,31 +16,35 @@ public class WebSessionDAO extends AbstractSessionDAO{
 
 	@Override
 	public void update(Session session) throws UnknownSessionException {
-		// TODO Auto-generated method stub
+		
+		System.out.println("WebSessionDAO ----------------------------update");
 		
 	}
 
 	@Override
 	public void delete(Session session) {
-		// TODO Auto-generated method stub
 		
+		System.out.println("WebSessionDAO ----------------------------delete");
 	}
 
 	@Override
 	public Collection<Session> getActiveSessions() {
-		// TODO Auto-generated method stub
+		
+		System.out.println("WebSessionDAO ----------------------------getActiveSessions");
 		return null;
 	}
 
 	@Override
 	protected Serializable doCreate(Session session) {
-		// TODO Auto-generated method stub
+		
+		System.out.println("WebSessionDAO ----------------------------doCreate");
 		return null;
 	}
 
 	@Override
 	protected Session doReadSession(Serializable sessionId) {
-		// TODO Auto-generated method stub
+		
+		System.out.println("WebSessionDAO ----------------------------doReadSession");
 		return null;
 	}
 

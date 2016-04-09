@@ -117,7 +117,7 @@ var TableDatatablesManaged = function () {
             ],
             "order": [
                 [1, "asc"]
-            ] // set first column as a default sort by asc
+            ]
         });
         
         table.on("click",".audit-submit",function(){ 
@@ -135,18 +135,18 @@ var TableDatatablesManaged = function () {
             	bootbox.confirm("你你确定要删除该任务吗?", function(result) {
                    	if(result == true){
                    		$.ajax( {  
-                   				url:'/sysManager/deleteTaskManage',// 跳转到 action  
+                   				url:WebUtil.getMainRoot()+'/deleteTaskManage',// 跳转到 action  
                    				data:{"taskId" :id},  
                    				type:'post',  
                    				cache:false,  
                    				dataType:'json',  
                    				success:function(data) {
                    					if(data.success == true){
-                   						WebUtil.alertMessage(data.message,"success"); 
-                   						//table.ajax.reload();
+                   						WebUtil.alertMessage(data.message,"success");
                    					}else{
                    						WebUtil.alertMessage(data.message,"danger");
-                   					} 
+                   					}
+                   					$('#sample_3').DataTable().ajax.reload(null,false);
                    				},  
                    				error : function() {
                    					WebUtil.alertMessage(data.message,"danger");
@@ -154,7 +154,6 @@ var TableDatatablesManaged = function () {
                    		 }); 
                    	}
                 });
-        		
         	}
         });
         

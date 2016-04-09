@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manager.news.dao.NewsDao">
+	<!-- 获取公告信息-->	
+	<select id="getNews" parameterType="java.lang.Integer" resultType="com.manager.sys.model.News">  
+  		SELECT a.*,u.user_name as userName FROM news a left join sys_user u on a.user_id = u.id where a.del_Flag=0 and a.id=#{id}
+    </select>
+    <select id="queryNews" resultType="com.manager.sys.model.News">  
+  		SELECT a.*,u.user_name as userName FROM news a left join sys_user u on a.user_id = u.id where a.del_Flag=0  <!--limit #{pageNo},#{pageSize}-->
+    </select>
+    <!-- 添加公告信息 -->
+    <insert id="addNews" parameterType="com.manager.sys.model.News" useGeneratedKeys="true" keyProperty="id">
+    	insert into news(title,content,user_id,create_Date) values (#{title},#{content},#{userId},#{create_Date})
+    </insert>
+     <!-- 添加公告信息 -->
+    <update id="updateNews" parameterType="com.manager.sys.model.News"> 
+    	update news set title=#{title},content=#{content},update_Date=#{update_Date} where id = #{id} 
+    </update>
+     <!-- 添加公告信息 -->
+    <update id="deleteNews" parameterType="java.lang.Integer"> 
+    	update news set del_flag=1 where id=#{id}
+    </update>
+</mapper>

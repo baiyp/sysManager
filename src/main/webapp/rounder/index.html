@@ -43,6 +43,8 @@ License: You must have a valid license purchased only from themeforest(the above
         <link href="../assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
         <!-- END PAGE LEVEL PLUGINS -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
+        <link href="../assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/global/plugins/ckeditor/contents.css" rel="stylesheet" type="text/css" />
         <link href="../assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet" type="text/css" />
         <link href="../assets/global/plugins/jquery-file-upload/blueimp-gallery/blueimp-gallery.min.css" rel="stylesheet" type="text/css" />
         <link href="../assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" type="text/css" />
@@ -472,13 +474,38 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <span class="arrow"></span>
                             </a>
                             <ul class="sub-menu">
-                                <li class="nav-item  ">
+                                <li class="nav-item">
                                     <a href="announcement.html"  class="ajaxify" ajaxScript="../assets/pages/scripts/announcement.js">
                                         <span class="title">公告管理</span>
                                     </a>
                                 </li>
-                            </ul>
-                        </li> 
+                                <li class="nav-item">
+                                    <a href="components_editors.html"  class="ajaxify" ajaxScript="">
+                                        <span class="title">添加公告</span>
+                                    </a>
+                                </li>
+                            </ul> 
+                        </li>
+                        
+                       <li class="nav-item  ">
+                            <a href="javascript:;" class="nav-link nav-toggle">
+                                <i class="icon-puzzle"></i>
+                                <span class="title">新闻管理</span>
+                                <span class="arrow"></span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li class="nav-item">
+                                    <a href="news/news.html"  class="ajaxify" ajaxScript="../assets/pages/scripts/news/news.js">
+                                        <span class="title">新闻管理</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="news/newsAdd.html"  class="ajaxify" ajaxScript="">
+                                        <span class="title">添加新闻</span>
+                                    </a>
+                                </li>
+                            </ul> 
+                        </li>
                         
                          
                         <!--li class="nav-item">
@@ -655,8 +682,8 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- END CONTAINER -->
         <!-- BEGIN FOOTER -->
         <div class="page-footer">
-            <div class="page-footer-inner"> 2014 &copy; Metronic by keenthemes.
-                <a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" title="Purchase Metronic just for 27$ and get lifetime updates for free" target="_blank">Purchase Metronic!</a>
+            <div class="page-footer-inner"> Copyright @ 加加物联网 2016 All Rights Reserved! 版权所有 备案号：辽ICP备16002293-1号
+                
             </div>
             <div class="scroll-to-top">
                 <i class="icon-arrow-up"></i>
@@ -676,6 +703,11 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
         <script src="../assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
         <script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/bootstrap-markdown/lib/markdown.js" type="text/javascript"></script>
+        <script src="./../assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
+ 		<script src="../assets/global/plugins/ckeditor/adapters/jquery.js" type="text/javascript"></script>
         <!-- END CORE PLUGINS -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
         <script src="../assets/global/plugins/moment.min.js" type="text/javascript"></script>
@@ -708,9 +740,6 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="../assets/global/plugins/jqvmap/jqvmap/maps/jquery.vmap.usa.js" type="text/javascript"></script>
         <script src="../assets/global/plugins/jqvmap/jqvmap/data/jquery.vmap.sampledata.js" type="text/javascript"></script>
         <!-- END PAGE LEVEL PLUGINS -->
-        <!-- BEGIN THEME GLOBAL SCRIPTS -->
-        <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
-        <!-- END THEME GLOBAL SCRIPTS -->
         <!-- BEGIN PAGE LEVEL PLUGINS -->
         <script src="../assets/global/scripts/datatable.js" type="text/javascript"></script>
         <script src="../assets/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
@@ -739,22 +768,16 @@ License: You must have a valid license purchased only from themeforest(the above
         <script src="../assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
          <script src="../assets/global/plugins/jquery-validation/js/localization/messages_zh.min.js" type="text/javascript"></script> 
         <script src="../assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
-        <script src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-        <script src="../assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js" type="text/javascript"></script>
-        <script src="../assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js" type="text/javascript"></script>
-        <script src="../assets/global/plugins/ckeditor/ckeditor.js" type="text/javascript"></script>
-        <script src="../assets/global/plugins/bootstrap-markdown/lib/markdown.js" type="text/javascript"></script>
-        <script src="./../assets/global/plugins/bootstrap-markdown/js/bootstrap-markdown.js" type="text/javascript"></script>
+
         <script src="../assets/global/plugins/codemirror/lib/codemirror.js" type="text/javascript"></script>
         <script src="../assets/global/plugins/codemirror/mode/javascript/javascript.js" type="text/javascript"></script>
         <script src="../assets/global/plugins/codemirror/mode/htmlmixed/htmlmixed.js" type="text/javascript"></script>
         <script src="../assets/global/plugins/codemirror/mode/css/css.js" type="text/javascript"></script>
-        
-        <!-- END PAGE LEVEL PLUGINS -->
+         
+       <!-- END PAGE LEVEL PLUGINS -->
  		<!-- BEGIN THEME GLOBAL SCRIPTS -->
         <script src="../assets/global/scripts/app.min.js" type="text/javascript"></script>
-         <script src="../assets/global/scripts/common.js" type="text/javascript"></script>
-        <!-- END THEME GLOBAL SCRIPTS -->
+         <script src="../assets/global/scripts/common.js" type="text/javascript"></script> 
         <!-- BEGIN THEME LAYOUT SCRIPTS -->
         <script src="../assets/layouts/layout/scripts/layout.js" type="text/javascript"></script>
         <script src="../assets/layouts/layout/scripts/demo.js" type="text/javascript"></script>

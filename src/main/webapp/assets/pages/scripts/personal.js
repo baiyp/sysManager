@@ -4,10 +4,8 @@ var TableDatatablesManaged = function () {
 
         var table = $('#sample_3');
 
-        // begin: third table
         table.dataTable({
 
-            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
         	"language": {
                 "processing": "处理中...",
                 "lengthMenu": "显示 _MENU_ 项结果",
@@ -129,13 +127,13 @@ var TableDatatablesManaged = function () {
                              "searchable": false,
                              render: function (data,full,meta) { 
                                  return "<button data-target=\"#ajax\" data-toggle=\"modal\" href=\"personalAudit.html\" class=\"btn btn-sm green btn-outline audit-submit margin-bottom\" dataUrl="+meta.id+" ><i class=\"fa fa-hand-pointer-o\"></i> 审核</button> <button class=\"btn btn-sm red btn-outline forbidden-submit\" dataUrl="+meta.id+"|"+meta.username+"><i class=\"fa fa-times\"></i> 禁用</button>";
-                             }//<a href="ui_modals_ajax_sample.html" data-target="#ajax" class="btn btn-default btn-sm" data-toggle="modal">
+                             }
                          }
           
             ],
             "order": [
                 [1, "asc"]
-            ] // set first column as a default sort by asc
+            ]
         });
         
         table.on("click",".audit-submit",function(){ 
@@ -161,10 +159,11 @@ var TableDatatablesManaged = function () {
                    				success:function(data) {
                    					if(data.success == true){
                    						WebUtil.alertMessage("账号"+username+"禁用成功","success"); 
-                   						//table.ajax.reload();
+                   						
                    					}else{
                    						WebUtil.alertMessage("账号"+username+"禁用失败","danger");
-                   					} 
+                   					}
+                   					$('#sample_3').DataTable().ajax.reload(null,false);
                    				},  
                    				error : function() {
                    					WebUtil.alertMessage("账号"+username+"禁用失败","danger");
@@ -195,7 +194,6 @@ var TableDatatablesManaged = function () {
 
     return {
 
-        //main function to initiate the module
         init: function () {
             if (!jQuery().dataTable) {
                 return;

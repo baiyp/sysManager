@@ -32,7 +32,7 @@ public interface AnnouncementDao{
 	 * @param annoId
 	 * @return
 	 */
-	public void deleteAnnouncement(int annoId);
+	public void deleteAnnouncement(int id);
 	
 	/**
 	 * @param pageNo
@@ -45,7 +45,7 @@ public interface AnnouncementDao{
 	 * @param annoId
 	 * @return
 	 */
-	public Announcement getAnnouncement(int annoId);
+	public Announcement getAnnouncement(int id);
  
 	
 }

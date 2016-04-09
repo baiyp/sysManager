@@ -7,6 +7,8 @@ public class Announcement extends BaseEntity {
 	private String content;
 	
 	private String userName;
+	
+	private int userId;
 
 	public String getTitle() {
 		return title;
@@ -30,6 +32,14 @@ public class Announcement extends BaseEntity {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
-	} 
+	}
 
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	} 
+ 
 }

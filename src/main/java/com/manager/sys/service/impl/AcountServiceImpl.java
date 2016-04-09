@@ -44,9 +44,9 @@ public class AcountServiceImpl implements AccountService {
 	@Override
 	public int auditAccount(int accountId, int auditStatus) {
 		if(auditStatus == 1){
-			accountDao.auditAccount(accountId, auditStatus,0);
+			accountDao.auditAccount(accountId,auditStatus,0);
 		}else{
-			accountDao.auditAccount(accountId, auditStatus,1);
+			accountDao.auditAccount(accountId,auditStatus,1);
 			Account account = accountDao.getAccount(accountId);
 			MessageSender.sendMessage("加加物联网提示：您的VIP会员申请已通过，可以正常使用【加加物联网】",account.getUsername());
 		}

@@ -55,21 +55,27 @@ public class TaskController extends BaseController {
 		return page;
 	}
 	
-	/**
-	 * 添加任务合同信息
+	/** 
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value="/addTaskCoworkinfo")
+	@RequestMapping(value="/suspendTask")
 	@ResponseBody
-	public Coworkinfo addTaskCoworkinfo(HttpServletRequest request,HttpServletResponse response){
-		
-		System.out.println("1234234234234234");
-		
-		
-		
-		return null;
+	public JsonView suspendTask(HttpServletRequest request,HttpServletResponse response){
+		 
+		JsonView json = new JsonView();
+		String taskId = request.getParameter("taskId");
+		int result = taskService.updateTaskStatus(Integer.parseInt(taskId));
+		if(result == 1){
+			json.setMessage("终止任务信息成功");
+			json.setMessageCode("10001");
+		}else{
+			json.setMessage("终止任务信息失败");
+			json.setMessageCode("10001");
+			json.setSuccess(false);
+		}
+		return json;
 	}
 	
 	/**

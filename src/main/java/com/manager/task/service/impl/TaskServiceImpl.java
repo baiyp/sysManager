@@ -84,13 +84,17 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public int deletTaskManage(int taskId) {
+		taskDao.deleteTask(taskId);
+		return 1;
+	}
+	
+	
+	@Override
+	public int updateTaskStatus(int taskId){
 		taskDao.updateTaskStatus(taskId);
 		return 1;
 	}
 
-	@Override
-	public Coworkinfo getTaskCoworkinfo(int taskId) { 
-		return null;
-	}
+  
  
 }
