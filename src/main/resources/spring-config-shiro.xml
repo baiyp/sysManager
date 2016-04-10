@@ -59,7 +59,7 @@
 	<bean id="casFilter" class="org.apache.shiro.cas.CasFilter">  
 		<property name="failureUrl" value="error.html"/>
 	</bean>
-	
+	 
 		<!-- 自定义会话管理配置 -->
 	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager"> 
 		<property name="sessionDAO" ref="sessionDAO"/>
@@ -70,6 +70,11 @@
  		<property name="sessionValidationSchedulerEnabled" value="true"/>
 		<!--property name="sessionIdCookie" ref="sessionIdCookie"/-->
 		<property name="sessionIdCookieEnabled" value="true"/>
+		<property name="sessionListeners">
+			 <list>
+			 	<bean class="com.manager.common.listener.SystemSessionListener"/>
+			 </list>
+		</property>
 	</bean>
 	
 	<bean id="systemAuthorizingRealm" class="com.manager.common.security.SystemAuthorizingRealm"></bean>
