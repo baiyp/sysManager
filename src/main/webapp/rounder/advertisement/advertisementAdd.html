@@ -1,0 +1,83 @@
+ <!-- END PAGE BAR -->
+                    <!-- BEGIN PAGE TITLE-->
+                    <h3 class="page-title"> 轮播图片管理
+                        <small>添加轮播图片</small>
+                    </h3>
+                    <!-- END PAGE TITLE-->
+                    <!-- END PAGE HEADER-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- BEGIN EXTRAS PORTLET-->
+                            <div class="portlet light form-fit bordered">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class=" icon-layers font-green"></i>
+                                        <span class="caption-subject font-green bold uppercase">添加轮播图片</span>
+                                    </div>
+                                    <div class="actions">
+                                        <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                                            <i class="icon-cloud-upload"></i>
+                                        </a>
+                                        <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                                            <i class="icon-wrench"></i>
+                                        </a>
+                                        <a class="btn btn-circle btn-icon-only btn-default" href="javascript:;">
+                                            <i class="icon-trash"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body form">
+                                     <form action="#" id="form_sample_1" class="form-horizontal form-bordered" enctype="multipart/form-data">
+                                      	<div class="alert alert-danger display-hide">
+				                          <button class="close" data-close="alert"></button> 表单信息填写错误,请填写正确信息 </div>
+				                      <!--div class="alert alert-success display-hide">
+				                          <button class="close" data-close="alert"></button> 请填写表单信息 </div-->
+                                      <div class="form-group">
+				                          <label class="control-label col-md-2">标题：
+				                              <span class="required"> * </span>
+				                          </label>
+				                          <div class="col-md-10">
+				                              <input type="text" name="title" id="title" data-required="1" class="form-control" /> </div>
+				                      </div>
+				                      <div class="form-group">
+				                          <label class="control-label col-md-2">URL：
+				                              <span class="required"> * </span>
+				                          </label>
+				                          <div class="col-md-10">
+				                              <input type="text" name="url" id="url" data-required="1" class="form-control" /></div>
+				                      </div>
+				                      <div class="form-group last">
+				                          <label class="control-label col-md-2">图片：
+				                              <span class="required"> * </span>
+				                          </label>
+				                          <div class="col-md-10">
+				                         	 <input type="file" name="files[]" id="imageUpload">
+				                         	 <input type="hidden" id="imagePath" value="">
+				                              	 <!--div class="fileinput fileinput-new" data-provides="fileinput">
+                                                        <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> </div>
+                                                        <div>
+                                                            <span class="btn red btn-outline btn-file">
+                                                                <span class="fileinput-new"> 选择图片 </span>
+                                                                <span class="fileinput-exists"> 更换图片 </span>
+                                                                <input type="file" name="files[]" id="imagePath"> </span>
+                                                            <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> 移除图片 </a>
+                                                        </div>
+                                                    </div--> 
+				                              </div>
+				                      </div>
+				                      
+                                        <div class="form-actions">
+                                            <div class="row">
+                                                <div class="col-md-offset-2 col-md-10">
+                                                    <button type="submit" class="btn green">
+                                                        <i class="fa fa-check"></i> 提交</button>
+                                                    <button type="button" class="btn default">取消</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+ 

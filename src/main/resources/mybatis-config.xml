@@ -6,6 +6,7 @@
     	<package name="mappings/modules/sys/AccountDao.xml"/>
     	<package name="mappings/modules/sys/TaskDao.xml"/>
     	<package name="mappings/modules/sys/AnnouncementDao.xml"/>
+    	<package name="mappings/modules/sys/AdvertisementDao.xml"/>
     </mappers>
  
 </configuration>

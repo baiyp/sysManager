@@ -5,7 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.DefaultMultipartHttpServletRequest;
@@ -49,14 +52,15 @@ public class FileUploadController extends BaseController{
 	
 	
 	@RequestMapping(value="/multipartFileUpload",method=RequestMethod.POST)
-	public void processUpload(@RequestParam(value="files[]",required=false) MultipartFile   multipartRequest, HttpServletResponse response) throws IOException {
+	@ResponseBody
+	public String processUpload(@RequestParam(value="files[]",required=false) MultipartFile   multipartRequest, HttpServletResponse response) throws IOException {
 		//model.addAttribute("message", "File '" + file.getOriginalFilename() + "' uploaded successfully");
 		String path = "D:\\software\\apache-tomcat-8.0.28\\wtpwebapps\\sysManager\\upload\\";//file.getParameter("path");
-		List<FileModel> arrList = new ArrayList<FileModel>();
+		//List<FileModel> arrList = new ArrayList<FileModel>();
+		FileModel fileModel = new FileModel(); 
 		if(multipartRequest != null){
 				String newFileName = UUID.randomUUID().toString();//生产新文件名
-				if(multipartRequest != null && StringUtils.hasText(multipartRequest.getOriginalFilename())){ 
-					FileModel fileModel = new FileModel(); 
+				if(multipartRequest != null && StringUtils.hasText(multipartRequest.getOriginalFilename())){
  					fileModel.setNewFileName(newFileName+multipartRequest.getOriginalFilename().substring(multipartRequest.getOriginalFilename().lastIndexOf(".")));
 					fileModel.setFileSize(multipartRequest.getSize());
 					fileModel.setOldFileName(multipartRequest.getOriginalFilename());
@@ -67,10 +71,11 @@ public class FileUploadController extends BaseController{
 					} catch (UploadFileException e) {
 						e.printStackTrace();
 					}
-					arrList.add(fileModel);
+					//arrList.add(fileModel);
 				}
 			
 		}
+		return fileModel.getDownFileUrL();
 	 
 	}
 	
@@ -106,7 +111,9 @@ public class FileUploadController extends BaseController{
 	}
 	
 	private String  uploadFile(MultipartFile file,String path,String newFileName) throws  UploadFileException {
-		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String date = format.format(new Date());
+		path = path + File.separator+date;
 		File filePath = new File(path);
 		InputStream inputStream = null;
 		OutputStream os = null;
@@ -142,7 +149,7 @@ public class FileUploadController extends BaseController{
 				}
 			}
 		}
-		return (path + File.separator + newFileName);
+		return (date +"/" + newFileName);
 	}
 	
 	@RequestMapping(value="/deleteFile",method=RequestMethod.GET)

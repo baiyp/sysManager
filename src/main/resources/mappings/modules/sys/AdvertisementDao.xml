@@ -3,24 +3,24 @@
 <mapper namespace="com.manager.advertisement.dao.AdvertisementDao">
 	<!-- 获取广告信息-->	
 	<select id="getAdvertisement" parameterType="java.lang.Integer" resultType="com.manager.sys.model.Advertisement">  
-  		SELECT a.*,u.user_name as userName FROM announcement a left join sys_user u on a.user_id = u.id where a.del_Flag=0 and a.id=#{id}
+  		SELECT a.* FROM advertisement a  where a.del_Flag=0 and a.id=#{id}
     </select>
  	<!-- 获取广告信息-->
     <select id="queryAdvertisement" resultType="com.manager.sys.model.Advertisement">  
-  		SELECT a.*,u.user_name as userName FROM announcement a left join sys_user u on a.user_id = u.id where a.del_Flag=0
+  		SELECT a.* FROM advertisement a where a.del_Flag=0
     </select>
 
     <!-- 添加广告信息 -->
     <insert id="addAdvertisement" parameterType="com.manager.sys.model.Advertisement" useGeneratedKeys="true" keyProperty="id">
-    	insert into announcement(title,content,user_id,create_Date) values (#{title},#{content},#{userId},#{create_Date})
+    	insert into advertisement(title,imagePath,url,create_date,create_user) values (#{title},#{imagePath},#{url},#{create_date},#{create_user})
     </insert>
      <!-- 更新广告信息 -->
     <update id="updateAdvertisement" parameterType="com.manager.sys.model.Advertisement"> 
-    	update announcement set title=#{title},content=#{content},update_Date=#{update_Date} where id = #{id} 
+    	update advertisement set title=#{title},content=#{content},update_Date=#{update_Date} where id = #{id} 
     </update>
      <!--删除广告信息 -->
     <update id="deleteAdvertisement" parameterType="java.util.List"> 
-    	update announcement set del_flag=1 where id in
+    	update advertisement set del_flag=1 where id in
 		<foreach collection="list" item="item" index="index" open="(" separator="," close=")" >  
         	#{item}  
     	</foreach> 
