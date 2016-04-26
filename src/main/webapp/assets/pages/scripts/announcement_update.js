@@ -1,6 +1,5 @@
-var ComponentsEditors = function () {
+var announcementUdate = function () {
 	
-	// basic validation
     var handleValidation1 = function() { 
 
             var form1 = $('#form_sample_1');
@@ -42,42 +41,46 @@ var ComponentsEditors = function () {
                 },
 
                 success: function (label) {
-                    label
-                        .closest('.form-group').removeClass('has-error'); // set success class to the control group
+                    label.closest('.form-group').removeClass('has-error'); // set success class to the control group
                 },
 
                 submitHandler: function (form) {
                     success1.show();
                     error1.hide();
-                    $.post(WebUtil.getMainRoot()+'/addAnnouncement',{title:$("#title").val(),content:$("#editor1").val()},function(data){
+                    $.post(WebUtil.getMainRoot()+'/updateAnnouncement',{noticeId:$("#noticeId").val(),title:$("#title").val(),content:$("#editor1").val()},function(data){
                     	if(data.success == true){
                     		WebUtil.alertMessage(data.message,"success");
                     		
    	    			 	}else{
    	    			 		WebUtil.alertMessage(data.message,"danger");
    	    			 	}
-                    	
                	 	},"json");
                 }
             });
-    }
+    };
   
     var ckeditorJquery = function () { 
     	$('textarea#editor1').ckeditor();
-    }
-  
-    return { 
+    };
+    var updateNotice = function(){
+    	var id =  WebUtil.getUpdateParam().join();
+    	$.post(WebUtil.getMainRoot()+'/getAnnouncement',{noticeId:id},function(data){
+    		$("#noticeId").val(id);
+    		$("#title").val(data.title);
+    		$("#editor1").text(data.content); 
+    	});
+    };
+    
+    return {
         init: function () {
         	ckeditorJquery();
         	handleValidation1();
-        },
-        update:function(){
-        	
+        	updateNotice();
         }
     };
 
 }();
 
 jQuery(document).ready(function() {
-   ComponentsEditors.init();
+	announcementUdate.init();
 });

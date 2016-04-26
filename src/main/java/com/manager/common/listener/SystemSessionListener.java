@@ -30,6 +30,4 @@ public class SystemSessionListener implements SessionListener {
 		System.out.println("onExpiration----------------------------------------------"); 
 	}
 
-
-
 }

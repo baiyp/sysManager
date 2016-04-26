@@ -19,15 +19,15 @@ var FormValidation = function () {
 
 jQuery(document).ready(function() {
 	$.ajax({  
-		url:'/sysManager/getAnnouncement',// 跳转到 action  
-		data:{"noticeId":$('.modal').attr("dataAjax")},  
+		url:'/sysManager/getNews',// 跳转到 action  
+		data:{"newId":$('.modal').attr("dataAjax")},  
 		type:'post',  
 		cache:false,  
 		dataType:'json',  
 		success:function(data) {
-			$(".noticeTitle").html($(".noticeTitle").html()+data.title);
-			$(".noticeContent").html($(".noticeContent").html()+data.content); 
-		},  
+			$(".newsTitle").html($(".newsTitle").html()+data.title);
+			$(".newsContent").html($(".newsContent").html()+data.content); 
+		},
 		error:function() {
 			
 		}  

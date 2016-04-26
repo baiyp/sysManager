@@ -233,6 +233,7 @@ var Layout = function () {
 	            	}else{
 	            		$.getScript(ajaxScript,function(){
 	                		App.stopPageLoading();
+	                		WebUtil.setUpdateParam(new Array());
 	                	});
 	            	}
             	});
@@ -265,20 +266,25 @@ var Layout = function () {
         $('.page-content').on('click', '.ajaxify', function (e) {
             e.preventDefault();
             App.scrollTop();
-
             var url = $(this).attr("href");
             var ajaxScript = $(this).attr("ajaxScript");
             var pageContent = $('.page-content');
             var pageContentBody = $('.page-content .page-content-body');
-
+            if(url.toUpperCase().indexOf("UPDATE") != -1){//更新页面进行判断
+	            if(WebUtil.getUpdateParam() != undefined){
+	            	if(WebUtil.getUpdateParam().length != 1){
+	            		alert("请选择一条记录进行编辑");
+	            		return;
+	            	}
+	            }
+            }
             App.startPageLoading();
-            
             pageContentBody.load(url,function(){
             	$.getScript("../assets/global/scripts/app.min.js",function(){
 	            	if(ajaxScript == undefined || ajaxScript == ""){
 	            		App.stopPageLoading();
 	            	}else{
-	            		$.getScript(ajaxScript,function(){
+	            		$.getScript(ajaxScript,function(script,textStatus,jqXHR){
 	                		App.stopPageLoading();
 	                	});
 	            	}

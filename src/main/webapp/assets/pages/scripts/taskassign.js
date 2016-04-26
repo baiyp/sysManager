@@ -168,8 +168,7 @@ var TableDatatablesManaged = function () {
                         		  if(data == 0){
                         			  return "";
                         		  }
-                        		  var d = new Date(data*1000);
-                        		  return d.getFullYear()+"-"+(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" +d.getMinutes() +":" + d.getSeconds();
+                        		  return WebUtil.getDateFormat(data);
                         	  }
                           },
                           {
@@ -180,8 +179,7 @@ var TableDatatablesManaged = function () {
                         		  if(data == 0){
                         			  return "";
                         		  }
-                        		  var d = new Date(data*1000);
-                        		  return d.getFullYear()+"-"+(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" +d.getMinutes() +":" + d.getSeconds();
+                        		  return WebUtil.getDateFormat(data);
                         	  }
                           },
                           {   "targets":[8],

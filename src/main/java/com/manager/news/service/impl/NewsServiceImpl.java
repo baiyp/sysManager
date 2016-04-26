@@ -1,6 +1,7 @@
 package com.manager.news.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,12 @@ public class NewsServiceImpl implements NewsService {
 
 	@Override
 	public int updateNews(News anno) {
-		return 0;
+		try{
+			newsDao.updateNews(anno);
+		}catch(Exception e){
+			return 0;
+		}
+		return 1;
 	}
 
 	@Override
@@ -45,9 +51,14 @@ public class NewsServiceImpl implements NewsService {
 	}
 
 	@Override
-	public int deleteNews(int annoId) {
+	public int deleteNews(String annoId) {
+		String id [] = annoId.split(",");
+		List<String> arrList = new ArrayList<String>();
+		for(String str : id){
+			arrList.add(str);
+		}
 		try{
-			newsDao.deleteNews(annoId);
+			newsDao.deleteNews(arrList);
 		}catch(Exception e){
 			return 0;
 		}

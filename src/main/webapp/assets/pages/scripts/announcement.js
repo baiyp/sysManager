@@ -1,12 +1,18 @@
 var TableDatatablesManaged = function () {
   
+	var checked = new Array();
+	
+	var loadDataTables = function(){
+		$('#sample_3').DataTable().ajax.reload(null,false);	
+	}
+	
 	var initTable3 = function () {
 
         var table = $('#sample_3');
 
-        // begin: third table
+        
         table.dataTable({
-            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+             
         	"language": {
                 "processing": "处理中...",
                 "lengthMenu": "显示 _MENU_ 项结果",
@@ -56,7 +62,7 @@ var TableDatatablesManaged = function () {
                           "orderable":false,
                           "searchable":false,
                           "render":function(data,full,meta){
-                           	  			return "<input type=\"checkbox\" class=\"checkboxes\" value="+data+" /> </td>";
+                           	  			return "<input type=\"checkbox\" name=\"checkboxes\" class=\"checkboxes\" value="+data+" /> </td>";
                           			}
                            	 
                           },
@@ -68,8 +74,7 @@ var TableDatatablesManaged = function () {
                         		  if(data == 0){
                         			  return "";
                         		  }
-                        		  var d = new Date(data*1000);
-                        		  return d.getFullYear()+"-"+(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" +d.getMinutes() +":" + d.getSeconds();
+                        		  return WebUtil.getDateFormat(data);
                         	  }
                           },
                           {
@@ -92,8 +97,6 @@ var TableDatatablesManaged = function () {
        table.on("click",".audit-submit",function(){
     	   $('.modal').attr("dataAjax",$(this).attr("dataUrl"));
        });
-        
-        
  
         table.on("click",".forbidden-submit",function(){
         	var dataUrl = $(this).attr("dataUrl"); 
@@ -101,7 +104,8 @@ var TableDatatablesManaged = function () {
             	bootbox.setLocale("zh_CN");
             	bootbox.confirm("你确定要删除该公告信息吗?", function(result) {
                    	if(result == true){
-                   		$.ajax( {  
+                   		WebUtil.ajaxRequest(WebUtil.getMainRoot()+'/deleteAnnouncement',{"noticeId" :dataUrl},loadDataTables);
+                   		/*$.ajax( {  
                    				url:WebUtil.getMainRoot()+'/deleteAnnouncement',// 跳转到 action  
                    				data:{"noticeId" :dataUrl},  
                    				type:'post',  
@@ -118,7 +122,7 @@ var TableDatatablesManaged = function () {
                    				error : function() {
                    					WebUtil.alertMessage("删除该公告信息失败","danger");
                    				}  
-                   		 }); 
+                   		 }); */
                    	}
                 });
         		
@@ -140,25 +144,51 @@ var TableDatatablesManaged = function () {
             });
             jQuery.uniform.update(set);
         });
-    }
+    };
+	
+	var batchDelete = function(){
+		var batch = new Array();
+		$("#batch-delete").on("click",function(){
+			 $("input[name='checkboxes']:checked").each(function(){
+				 batch.push($(this).val());
+			 });
+			 if(batch.length > 0){
+				 bootbox.setLocale("zh_CN");
+	            	bootbox.confirm("你确定要删除所选的公告吗?", function(result) {
+	                   	if(result == true){
+	                   		WebUtil.ajaxRequest(WebUtil.getMainRoot()+'/deleteAnnouncement',{"noticeId" :batch.join()},loadDataTables);
+	                   	}
+	                });
+				 
+			 }else{
+				 alert("请选择一条记录进行删除");
+			 }
+		});
+	}	
+	var updateNotes = function(){
+		$("#update").on("click",function(){
+			var updateId = new Array();
+			$("input[name='checkboxes']:checked").each(function(){
+				updateId.push($(this).val());
+			});
+			WebUtil.setUpdateParam(updateId);
+		});
+	}
 
     return {
-
-        //main function to initiate the module
         init: function () {
             if (!jQuery().dataTable) {
                 return;
             }
- 
             initTable3();
+            batchDelete();
+            updateNotes();
         }
-
     };
 
 }();
-
-if (App.isAngularJsApp() === false) { 
-    jQuery(document).ready(function() {
-        TableDatatablesManaged.init();
-    });
-}
+ 
+jQuery(document).ready(function() {
+    TableDatatablesManaged.init();
+});
+ 

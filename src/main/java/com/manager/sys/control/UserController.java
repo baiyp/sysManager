@@ -79,7 +79,9 @@ public class UserController extends BaseController{
 	@RequestMapping(value="/logout")
 	public void logout() {
 	    Subject subject = SecurityUtils.getSubject();
-	    SecurityUtils.getSecurityManager().logout(subject);
+	    if(subject.isAuthenticated()){
+	    	SecurityUtils.getSecurityManager().logout(subject);
+	    }
 	}
  
 }

@@ -1,5 +1,9 @@
 var TableDatatablesManaged = function () {
-  
+	
+	
+	var loadDataTables = function(){
+		$('#sample_3').DataTable().ajax.reload(null,false);	
+	}
 	var initTable3 = function () {
 
         var table = $('#sample_3');
@@ -56,7 +60,7 @@ var TableDatatablesManaged = function () {
                           "orderable":false,
                           "searchable":false,
                           "render":function(data,full,meta){
-                           	  			return "<input type=\"checkbox\" class=\"checkboxes\" value="+data+" /> </td>";
+                           	  			return "<input type=\"checkbox\" class=\"checkboxes\" name=\"checkboxes\" value="+data+" /> </td>";
                           			}
                            	 
                           },
@@ -68,8 +72,7 @@ var TableDatatablesManaged = function () {
                         		  if(data == 0){
                         			  return "";
                         		  }
-                        		  var d = new Date(data*1000);
-                        		  return d.getFullYear()+"-"+(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" +d.getMinutes() +":" + d.getSeconds();
+                        		  return WebUtil.getDateFormat(data);
                         	  }
                           },
                           {
@@ -101,24 +104,7 @@ var TableDatatablesManaged = function () {
             	bootbox.setLocale("zh_CN");
             	bootbox.confirm("你确定要删除该新闻信息吗?", function(result) {
                    	if(result == true){
-                   		$.ajax( {  
-                   				url:WebUtil.getMainRoot()+'/deleteNews',// 跳转到 action  
-                   				data:{"newsId" :dataUrl},  
-                   				type:'post',  
-                   				cache:false,  
-                   				dataType:'json',  
-                   				success:function(data) {
-                   					if(data.success == true){
-                   						WebUtil.alertMessage(data.message,"success");
-                   					}else{
-                   						WebUtil.alertMessage(data.message,"danger");
-                   					}
-                   					$('#sample_3').DataTable().ajax.reload(null,false);
-                   				},  
-                   				error : function() {
-                   					WebUtil.alertMessage("删除该新闻信息失败","danger");
-                   				}  
-                   		 }); 
+                   		WebUtil.ajaxRequest(WebUtil.getMainRoot()+'/deleteNews',{"newsId" :dataUrl},loadDataTables);
                    	}
                 });
         		
@@ -140,7 +126,37 @@ var TableDatatablesManaged = function () {
             });
             jQuery.uniform.update(set);
         });
-    }
+    };
+    
+	var batchDelete = function(){
+		var batch = new Array();
+		$("#batch-delete").on("click",function(){
+			 $("input[name='checkboxes']:checked").each(function(){
+				 batch.push($(this).val());
+			 });
+			 if(batch.length > 0){
+				 bootbox.setLocale("zh_CN");
+	            	bootbox.confirm("你确定要删除所选的新闻吗?", function(result) {
+	                   	if(result == true){
+	                   		WebUtil.ajaxRequest(WebUtil.getMainRoot()+'/deleteNews',{"newsId":batch.join()},loadDataTables);
+	                   	}
+	                });
+				 
+			 }else{
+				 alert("请选择一条记录进行删除");
+			 }
+		});
+	}
+    
+    var updateNotes = function(){
+		$("#update").on("click",function(){
+			var updateId = new Array();
+			$("input[name='checkboxes']:checked").each(function(){
+				updateId.push($(this).val());
+			});
+			WebUtil.setUpdateParam(updateId);
+		});
+	}
 
     return {
 
@@ -150,6 +166,8 @@ var TableDatatablesManaged = function () {
             }
  
             initTable3();
+            updateNotes();
+            batchDelete();
         }
 
     };

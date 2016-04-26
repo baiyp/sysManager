@@ -68,8 +68,8 @@ public class NewsController extends BaseController {
 	@RequestMapping(value="/getNews")
 	@ResponseBody
 	public News getNews(HttpServletRequest request,HttpServletResponse response){ 
-		int noticeId = Integer.parseInt(request.getParameter("noticeId")); 
-		return  newsService.getNews(noticeId);
+		int newId = Integer.parseInt(request.getParameter("newId")); 
+		return  newsService.getNews(newId);
 	}
 	
 	
@@ -77,8 +77,23 @@ public class NewsController extends BaseController {
 	@ResponseBody
 	public JsonView updateNews(HttpServletRequest request,HttpServletResponse response){
 		JsonView json = new JsonView();
-		
-		
+		News news = new News();
+		int newId = Integer.parseInt(request.getParameter("newId"));
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		news.setId(newId);
+		news.setTitle(title);
+		news.setContent(content);
+		news.setUpdate_Date(String.valueOf(new Date().getTime()/1000));
+		int result = newsService.updateNews(news);
+		if(result == 0){
+			json.setMessage("更新新闻信息失败");
+			json.setMessageCode("10001");
+			json.setSuccess(false);
+		}else{
+			json.setMessage("更新新闻信息成功");
+			json.setMessageCode("10001");
+		}
 		return json;
 	}
 	
@@ -87,8 +102,8 @@ public class NewsController extends BaseController {
 	@ResponseBody
 	public JsonView deleteNews(HttpServletRequest request,HttpServletResponse response){
 		JsonView json = new JsonView();
-		int noticeId = Integer.parseInt(request.getParameter("newsId")); 
-		int result = newsService.deleteNews(noticeId); 
+		String news = request.getParameter("newsId"); 
+		int result = newsService.deleteNews(news); 
 		if(result == 0){
 			json.setMessage("删除新闻信息失败");
 			json.setMessageCode("10001");

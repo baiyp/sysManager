@@ -4,7 +4,7 @@
 package com.manager.news.dao;
 
 import java.util.ArrayList;
- 
+import java.util.List;
 
 import com.manager.common.view.PageView; 
 import com.manager.sys.model.News;
@@ -31,7 +31,7 @@ public interface NewsDao{
 	 * @param annoId
 	 * @return
 	 */
-	public void deleteNews(int id);
+	public void deleteNews(List id);
 	
 	/**
 	 * @param pageNo

@@ -53,7 +53,7 @@ public interface NewsService {
 	 * @param annoId
 	 * @return
 	 */
-	public int deleteNews(int annoId);
+	public int deleteNews(String annoId);
 	 
 	
 	

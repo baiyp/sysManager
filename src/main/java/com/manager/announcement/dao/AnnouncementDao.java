@@ -4,6 +4,7 @@
 package com.manager.announcement.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -32,7 +33,7 @@ public interface AnnouncementDao{
 	 * @param annoId
 	 * @return
 	 */
-	public void deleteAnnouncement(int id);
+	public void deleteAnnouncement(List id);
 	
 	/**
 	 * @param pageNo

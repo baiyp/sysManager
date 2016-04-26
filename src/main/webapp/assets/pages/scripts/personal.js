@@ -1,4 +1,8 @@
 var TableDatatablesManaged = function () {
+	
+	var loadDataTables = function(){
+		$('#sample_3').DataTable().ajax.reload(null,false);	
+	}
  
 	var initTable3 = function () {
 
@@ -89,8 +93,7 @@ var TableDatatablesManaged = function () {
                         		  if(data == 0){
                         			  return "";
                         		  }
-                        		  var d = new Date(data*1000);
-                        		  return d.getFullYear()+"-"+(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" +d.getMinutes() +":" + d.getSeconds();
+                        		  return WebUtil.getDateFormat(data);
                         	  }
                           },
                           {   "targets":[9],
@@ -150,7 +153,8 @@ var TableDatatablesManaged = function () {
             	bootbox.setLocale("zh_CN");
             	bootbox.confirm("你你确定要禁用"+username+"账号吗?", function(result) {
                    	if(result == true){
-                   		$.ajax( {  
+                   		WebUtil.ajaxRequest(WebUtil.getMainRoot()+'/forbiddenAccount',{"accountId":id},loadDataTables);
+                   		/*$.ajax( {  
                    				url:WebUtil.getMainRoot()+'/forbiddenAccount',// 跳转到 action  
                    				data:{"accountId" :id},  
                    				type:'post',  
@@ -168,7 +172,7 @@ var TableDatatablesManaged = function () {
                    				error : function() {
                    					WebUtil.alertMessage("账号"+username+"禁用失败","danger");
                    				}  
-                   		 }); 
+                   		 });*/
                    	}
                 });
         		

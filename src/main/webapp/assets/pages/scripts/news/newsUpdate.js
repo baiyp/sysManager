@@ -49,13 +49,14 @@ var ComponentsEditors = function () {
                 submitHandler: function (form) {
                     success1.show();
                     error1.hide();
-                    $.post(WebUtil.getMainRoot()+'/addAnnouncement',{title:$("#title").val(),content:$("#editor1").val()},function(data){
+                    $.post(WebUtil.getMainRoot()+'/updateNews',{newId:$("#newId").val(),title:$("#title").val(),content:$("#editor1").val()},function(data){
                     	if(data.success == true){
                     		WebUtil.alertMessage(data.message,"success");
                     		
    	    			 	}else{
    	    			 		WebUtil.alertMessage(data.message,"danger");
    	    			 	}
+                    	//$('#taskassign').DataTable().ajax.reload(null,false);//刷新
                     	
                	 	},"json");
                 }
@@ -65,19 +66,26 @@ var ComponentsEditors = function () {
     var ckeditorJquery = function () { 
     	$('textarea#editor1').ckeditor();
     }
+    
+    var updateNotice = function(){
+    	var id =  WebUtil.getUpdateParam().join();
+    	$.post(WebUtil.getMainRoot()+'/getNews',{newId:id},function(data){
+    		$("#newId").val(id);
+    		$("#title").val(data.title);
+    		$("#editor1").text(data.content); 
+    	});
+    };
   
     return { 
         init: function () {
         	ckeditorJquery();
         	handleValidation1();
-        },
-        update:function(){
-        	
+        	updateNotice();
         }
     };
 
 }();
 
 jQuery(document).ready(function() {
-   ComponentsEditors.init();
+   ComponentsEditors.init(); 
 });

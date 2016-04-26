@@ -17,7 +17,10 @@
     	update news set title=#{title},content=#{content},update_Date=#{update_Date} where id = #{id} 
     </update>
      <!-- 添加公告信息 -->
-    <update id="deleteNews" parameterType="java.lang.Integer"> 
-    	update news set del_flag=1 where id=#{id}
+    <update id="deleteNews" parameterType="java.util.List"> 
+    	update news set del_flag=1 where id in 
+    	<foreach collection="list" item="item" index="index" open="(" separator="," close=")" >  
+        	#{item}
+    	</foreach> 
     </update>
 </mapper>

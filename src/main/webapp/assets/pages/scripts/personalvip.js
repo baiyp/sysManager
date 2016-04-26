@@ -91,8 +91,7 @@ var TableDatatablesManaged = function () {
                         		  if(data == 0){
                         			  return "";
                         		  }
-                        		  var d = new Date(data*1000);
-                        		  return d.getFullYear()+"-"+(d.getMonth()+1) + "-" + d.getDate() + " " + d.getHours() +":" +d.getMinutes() +":" + d.getSeconds();
+                        		  return WebUtil.getDateFormat(data);
                         	  }
                           }, 
                           {   "targets":[9],
@@ -134,7 +133,7 @@ var TableDatatablesManaged = function () {
             ],
             "order": [
                 [1, "asc"]
-            ] // set first column as a default sort by asc
+            ]
         });
         
         table.on("click",".audit-submit",function(){ 
@@ -149,9 +148,9 @@ var TableDatatablesManaged = function () {
             	var id = arr[0];
             	var username = arr[1];
             	bootbox.setLocale("zh_CN");
-            	bootbox.confirm("你你确定要禁用"+username+"账号吗?", function(result) {
+            	bootbox.confirm("你确定要禁用"+username+"账号吗?", function(result) {
                    	if(result == true){
-                   		$.ajax( {  
+                   		$.ajax({
                    				url:'/sysManager/forbiddenAccount',// 跳转到 action  
                    				data:{"accountId" :id},  
                    				type:'post',  
@@ -159,8 +158,7 @@ var TableDatatablesManaged = function () {
                    				dataType:'json',  
                    				success:function(data) {
                    					if(data.success == true){
-                   						WebUtil.alertMessage("账号"+username+"禁用成功","success"); 
-                   						//table.ajax.reload();
+                   						WebUtil.alertMessage("账号"+username+"禁用成功","success");
                    					}else{
                    						WebUtil.alertMessage("账号"+username+"禁用失败","danger");
                    					} 

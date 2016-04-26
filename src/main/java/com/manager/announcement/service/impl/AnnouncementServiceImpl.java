@@ -1,6 +1,7 @@
 package com.manager.announcement.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,12 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
 	@Override
 	public int updateAnnouncement(Announcement anno) {
-		return 0;
+		try{
+			announcementDao.updateAnnouncement(anno);
+		}catch(Exception e){
+			return 0;
+		}
+		return 1;
 	}
 
 	@Override
@@ -42,9 +48,14 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 	}
 
 	@Override
-	public int deleteAnnouncement(int annoId) {
+	public int deleteAnnouncement(String annoId) {
 		try{
-			announcementDao.deleteAnnouncement(annoId);
+			List<String> arrList = new ArrayList<String>();
+			String [] id = annoId.split(",");
+			for(String str : id){
+				arrList.add(str);
+			}
+			announcementDao.deleteAnnouncement(arrList);
 		}catch(Exception e){
 			return 0;
 		}

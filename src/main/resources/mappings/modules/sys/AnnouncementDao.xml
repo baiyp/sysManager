@@ -18,8 +18,11 @@
     <update id="updateAnnouncement" parameterType="com.manager.sys.model.Announcement"> 
     	update announcement set title=#{title},content=#{content},update_Date=#{update_Date} where id = #{id} 
     </update>
-     <!-- 添加公告信息 -->
-    <update id="deleteAnnouncement" parameterType="java.lang.Integer"> 
-    	update announcement set del_flag=1 where id=#{id}
+     <!-- 删除公告信息 -->
+    <update id="deleteAnnouncement" parameterType="java.util.List"> 
+    	update announcement set del_flag=1 where id in
+		<foreach collection="list" item="item" index="index" open="(" separator="," close=")" >  
+        	#{item}  
+    	</foreach> 
     </update>
 </mapper>

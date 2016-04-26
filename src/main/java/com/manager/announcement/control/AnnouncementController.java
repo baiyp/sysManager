@@ -75,8 +75,23 @@ public class AnnouncementController extends BaseController {
 	@ResponseBody
 	public JsonView updateAnnouncement(HttpServletRequest request,HttpServletResponse response){
 		JsonView json = new JsonView();
-		
-		
+		Announcement anno = new Announcement();
+		int noticeId = Integer.parseInt(request.getParameter("noticeId")); 
+		String title = request.getParameter("title"); 
+		String content = request.getParameter("content");
+		anno.setId(noticeId);
+		anno.setContent(content);
+		anno.setUpdate_Date(String.valueOf(new Date().getTime()/1000));
+		anno.setTitle(title);
+		int result = announcementService.updateAnnouncement(anno);
+		if(result == 0){
+			json.setMessage("修改公告信息失败");
+			json.setSuccess(false);
+			json.setMessageCode("100001");
+		}else{
+			json.setMessage("修改公告信息成功");
+			json.setMessageCode("100001");
+		}
 		return json;
 	}
 	
@@ -85,7 +100,7 @@ public class AnnouncementController extends BaseController {
 	@ResponseBody
 	public JsonView deleteAnnouncement(HttpServletRequest request,HttpServletResponse response){
 		JsonView json = new JsonView();
-		int noticeId = Integer.parseInt(request.getParameter("noticeId")); 
+		String  noticeId = request.getParameter("noticeId"); 
 		int result = announcementService.deleteAnnouncement(noticeId); 
 		if(result == 0){
 			json.setMessage("删除公告信息失败");

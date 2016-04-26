@@ -52,7 +52,7 @@ public interface AnnouncementService {
 	 * @param annoId
 	 * @return
 	 */
-	public int deleteAnnouncement(int annoId);
+	public int deleteAnnouncement(String anno);
 	 
 	
 	
