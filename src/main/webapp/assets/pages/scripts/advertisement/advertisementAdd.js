@@ -89,6 +89,21 @@ var ComponentsEditors = function () {
 
 jQuery(document).ready(function() {
 	
+    $('#fileupload').fileupload({
+        url: WebUtil.getMainRoot()+'/multipartFileUpload',
+        dataType: 'json',
+        done: function (e, data) {
+            
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css(
+                'width',
+                progress + '%'
+            );
+        }
+    }).prop('disabled', !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : 'disabled');
 
 	
     /*$("#imagePath").fileinput({
