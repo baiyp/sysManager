@@ -28,15 +28,15 @@
     </select>
     <!-- 查詢普通企業用戶信息 -->
     <select id="queryEnterprise"  resultType="com.manager.sys.model.Enterprise">  
-		SELECT a.*,e.enterprise_name,e.bank_account,e.deposit_bank,e.output_value,e.business_volume,e.registered_capital,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id where a.user_type=1  and a.user_level=0 
+		SELECT a.*,e.enterprise_name,e.bank_account,e.deposit_bank,e.output_value,e.business_volume,e.registered_capital,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website,s.name as enterprise_size,n.name as enterprise_nature, b.name as business_type FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id LEFT JOIN enterprisescale s on s.id= e.enterprise_size left join enterprisenature n on n.id=e.Enterprise_nature left join businesstype b on b.id=e.business_type  where a.user_type=1  and a.user_level=0 
     </select>
     <!-- 查詢普通企業用戶信息 -->
     <select id="queryEnterpriseVip"  resultType="com.manager.sys.model.Enterprise">  
-		SELECT a.*,e.enterprise_name,e.bank_account,e.deposit_bank,e.output_value,e.business_volume,e.registered_capital,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id where a.user_type=1 and a.user_level>0   
+		SELECT a.*,e.enterprise_name,e.bank_account,e.deposit_bank,e.output_value,e.business_volume,e.registered_capital,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website,s.name as enterprise_size,n.name as enterprise_nature, b.name as business_type FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id LEFT JOIN enterprisescale s on s.id= e.enterprise_size left join enterprisenature n on n.id=e.Enterprise_nature left join businesstype b on b.id=e.business_type   where a.user_type=1 and a.user_level>0   
     </select>
     <!-- 根據企業編號獲取企業信息 -->
     <select id="getEnterprise" parameterType="java.lang.Integer" resultType="com.manager.sys.model.Enterprise">  
-		SELECT a.*,e.province,e.city,e.enterprise_name,e.bank_account,e.deposit_bank,e.output_value,e.business_volume,e.registered_capital,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website  FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id where a.id=#{id}
+		SELECT a.*,e.enterprise_name,e.bank_account,e.deposit_bank,e.output_value,e.business_volume,e.registered_capital,e.en_bus_license_no,e.business_entity,e.contacts,e.contacts_email,e.integration,e.Enterprise_website,s.name as enterprise_size,n.name as enterprise_nature, b.name as business_type FROM ACCOUNT a LEFT JOIN enterprise e on a.id = e.account_id LEFT JOIN enterprisescale s on s.id= e.enterprise_size left join enterprisenature n on n.id=e.Enterprise_nature left join businesstype b on b.id=e.business_type   where a.id=#{id}
     </select>
     <!-- 審核企業、個人用戶 -->
     <update  id="auditAccount">  

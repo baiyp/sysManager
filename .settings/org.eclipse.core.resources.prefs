@@ -4,6 +4,7 @@ encoding//src/main/resources=UTF-8
 encoding//src/main/resources/dbcpconfig.properties=UTF-8
 encoding//src/main/webapp/rounder/advertisement/advertisement.html=UTF-8
 encoding//src/main/webapp/rounder/advertisement/advertisementAdd.html=UTF-8
+encoding//src/main/webapp/rounder/advertisement/advertisementDetails.html=UTF-8
 encoding//src/main/webapp/rounder/announcement.html=UTF-8
 encoding//src/main/webapp/rounder/announcement_update.html=UTF-8
 encoding//src/main/webapp/rounder/components_editors.html=UTF-8

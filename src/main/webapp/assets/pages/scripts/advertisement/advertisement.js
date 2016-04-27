@@ -66,7 +66,7 @@ var TableDatatablesManaged = function () {
                            	 
                           },
                           {
-                        	  "targets":[3],
+                        	  "targets":[4],
                         	  "orderable":false,
                         	  "searchable":false,
                         	  "render":function(data,full,meta){
@@ -82,8 +82,8 @@ var TableDatatablesManaged = function () {
                              'orderable': false,
                              "searchable": false,
                              render: function (data,full,meta) {
-                            	 //<button class=\"btn btn-sm green btn-outline audit-submit margin-bottom ajaxify\" href=\"form_fileupload.html\" ajaxScript=\"../assets/pages/scripts/form-fileupload.js\"><i class=\"fa fa-hand-pointer-o\"></i> 查看</button> <button class=\"btn btn-sm red btn-outline forbidden-submit\"><i class=\"fa fa-times\"></i>删除</button>
-                                 return "<button  data-target=\"#ajax\" dataUrl="+meta.id+" data-toggle=\"modal\" class=\"btn btn-sm green btn-outline  audit-submit margin-bottom\" href=\"news/newsDetails.html\"><i class=\"fa fa-hand-pointer-o\"></i> 查看</button> <button dataUrl="+meta.id+" class=\"btn btn-sm red btn-outline forbidden-submit\"><i class=\"fa fa-times\"></i>删除</button>";
+                            	 
+                                 return "<button  data-target=\"#ajax\" dataUrl="+meta.id+" data-toggle=\"modal\" class=\"btn btn-sm green btn-outline  audit-submit margin-bottom\" href=\"advertisement/advertisementDetails.html\"><i class=\"fa fa-hand-pointer-o\"></i> 查看</button> <button dataUrl="+meta.id+" class=\"btn btn-sm red btn-outline forbidden-submit\"><i class=\"fa fa-times\"></i>删除</button>";
                              }
                          }
           
@@ -96,8 +96,6 @@ var TableDatatablesManaged = function () {
        table.on("click",".audit-submit",function(){
     	   $('.modal').attr("dataAjax",$(this).attr("dataUrl"));
        });
-        
-        
  
         table.on("click",".forbidden-submit",function(){
         	var dataUrl = $(this).attr("dataUrl"); 
@@ -105,7 +103,7 @@ var TableDatatablesManaged = function () {
             	bootbox.setLocale("zh_CN");
             	bootbox.confirm("你确定要删除该轮播图片吗?", function(result) {
                    	if(result == true){
-                   		WebUtil.ajaxRequest(WebUtil.getMainRoot()+'/deleteAdvertisement',{"advertId" :dataUrl},loadDataTables);
+                   		WebUtil.ajaxRequest(WebUtil.getMainRoot()+'/deleteAdvertisement',{"advertId":dataUrl},loadDataTables);
                    	}
                 });
         		

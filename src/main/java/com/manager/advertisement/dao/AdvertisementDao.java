@@ -27,7 +27,7 @@ public interface AdvertisementDao {
 	 * @param a
 	 * @return
 	 */
-	public int   updateAdvertisement(Advertisement a);
+	public void   updateAdvertisement(Advertisement a);
 	
 	
 	/**
@@ -35,13 +35,13 @@ public interface AdvertisementDao {
 	 * @param a
 	 * @return
 	 */
-	public int addAdvertisement(Advertisement a);
+	public void addAdvertisement(Advertisement a);
 	
 	
 	/**
 	 * @param id
 	 * @return
 	 */
-	public int   deleteAdvertisement(List id);
+	public void   deleteAdvertisement(List id);
 
 }

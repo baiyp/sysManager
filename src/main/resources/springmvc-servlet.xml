@@ -17,6 +17,7 @@
 	  <!-- 配置访问信息 -->
 	  <mvc:resources location="/rounder/" mapping="/rounder/**"></mvc:resources>
 	  <mvc:resources location="/assets/" mapping="/assets/**"></mvc:resources>
+	  <mvc:resources location="/upload/" mapping="/upload/**"></mvc:resources>
 	  <mvc:resources location="/login.html" mapping="/**"></mvc:resources>
 	  <mvc:resources location="/index.html" mapping="/**"></mvc:resources>
 	  <!-- 开启MVC注解 -->

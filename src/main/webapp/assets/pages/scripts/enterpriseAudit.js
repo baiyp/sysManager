@@ -58,7 +58,15 @@ jQuery(document).ready(function() {
 				$(".business_volume").html($(".business_volume").html()+data.business_volume);
 				$(".output_value").html($(".output_value").html()+data.output_value);
 				$(".deposit_bank").html($(".deposit_bank").html()+data.deposit_bank);
-				$(".bank_account").html($(".bank_account").html()+data.bank_account); 
+				$(".bank_account").html($(".bank_account").html()+data.bank_account);
+				
+				$(".enterprise_size").html($(".enterprise_size").html()+data.enterprise_size); 
+				$(".enterprise_nature").html($(".enterprise_nature").html()+data.enterprise_nature); 
+				$(".business_type").html($(".business_type").html()+data.business_type); 
+				$(".en_bus_license_image").html($(".en_bus_license_image").html()+"<img src=\""+data.imagePath+"\" width=\"250\" height=\"200\"/>");
+				$(".safety").html($(".safety").html()+"<img src=\""+data.imagePath+"\" width=\"250\" height=\"200\"/>"); 
+				$(".iso9001").html($(".iso9001").html()+"<img src=\""+data.imagePath+"\" width=\"250\" height=\"200\"/>"); 
+				$(".iso14001").html($(".iso14001").html()+"<img src=\""+data.imagePath+"\" width=\"250\" height=\"200\"/>"); 
 			},  
 			error : function() {
 			}  

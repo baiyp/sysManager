@@ -22,6 +22,10 @@ var ComponentsEditors = function () {
                 	title: {
                         minlength: 2,
                         required: true
+                    },
+                    url: {
+                        minlength: 2,
+                        required: true
                     }
                 },
 
@@ -88,12 +92,11 @@ var ComponentsEditors = function () {
 }();
 
 jQuery(document).ready(function() {
-	
     $('#fileupload').fileupload({
         url: WebUtil.getMainRoot()+'/multipartFileUpload',
-        dataType: 'json',
-        done: function (e, data) {
-            
+        dataType: 'text',
+        done: function (e,data) {
+        	$("#imagePath").attr("value",data.result);
         },
         progressall: function (e, data) {
             var progress = parseInt(data.loaded / data.total * 100, 10);

@@ -12,7 +12,7 @@
 
     <!-- 添加广告信息 -->
     <insert id="addAdvertisement" parameterType="com.manager.sys.model.Advertisement" useGeneratedKeys="true" keyProperty="id">
-    	insert into advertisement(title,imagePath,url,create_date,create_user) values (#{title},#{imagePath},#{url},#{create_date},#{create_user})
+    	insert into advertisement(title,imagePath,url,create_date,create_user) values (#{title},#{imagePath},#{url},#{create_Date},#{create_user})
     </insert>
      <!-- 更新广告信息 -->
     <update id="updateAdvertisement" parameterType="com.manager.sys.model.Advertisement"> 

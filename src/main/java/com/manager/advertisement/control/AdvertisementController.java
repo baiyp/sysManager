@@ -43,6 +43,7 @@ public class AdvertisementController extends BaseController {
 		anno.setTitle(title);
 		anno.setImagePath(imagePath);
 		anno.setUrl(url);
+		anno.setCreate_user("1");
 		int result = advertisementService.addAdvertisement(anno);
 		if(result == 0){
 			json.setMessage("添加广告信息失败");
