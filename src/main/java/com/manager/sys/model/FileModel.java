@@ -7,7 +7,7 @@ public class FileModel implements Serializable {
 	
 	private static final long serialVersionUID = 7964950152782381235L;  
 	
-	private static final String DOWN_FILE_PATH = "http://localhost:8899/sysManager/upload/";
+	private static final String DOWN_FILE_PATH = "http://101.200.136.243:8080/sysManager/upload/";
 	
 	private long fileSize = 0;//文件大小
 	

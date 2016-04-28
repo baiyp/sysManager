@@ -62,11 +62,12 @@ jQuery(document).ready(function() {
 				
 				$(".enterprise_size").html($(".enterprise_size").html()+data.enterprise_size); 
 				$(".enterprise_nature").html($(".enterprise_nature").html()+data.enterprise_nature); 
-				$(".business_type").html($(".business_type").html()+data.business_type); 
-				$(".en_bus_license_image").html($(".en_bus_license_image").html()+"<img src=\""+data.imagePath+"\" width=\"250\" height=\"200\"/>");
-				$(".safety").html($(".safety").html()+"<img src=\""+data.imagePath+"\" width=\"250\" height=\"200\"/>"); 
-				$(".iso9001").html($(".iso9001").html()+"<img src=\""+data.imagePath+"\" width=\"250\" height=\"200\"/>"); 
-				$(".iso14001").html($(".iso14001").html()+"<img src=\""+data.imagePath+"\" width=\"250\" height=\"200\"/>"); 
+				$(".business_type").html($(".business_type").html()+data.business_type);
+				 
+				$(".en_bus_license_image").html($(".en_bus_license_image").html()+"<img src=\"http://www.jiajiawulian.com/upload/member/company/"+data.id+"/cert/2.jpg\" width=\"250\" height=\"200\"/>");
+				$(".safety").html($(".safety").html()+"<img src=\"http://www.jiajiawulian.com/upload/member/company/"+data.id+"/cert/4.jpg\" width=\"250\" height=\"200\"/>"); 
+				$(".iso9001").html($(".iso9001").html()+"<img src=\"http://www.jiajiawulian.com/upload/member/company/"+data.id+"/cert/5.jpg\" width=\"250\" height=\"200\"/>"); 
+				$(".iso14001").html($(".iso14001").html()+"<img src=\"http://www.jiajiawulian.com/upload/member/company/"+data.id+"/cert/6.jpg\" width=\"250\" height=\"200\"/>"); 
 			},  
 			error : function() {
 			}  

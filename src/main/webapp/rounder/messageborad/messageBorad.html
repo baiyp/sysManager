@@ -1,0 +1,62 @@
+
+                    
+<!-- BEGIN PAGE TITLE-->
+<h3 class="page-title"> 留言板管理
+    <small>留言板管理</small>
+</h3>
+<!-- END PAGE TITLE-->
+<div class="modal fade" id="ajax" role="basic" dataAjax="" aria-hidden="true">
+      <div class="modal-dialog" >
+          <div class="modal-content" style="width:700px;height:500px">
+              <div class="modal-body">
+                  <img src="../assets/global/img/loading-spinner-grey.gif" alt="" class="loading">
+                  <span> &nbsp;&nbsp;Loading... </span>
+              </div>
+          </div>
+      </div>
+ </div> 
+<div class="row">
+    <div class="col-sm-12">
+        <div class="portlet box red">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>留言板列表 </div>
+                 <div class="actions">
+                    <a href="javascript:;" class="btn btn-default btn-sm" id="batch-delete">
+                        <i class="fa fa-print"></i> 批量删除 </a>
+                </div>
+            </div>
+            <div class="modal fade" id="ajax" role="basic" aria-hidden="true">
+                  <div class="modal-dialog">
+                      <div class="modal-content" style="width:800px;height:500px">
+                          <div class="modal-body">
+                              <img src="../assets/global/img/loading-spinner-grey.gif" alt="" class="loading">
+                              <span> &nbsp;&nbsp;Loading... </span>
+                          </div>
+                      </div>
+                  </div>
+             </div>
+            <div class="portlet-body">
+                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_3">
+                    <thead>
+                        <tr>
+                            <th class="table-checkbox">
+                             <input type="checkbox" class="group-checkable" data-set="#sample_3 .checkboxes" /> </th>
+                             <th>用户姓名 </th>
+                             <th>联系方式</th>
+                             <th>内容</th>
+                             <th>留言时间</th>
+                             <th>操作 </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>
+
+           

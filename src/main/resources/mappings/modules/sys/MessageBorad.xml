@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manager.messageboard.dao.MessageBoardDao">
+	<!-- 获取广告信息-->	
+	<select id="getMessageBoard" parameterType="java.lang.Integer" resultType="com.manager.sys.model.MessageBoard">  
+  		SELECT a.* FROM message a  where a.del_Flag=0 and a.id=#{id}
+    </select>
+ 	<!-- 获取广告信息-->
+    <select id="queryMessageBoard" resultType="com.manager.sys.model.MessageBoard">  
+  		SELECT a.* FROM message a where a.del_Flag=0
+    </select>
+ 
+     <!--删除广告信息 -->
+    <update id="deleteMessageBoard" parameterType="java.util.List"> 
+    	update message set del_flag=1 where id in
+		<foreach collection="list" item="item" index="index" open="(" separator="," close=")" >  
+        	#{item}  
+    	</foreach> 
+    </update>
+</mapper>

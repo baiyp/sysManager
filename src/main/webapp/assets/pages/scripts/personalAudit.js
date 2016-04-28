@@ -67,6 +67,12 @@ jQuery(document).ready(function() {
 				$(".diploma").html($(".diploma").html()+data.diploma);
 				$(".work_unit").html($(".work_unit").html()+data.work_unit);
 				$(".positional_titles").html($(".positional_titles").html()+data.positional_titles);
+				
+				$(".photographImage").html($(".photographImage").html()+"<img src=\"http://www.jiajiawulian.com/upload/member/staff/"+data.id+"/cert/1.jpg\" width=\"250\" height=\"200\"/>");
+				$(".idPhoto").html($(".idPhoto").html()+"<img src=\"http://www.jiajiawulian.com/upload/member/staff/"+data.id+"/cert/2.jpg\" width=\"250\" height=\"200\"/>"); 
+				$(".titleCertificate").html($(".titleCertificate").html()+"<img src=\"http://www.jiajiawulian.com/upload/member/staff/"+data.id+"/cert/3.jpg\" width=\"250\" height=\"200\"/>"); 
+				$(".constructor").html($(".constructor").html()+"<img src=\"http://www.jiajiawulian.com/upload/member/staff/"+data.id+"/cert/4.jpg\" width=\"250\" height=\"200\"/>"); 
+			
 			},  
 			error : function() {
 			}  

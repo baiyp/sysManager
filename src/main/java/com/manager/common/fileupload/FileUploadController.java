@@ -55,7 +55,7 @@ public class FileUploadController extends BaseController{
 	@ResponseBody
 	public String processUpload(@RequestParam(value="files[]",required=false) MultipartFile   multipartRequest, HttpServletResponse response) throws IOException {
 		//model.addAttribute("message", "File '" + file.getOriginalFilename() + "' uploaded successfully");
-		String path = "E:\\software\\apache-tomcat-8.0.28\\wtpwebapps\\sysManager\\upload\\";//file.getParameter("path");
+		String path = "D:\\software\\apache-tomcat-8.0.28\\webapps\\sysManager\\upload\\";//file.getParameter("path");
 		//List<FileModel> arrList = new ArrayList<FileModel>();
 		FileModel fileModel = new FileModel(); 
 		if(multipartRequest != null){

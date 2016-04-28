@@ -3,6 +3,8 @@
  */
 package com.manager.sys.model;
 
+import com.manager.common.StringUtils;
+
 /**
  * @author baiyp
  *
@@ -126,7 +128,7 @@ public class Personal extends BaseEntity {
 	}
 
 	public void setDiploma(String diploma) {
-		this.diploma = diploma;
+		this.diploma = diploma;		
 	}
 
 	public String getGraduate_institutions() {

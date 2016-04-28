@@ -7,6 +7,7 @@
     	<package name="mappings/modules/sys/TaskDao.xml"/>
     	<package name="mappings/modules/sys/AnnouncementDao.xml"/>
     	<package name="mappings/modules/sys/AdvertisementDao.xml"/>
+    	<package name="mappings/modules/sys/MessageBorad.xml"/> 
     </mappers>
  
 </configuration>
